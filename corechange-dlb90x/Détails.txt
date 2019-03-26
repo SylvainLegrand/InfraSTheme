@@ -1,0 +1,103 @@
+./htdocs/categories/index.php		=> ligne 72				// ajout			-> , '', 'tag.png'
+
+./htdocs/comm/action/index.php		=> ligne 452			// ajout			-> Calendars.png
+
+./htdocs/core/lib/functions.lib.php	=> ligne 4157			// change			-> if ($picto) $return.= '<td class="nobordernopadding widthpictotitle opacityhigh" valign="middle">'.img_picto('',$picto, 'class="valignmiddle widthpictotitle pictotitle"', $pictoisfullpath).'</td>';
+															-> par				-> if ($picto) $return.= '<td class="nobordernopadding widthpictotitle " valign="middle">'.img_picto('',$picto, 'class="valignmiddle widthpictotitle pictotitle"', $pictoisfullpath).'</td>';
+									=> ligne 4223			// change			-> if ($picto && $titre) print img_picto('', $picto, 'class="hideonsmartphone valignmiddle opacityhigh widthpictotitle" id="pictotitle"', $pictoisfullpath);
+															-> par				-> if ($picto && $titre) print img_picto('', $picto, 'class="hideonsmartphone valignmiddle widthpictotitle" id="pictotitle"', $pictoisfullpath);
+
+./htdocs/core/lib/security2.lib.php	=> ligne 253			// change			-> 'id="captcha_refresh_img"'	-> par ->	'id="captcha_refresh_img" style="width: 15px;"'
+
+./htdocs/core/lib/usergroups.lib.php
+				=> ligne 504			// ajout	-> ; color: #'.txt_color($color).'
+				=> ligne 552			// ajout	-> ; color: #'.txt_color($color).'
+				=> ligne 600			// ajout	-> ; color: #'.txt_color($color).'
+				=> ligne 710			// ajout	-> ; color: #'.txt_color($color).'
+				=> ligne 739			// ajout	-> ; color: #'.txt_color($color).'
+				=> ligne 784			// ajout	-> ; color: #'.txt_color($color).'
+				=> ligne 831			// ajout	-> ; color: #'.txt_color($color).'
+				=> ligne 845			// ajout	-> function txt_color(&$bgcolor)
+											{
+												require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
+												global $conf;
+												
+												$tmppart			= colorStringToArray($bgcolor);
+												$tmpvalr			= (! empty($tmppart[0]) ? $tmppart[0] : 0) * 0.3;
+												$tmpvalg			= (! empty($tmppart[1]) ? $tmppart[1] : 0) * 0.59;
+												$tmpvalb			= (! empty($tmppart[2]) ? $tmppart[2] : 0) * 0.11;
+												$tmpval				= $tmpvalr + $tmpvalg + $tmpvalb;
+												if ($tmpval <= 128)	$txtcolor	= 'FFFFFF';
+												else				$txtcolor	= '000000';
+												return $txtcolor;
+											}	// function _txt_color(&$bgcolor)
+
+./htdocs/core/tpl/login.tpl.php
+				=> lignes 113 à 114		// suppression	->	<br>
+				=> lignes 163 à 175		// change		->	<td class="nowrap none center">
+															
+															<table class="login_table_securitycode centpercent"><tr>
+															<td>
+															<span class="span-icon-security">
+															<input id="securitycode" placeholder="<?php echo $langs->trans("SecurityCode"); ?>" class="flat input-icon-security width100" type="text" maxlength="5" name="code" tabindex="3" />
+															</span>
+															</td>
+															<td><img src="<?php echo DOL_URL_ROOT ?>/core/antispamimage.php" border="0" width="80" height="32" id="img_securitycode" /></td>
+															<td><a href="<?php echo $php_self; ?>" tabindex="4" data-role="button"><?php echo $captcha_refresh; ?></a></td>
+															</tr></table>
+
+															</td></tr>
+										// par			->		<td class="nowrap center valignmiddle">
+																	<?php if (! empty($conf->global->MAIN_OPTIMIZEFORTEXTBROWSER)) { ?><label for="securitycode" class="hidden"><?php echo $langs->trans("SecurityCode"); ?></label><?php } ?>
+																	<span class="span-icon-security">
+																		<a href="<?php echo $php_self; ?>" tabindex="4" data-role="button"><?php echo $captcha_refresh; ?></a>
+																		<input type="text" id="securitycode" placeholder="<?php echo $langs->trans("SecurityCode"); ?>" name="code" class="flat input-icon-security" maxlength="5" tabindex="3" style="height: 21px; width: 76px" />
+																		<img src="<?php echo DOL_URL_ROOT ?>/core/antispamimage.php" border="0" width="80" id="img_securitycode" style="vertical-align: middle;" />
+																	</span>
+																</td>
+															</tr>
+				=> lignes 279 à 286		// move to 238 à 245
+				=> lignes 277			// move to 246
+
+./htdocs/core/antispamimage.php		=> LA TOTALE !
+
+./htdocs/core/tools.php				=> ligne 46				// ajout			-> , '', 'title_tools.png'
+
+./htdocs/ecm/index.php
+				=> entre lignes 334/335	// ajout ligne	-> print load_fiche_titre($langs->trans("ECMArea").' - '.$langs->trans("ECMFileManager"),'','title_ecm.png');
+				=> ligne 336			// change		-> $langs->trans("ECMArea").' - '.$langs->trans("ECMFileManager") -> par -> ''
+
+./htdocs/ecm/index_auto.php
+				=> entre lignes 336/337	// ajout ligne	-> print load_fiche_titre($langs->trans("ECMArea").' - '.$langs->trans("ECMFileManager"),'','title_ecm.png');
+				=> ligne 338			// change		-> $langs->trans("ECMArea").' - '.$langs->trans("ECMFileManager") -> par -> ''
+
+./htdocs/expedition/index.php		=> ligne 44				// ajout			-> , '', 'entrepot.png'
+
+./htdocs/includes/fonts/	ajout fichier LinuxLibertine.ttf
+
+./htdocs/includes/jquery/plugins/select2/dist/css/select2.css
+				=> ligne 268			// change		-> background-color: #ddd; -> par ->	background-image: -o-linear-gradient(bottom, rgba(204, 68, 0, 0.3) 0%, rgba(204, 68, 0, 1) 100%);
+																								background-image: -moz-linear-gradient(bottom, rgba(204, 68, 0, 0.3) 0%, rgba(204, 68, 0, 1) 100%);
+																								background-image: -webkit-linear-gradient(bottom, rgba(204, 68, 0, 0.3) 0%, rgba(204, 68, 0, 1) 100%);
+																								background-image: -ms-linear-gradient(bottom, rgba(204, 68, 0, 0.3) 0%, rgba(204, 68, 0, 1) 100%);
+																								background-image: linear-gradient(to bottom, rgba(204, 68, 0, 0.3) 0%, rgba(204, 68, 0, 1) 100%);
+																								background-repeat: repeat-x;
+																								color: white;
+				=> ligne 297			// change		-> background-color: #5897fb; -> par ->	background-image: -o-linear-gradient(bottom, rgba(109, 70, 140, 0.3) 0%, rgba(109, 70, 140, 1) 100%);
+																								background-image: -moz-linear-gradient(bottom, rgba(109, 70, 140, 0.3) 0%, rgba(109, 70, 140, 1) 100%);
+																								background-image: -webkit-linear-gradient(bottom, rgba(109, 70, 140, 0.3) 0%, rgba(109, 70, 140, 1) 100%);
+																								background-image: -ms-linear-gradient(bottom, rgba(109, 70, 140, 0.3) 0%, rgba(109, 70, 140, 1) 100%);
+																								background-image: linear-gradient(to bottom, rgba(109, 70, 140, 0.3) 0%, rgba(109, 70, 140, 1) 100%);
+																								background-repeat: repeat-x;
+
+./htdocs/product/stock/index.php	=> ligne 46				// ajout			-> , '', 'entrepot.png'
+
+./htdocs/user/group/card.php		=> ligne 266			// ajout			-> , '', 'title_users.png'
+
+./htdocs/user/group/list.php		=> ligne 160			// change			-> title_generic -> par -> title_users
+
+./htdocs/user/card.php				=> ligne 629			// ajout			-> , '', 'title_user.png'
+
+./htdocs/user/home.php				=> ligne 63				// ajout			-> , '', 'title_users.png'
+
+./htdocs/user/list.php				=> ligne 297			// change			-> title_generic -> par -> title_user
