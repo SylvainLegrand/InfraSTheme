@@ -1226,8 +1226,8 @@ td.showDragHandle {
 	margin-left: 0;
 }
 div.login_block {
-	/* border-right: none ! important; */
-	top: inherit !important;
+	/* border-right: none ! important;
+	top: inherit !important; */
 }
 .side-nav {
 <?php if (in_array($conf->browser->layout, array('phone','tablet')) && ((GETPOST('testmenuhider') || ! empty($conf->global->MAIN_TESTMENUHIDER)) && empty($conf->global->MAIN_OPTIMIZEFORTEXTBROWSER))) { ?>
@@ -1253,8 +1253,8 @@ div.backgroundsemitransparent {
 /* Login */
 
 div.login_block {
-	/* position: initial !important;*/
-	display: none;
+	/* position: initial !important;
+	display: none; */
 }
 .login_block_getinfo {
 	text-align: center;
@@ -1516,6 +1516,22 @@ img.photorefnoborder {
 .underrefbanner {
 }
 .underbanner {
+}
+.trextrafieldseparator td {
+<?php if (GETPOST('optioncss','aZ09') == 'print') {  ?>
+	display:none;
+<?php } else { ?>
+	<?php if ($usegradient) { ?>
+		background-image: -o-linear-gradient(bottom, rgba(<?php echo $colorbackhmenu1; ?>,0.3) 0%, rgba(<?php echo $colorbackhmenu1; ?>,1) 100%) !important;
+		background-image: -moz-linear-gradient(bottom, rgba(<?php echo $colorbackhmenu1; ?>,0.3) 0%, rgba(<?php echo $colorbackhmenu1; ?>,1) 100%) !important;
+		background-image: -webkit-linear-gradient(bottom, rgba(<?php echo $colorbackhmenu1; ?>,0.3) 0%, rgba(<?php echo $colorbackhmenu1; ?>,1) 100%) !important;
+		background-image: -ms-linear-gradient(bottom, rgba(<?php echo $colorbackhmenu1; ?>,0.3) 0%, rgba(<?php echo $colorbackhmenu1; ?>,1) 100%) !important;
+		background-image: linear-gradient(to bottom, rgba(<?php echo $colorbackhmenu1; ?>,0.3) 0%, rgba(<?php echo $colorbackhmenu1; ?>,1) 100%) !important;
+	<?php } else { ?>
+		background: rgb(<?php echo $colorbackhmenu1; ?>) !important;
+	<?php } ?>
+<?php } ?>
+color: rgb(<?php echo $colortexttitle; ?>);
 }
 .tdhrthin {
 	margin: 0;

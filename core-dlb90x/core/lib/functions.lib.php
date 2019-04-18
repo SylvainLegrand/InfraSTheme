@@ -2301,11 +2301,7 @@ function dol_print_phone($phone,$countrycode='',$cid=0,$socid=0,$addlink='',$sep
 		}
 		elseif (dol_strlen($phone) == 12)
 		{
-			$newphone=substr($newphone,0,3).$separ.substr($newphone,3,1).$separ.substr($newphone,4,2).$separ.substr($newphone,6,2).$separ.substr($newphone,8,2).$separ.substr($newphone,10,2);	// InfraS ajout
-		}
-		elseif (dol_strlen($phone) == 13)
-		{
-			$newphone=substr($newphone,0,4).$separ.substr($newphone,4,2).$separ.substr($newphone,6,2).$separ.substr($newphone,8,3).$separ.substr($newphone,11,2);	// InfraS change
+			$newphone=substr($newphone,0,4).$separ.substr($newphone,4,2).$separ.substr($newphone,6,2).$separ.substr($newphone,8,2).$separ.substr($newphone,10,2);
 		}
 	}
 
@@ -2498,8 +2494,8 @@ function dol_print_phone($phone,$countrycode='',$cid=0,$socid=0,$addlink='',$sep
 	elseif (strtoupper($countrycode) == "MG")
 	{//Madagascar
 		if(dol_strlen($phone) == 13)
-		{//ex: +261_AB_CD_EFG_HI
-			$newphone = substr($newphone,0,4).$separ.substr($newphone,4,2).$separ.substr($newphone,6,2).$separ.substr($newphone,8,3).$separ.substr($newphone,11,2);	// InfraS change
+		{//ex: +261_AB_CD_EF_GHI
+			$newphone = substr($newphone,0,4).$separ.substr($newphone,4,2).$separ.substr($newphone,6,2).$separ.substr($newphone,8,2).$separ.substr($newphone,10,3);
 		}
 	}
 	elseif (strtoupper($countrycode) == "GB")
@@ -4072,7 +4068,7 @@ function load_fiche_titre($titre, $morehtmlright='', $picto='title_generic.png',
 
 	$return.= "\n";
 	$return.= '<table '.($id?'id="'.$id.'" ':'').'summary="" class="centpercent notopnoleftnoright'.($morecssontable?' '.$morecssontable:'').'" style="margin-bottom: 6px;"><tr>';	// maring bottom must be same than into print_barre_list
-	if ($picto) $return.= '<td class="nobordernopadding widthpictotitle" valign="middle">'.img_picto('',$picto, 'class="valignmiddle widthpictotitle pictotitle"', $pictoisfullpath).'</td>';	// InfraS ajout "opacityhigh"
+	if ($picto) $return.= '<td class="nobordernopadding widthpictotitle opacityhigh" valign="middle">'.img_picto('',$picto, 'class="valignmiddle widthpictotitle pictotitle"', $pictoisfullpath).'</td>';
 	$return.= '<td class="nobordernopadding valignmiddle">';
 	$return.= '<div class="titre inline-block">'.$titre.'</div>';
 	$return.= '</td>';
@@ -4138,7 +4134,7 @@ function print_barre_liste($titre, $page, $file, $options='', $sortfield='', $so
 	// Left
 	//if ($picto && $titre) print '<td class="nobordernopadding hideonsmartphone" width="40" align="left" valign="middle">'.img_picto('', $picto, 'id="pictotitle"', $pictoisfullpath).'</td>';
 	print '<td class="nobordernopadding valignmiddle">';
-	if ($picto && $titre) print img_picto('', $picto, 'class="hideonsmartphone valignmiddle pictotitle widthpictotitle"', $pictoisfullpath);	// InfraS ajout "opacityhigh"
+	if ($picto && $titre) print img_picto('', $picto, 'class="hideonsmartphone valignmiddle opacityhigh pictotitle widthpictotitle"', $pictoisfullpath);
 	print '<div class="titre inline-block">'.$titre;
 	if (!empty($titre) && $savtotalnboflines >= 0 && (string) $savtotalnboflines != '') print ' ('.$totalnboflines.')';
 	print '</div></td>';
@@ -6065,17 +6061,6 @@ function getCommonSubstitutionArray($outputlangs, $onlykey=0, $exclude=null, $ob
 		if ($onlykey != 2 || $mysoc->useLocalTax(1)) $substitutionarray['__AMOUNT_TAX2__']     = is_object($object)?$object->total_localtax1:'';
 		if ($onlykey != 2 || $mysoc->useLocalTax(2)) $substitutionarray['__AMOUNT_TAX3__']     = is_object($object)?$object->total_localtax2:'';
 
-		// Add by philazerty
-		$substitutionarray['__FACDATE__'] = is_object($object)?(isset($object->date) ? dol_print_date($object->date, 'daytext', 0, $outputlangs) : '') : '';
-		$substitutionarray['__FACDATELIMREG__'] = is_object($object)?(isset($object->date_lim_reglement) ? dol_print_date($object->date_lim_reglement, 'daytext', 0, $outputlangs) : '') : '';
-		$substitutionarray['__FACTOTALTTC_2D__'] = is_object($object)?number_format($object->total_ttc,2,',',' '):'';
-		$substitutionarray['__FACTOTALHT_2D__'] = is_object($object)?number_format($object->total_ht,2,',',' '):'';
-		$substitutionarray['__FACTOTALHT_2DC__'] = is_object($object)?price($object->total_ht,0,$outputlangs,1,2,2,'auto'):'';
-		$substitutionarray['__FACTOTALTTC_2DC__'] = is_object($object)?price($object->total_ttc,0,$outputlangs,1,2,2,'auto'):'';
-		$substitutionarray['__FACREST_2D__'] = is_object($object)?price($object->total_ttc - $object->totalpaye,2,',',' '):'';
-		$substitutionarray['__FACREST_2DC__'] = is_object($object)?price($object->total_ttc - $object->totalpaye,0,$outputlangs,1,2,2,'auto'):'';
-		// End of addition by Philazerty
-
 		$substitutionarray['__AMOUNT_FORMATED__']          = is_object($object)?($object->total_ttc ? price($object->total_ttc, 0, $outputlangs, 0, 0, -1, $conf->currency) : null):'';
 		$substitutionarray['__AMOUNT_EXCL_TAX_FORMATED__'] = is_object($object)?($object->total_ht ? price($object->total_ht, 0, $outputlangs, 0, 0, -1, $conf->currency) : null):'';
 		$substitutionarray['__AMOUNT_VAT_FORMATED__']      = is_object($object)?($object->total_vat ? price($object->total_vat, 0, $outputlangs, 0, 0, -1, $conf->currency): ($object->total_tva ? price($object->total_tva, 0, $outputlangs, 0, 0, -1, $conf->currency) : null)):'';
@@ -7208,86 +7193,21 @@ function printCommonFooter($zone='private')
 		print "\n";
 		if (! empty($conf->use_javascript_ajax))
 		{
-					
-			print '	<script src="'.dol_buildpath('/theme/infras/js/jquery.cookie.js', 1).'"></script>
-					<script type="text/javascript" language="javascript">
-							jQuery(document).ready(function() {';
+			print '<script type="text/javascript" language="javascript">'."\n";
+			print 'jQuery(document).ready(function() {'."\n";
+
 			if ($zone == 'private' && empty($conf->dol_use_jmobile))
 			{
-				print '
-							/* JS CODE TO ENABLE to manage handler to switch left menu page (menuhider) */
-							$.urlParam = function(param, url){
-								var results = new RegExp("[\?&]" + param + "=([^&#]*)").exec(url);
-								return results[1] || 0;
-							};
-							$.isSet = function(testVar){
-								return typeof(testVar) !== "undefined" && testVar !== null && testVar !== "";
-							};
-							var url = "off";
-							if(window.location.href.indexOf("leftmenu=") > 0) {
-								url = window.location.href;
-							} else if(document.referrer.indexOf("leftmenu=") > 0) {
-								url = document.referrer;
-							}
-							var menu = "on";
-							if($.cookie && $.isSet($.cookie("hidemenu"))) {
-								menu = $.cookie("hidemenu");
-							}
-							if(menu == "on") {
-								$(".side-nav").show();
-								$("#id-right").css("padding-left", "229px");
-							}
-							else {
-								$(".side-nav").hide();
-								$("#id-right").css("padding-left", "0px");
-							}
-							$(".menu_contenu:not(#menu_contenu_logo, .time_basket)").hide();
-							if(url != "off" && $.urlParam("leftmenu", url) != 0) {
-								$(".blockvmenu").find("a").each(function() {
-									var link = "off";
-									if($(this).attr("href").indexOf("leftmenu=") > 0) {
-										link = $(this).attr("href");
-									}
-									if(link != "off" && $.urlParam("leftmenu", link) != 0) {
-										if ($.urlParam("leftmenu", url) == $.urlParam("leftmenu", link)) {
-											$(".menu_contenu:not(#menu_contenu_logo, .time_basket)").hide();
-											$(this).siblings(".infrastoggle").removeClass("fa-caret-down").addClass("fa-caret-left");
-											$(this).parent().show();
-											$(this).parent().siblings().show();
-											return(false);
-										}
-									}
-								});
-							}
-							$(".blockvmenu").each(function() {
-								if($(this).children(".menu_contenu").length == 0) {
-									$(this).find(".infrastoggle").hide();
-								} else {
-									$(this).find(".infrastoggle").show();
-								}
-							});
-							$(".menuhider").click(function() {
-								$(".side-nav").toggle();
-								if($(".side-nav").is(":visible")) {
-									$("#id-right").css("padding-left", "229px");
-									$.cookie("hidemenu", "on", { expires: 1, path: "/" });
-								} else if($(".side-nav").is(":hidden")) {
-									$("#id-right").css("padding-left", "0px");
-									$.cookie("hidemenu", "off", { expires: 1, path: "/" });
-								}
-							});
-							$(".infrastoggle").click(function() {
-								if($(this).hasClass("fa-caret-down")) {
-									$(".menu_contenu:not(#menu_contenu_logo, .time_basket)").hide();
-									$(this).parent().nextAll().toggle();
-									$(".infrastoggle").removeClass("fa-caret-left").addClass("fa-caret-down");
-									$(this).removeClass("fa-caret-down").addClass("fa-caret-left");
-								} else if($(this).hasClass("fa-caret-left")) {
-									$(".menu_contenu:not(#menu_contenu_logo, .time_basket)").hide();
-									$(this).removeClass("fa-caret-left").addClass("fa-caret-down");
-								}
-							});';
+				print "\n";
+				print '/* JS CODE TO ENABLE to manage handler to switch left menu page (menuhider) */'."\n";
+				print 'jQuery(".menuhider").click(function() {';
+				print '  console.log("We click on .menuhider");'."\n";
+				//print "  $('.side-nav').animate({width:'toggle'},200);\n";     // OK with eldy theme but not with md
+				print "  $('.side-nav').toggle()\n";
+				print "  $('.login_block').toggle()\n";
+				print '});'."\n";
 			}
+
 			// Management of focus and mandatory for fields
 			if ($action == 'create' || $action == 'edit' || (empty($action) && (preg_match('/new\.php/', $_SERVER["PHP_SELF"]))))
 			{
