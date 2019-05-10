@@ -26,7 +26,7 @@
  *		\brief      File for CSS style sheet InfraS (Material Design)
  */
 
-	/************************************************
+ 	/************************************************
 	*	Select text color from background values
 	*
 	*	@param	string		$bgcolor     		RGB value for background color
@@ -36,7 +36,7 @@
 	{
 		require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 		global $conf;
-
+		
 		$tmppart			= explode(',', $bgcolor);
 		$tmpvalr			= (! empty($tmppart[0]) ? $tmppart[0] : 0) * 0.3;
 		$tmpvalg			= (! empty($tmppart[1]) ? $tmppart[1] : 0) * 0.59;
@@ -674,7 +674,7 @@ div.divsearchfield {
 	margin-<?php print $left; ?>: 2px;
 	margin-top: 4px;
     margin-bottom: 4px;
-	padding-left: 2px;
+  	padding-left: 2px;
 }
 .divsearchfieldfilter {
     text-overflow: clip;
@@ -838,7 +838,7 @@ select.flat.selectlimit {
     overflow-x: auto;
     min-height: 0.01%;
 }
-.div-table-responsive-no-min img:not(.img_logo) img:not(.pictotitle) {
+.div-table-responsive-no-min img:not(.img_logo) {
 	max-height: 16px;
 }
 .div-table-responsive {
@@ -988,10 +988,10 @@ select.selectarrowonleft option {
 	.divmainbodylarge { margin-left: 20px; margin-right: 20px; }
 
     .tdoverflowonsmartphone {
-	max-width: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+        max-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 	div.fiche {
 		    margin-top: <?php print ($dol_hide_topmenu?'12':'6'); ?>px !important;
@@ -1001,11 +1001,11 @@ select.selectarrowonleft option {
 		/* line-height: 2em; */
 	}
     .border tbody tr, .border tbody tr td, div.tabBar table.border tr {
-	height: 40px !important;
+    	height: 40px !important;
     }
 
     .quatrevingtpercent, .inputsearch {
-	width: 95%;
+    	width: 95%;
     }
 
 	select {
@@ -1014,12 +1014,12 @@ select.selectarrowonleft option {
 	}
 	input, input[type=text], input[type=password], select, textarea     {
 		min-width: 20px;
-	min-height: 1.4em;
-	line-height: 1.4em;
+    	min-height: 1.4em;
+    	line-height: 1.4em;
 		font-size: <?php print $fontsize+3; ?>px;
-	/* padding: .4em .1em; */
-	/* border-bottom: 1px solid #BBB; */
-	/* max-width: inherit; why this */
+    	/* padding: .4em .1em; */
+    	/* border-bottom: 1px solid #BBB; */
+    	/* max-width: inherit; why this */
      }
 
     .hideonsmartphone { display: none; }
@@ -1058,28 +1058,28 @@ select.selectarrowonleft option {
 	    padding-bottom: 5px;
 	}
     img.photoref, div.photoref {
-	border: none;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	padding: 4px;
-	height: 20px;
-	width: 20px;
-	object-fit: contain;
+    	border: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        padding: 4px;
+    	height: 20px;
+    	width: 20px;
+        object-fit: contain;
     }
 
 	div.statusref {
-	padding-right: 10px;
-	}
+    	padding-right: 10px;
+   	}
 	div.statusref img {
-	padding-right: 3px !important;
-	}
+    	padding-right: 3px !important;
+   	}
 	div.statusrefbis {
-	padding-right: 3px !important;
-	}
+    	padding-right: 3px !important;
+   	}
 
-	input.buttonpayment {
+   	input.buttonpayment {
 		min-width: 300px;
-	}
+   	}
 }
 .linkobject { cursor: pointer; }
 <?php if (GETPOST('optioncss','aZ09') == 'print') { ?>
@@ -1107,10 +1107,7 @@ div#iddivjstreecontrol img {
 .imgnone {
 	max-height: none ! important;
 }
-.butAction img {
-	max-height: 16px;
-	vertical-align: middle;
-}
+
 
 /* ============================================================================== */
 /* Styles for dragging lines                                                      */
@@ -1336,7 +1333,7 @@ div.ficheaddleft {
 	<?php if ($conf->browser->layout != 'phone')   { print "padding-".$left.": 16px;\n"; }
 	else print "margin-top: 10px;\n"; ?>
 }
-div.ficheaddleft  img:not(.pictotitle) {
+div.ficheaddleft img {
 	max-height: 16px;
 }
 div.firstcolumn div.box {
@@ -1349,39 +1346,39 @@ div.secondcolumn div.box {
 @media only screen and (max-width: 900px)
 {
     div.fiche {
-	margin-<?php print $left; ?>: <?php print (GETPOST('optioncss','aZ09') == 'print'?6:($dol_hide_leftmenu?'4':'20')); ?>px;
-	margin-<?php print $right; ?>: <?php print (GETPOST('optioncss','aZ09') == 'print'?8:16); ?>px;
-	<?php if (! empty($conf->dol_hide_leftmenu) && ! empty($conf->dol_hide_topmenu)) print 'margin-top: 4px;'; ?>
-	margin-bottom: 15px;
+    	margin-<?php print $left; ?>: <?php print (GETPOST('optioncss','aZ09') == 'print'?6:($dol_hide_leftmenu?'4':'20')); ?>px;
+    	margin-<?php print $right; ?>: <?php print (GETPOST('optioncss','aZ09') == 'print'?8:16); ?>px;
+    	<?php if (! empty($conf->dol_hide_leftmenu) && ! empty($conf->dol_hide_topmenu)) print 'margin-top: 4px;'; ?>
+    	margin-bottom: 15px;
     }
     div.fichecenter {
-	width: 100%;
-	clear: both;	/* This is to have div fichecenter that are true rectangles */
+    	width: 100%;
+    	clear: both;	/* This is to have div fichecenter that are true rectangles */
     }
     div.fichecenterbis {
-	margin-top: 8px;
+    	margin-top: 8px;
     }
     div.fichethirdleft {
-	float: none;
-	width: auto;
-	padding-bottom: 6px;
+    	float: none;
+    	width: auto;
+    	padding-bottom: 6px;
     }
     div.fichetwothirdright {
-	float: none;
-	width: auto;
-	padding-bottom: 6px;
+    	float: none;
+    	width: auto;
+    	padding-bottom: 6px;
     }
     div.fichehalfleft {
-	float: none;
-	width: auto;
+    	float: none;
+    	width: auto;
     }
     div.fichehalfright {
-	float: none;
-	width: auto;
+    	float: none;
+    	width: auto;
     }
     div.ficheaddleft {
-	<?php print "padding-".$left.": 0px;\n"; ?>
-	margin-top: 10px;
+    	<?php print "padding-".$left.": 0px;\n"; ?>
+    	margin-top: 10px;
     }
     div.firstcolumn div.box {
 		padding-right: 0px;
@@ -1488,8 +1485,8 @@ div.statusref img {
 }
 div.statusrefbis {
     padding-left: 8px;
-	padding-right: 9px;
-	vertical-align: text-bottom;
+   	padding-right: 9px;
+   	vertical-align: text-bottom;
 }
 img.photoref, div.photoref {
 	border: 1px solid #CCC;
@@ -1885,7 +1882,7 @@ while ($j++ < 4)
     padding:0 0 0 0 !important;
     margin:0 0px 0 0 !important;
     <?php if ($disableimages) { ?>
-	display: none;
+    	display: none;
     <?php } ?>
 }
 a.tmenuimage {
@@ -1968,7 +1965,7 @@ form#login {
     min-width: 220px;
 }
 .login_table .tdinputlogin .fa {
-
+	
 }
 .login_table .login_main_home {
 	color: rgb(<?php echo $colorbackhmenu1; ?>) !important;
@@ -2498,7 +2495,7 @@ span.butAction, span.butActionDelete {
 }
 
 .button, .butAction, .butActionDelete, .butActionRefused, .butActionNewRefused, .buttonDelete, input[name="sbmtConnexion"] {
-	display: inline-block;
+ 	display: inline-block;
     padding: 0.4em <?php echo ($dol_optimize_smallscreen?'0.4':'0.7'); ?>em;
     margin: 0em <?php echo ($dol_optimize_smallscreen?'0.7':'0.9'); ?>em;
 	line-height: 20px;
@@ -2580,7 +2577,7 @@ a.butActionNewRefused>span.fa-plus-circle { padding-left: 6px; font-size: 1.5em;
     filter: alpha(opacity=40); /* For IE8 and earlier */
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
-    box-shadow: none;
+    box-shadow: none;	
 	<?php if ($usegradient) { ?>
 		background-image: -o-linear-gradient(bottom, rgba(255, 255, 255, 0.3) 0%, rgba(230, 230, 230, 1) 100%);
 		background-image: -moz-linear-gradient(bottom, rgba(255, 255, 255, 0.3) 0%, rgba(230, 230, 230, 1) 100%);
@@ -2689,7 +2686,7 @@ tr.nocellnopadd td.nobordernopadding, tr.nocellnopadd td.nocellnopadd
 	padding-bottom: 4px;
 	margin: 0px 0px 0px 0px;
 }
-form.listactionsfilter td>img img:not(.pictotitle) {
+form.listactionsfilter td>img {
 	max-height: 16px;
 }
 
@@ -2893,16 +2890,16 @@ div.refidpadding  {
 div.refid  {
 	font-weight: bold;
 	color: rgb(<?php print $colortexttitlenotab; ?>);
-	font-size: 160%;
+  	font-size: 160%;
 }
 div.refidno  {
 	padding-top: 8px;
 	font-weight: normal;
-	color: #444;
-	font-size: <?php print $fontsize ?>px;
-	line-height: 21px;
+  	color: #444;
+  	font-size: <?php print $fontsize ?>px;
+  	line-height: 21px;
 }
-div.refidno img {
+div.refidno img {	
 	max-width: 16px;
 }
 div.refidno form {
@@ -2977,7 +2974,7 @@ div.pagination li span:focus {
     color: #000;
     background-color: #eee;
     border-color: #ddd;
-	/* padding-top: 8px; */
+  	/* padding-top: 8px; */
 }
 div.pagination li .active a,
 div.pagination li .active span,
@@ -3399,8 +3396,8 @@ div .tdtop {
 	.boxstats, .boxstats130 {
 		margin: 3px;
 	    border: 1px solid #ddd;
-	box-shadow: none;
-	background: #eee;
+    	box-shadow: none;
+    	background: #eee;
     }
 	.thumbstat {
 		flex: 1 1 110px;
@@ -3409,14 +3406,14 @@ div .tdtop {
 		flex: 1 1 110px;
 	}
     .dashboardlineindicator {
-	float: left;
-	padding-left: 5px;
+        float: left;
+    	padding-left: 5px;
     }
     .boxstats130 {
-	width: 148px;
+    	width: 148px;
     }
     .boxstats {
-	width: 100px;
+        width: 100px;
     }
 }
 .boxstats:hover {
@@ -4355,21 +4352,21 @@ a.cke_dialog_ui_button_ok span {
 	margin: 0;
 }
 .aceeditorstatusbar {
-	margin: 0;
-	padding: 0;
-	padding-<?php echo $left; ?>: 10px;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	color: #666;
-	height: 28px;
-	line-height: 2.2em;
+        margin: 0;
+        padding: 0;
+        padding-<?php echo $left; ?>: 10px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        color: #666;
+        height: 28px;
+        line-height: 2.2em;
 }
 .ace_status-indicator {
-	color: gray;
-	position: relative;
-	right: 0;
-	border-left: 1px solid;
+        color: gray;
+        position: relative;
+        right: 0;
+        border-left: 1px solid;
 }
 pre#editfilecontentaceeditorid {
     margin-top: 5px;
@@ -4715,7 +4712,7 @@ div.dataTables_length select {
     background-color: unset;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-
+	
 }
 .select2-container .select2-choice {
 	border-bottom: 1px solid #ccc;
@@ -5419,11 +5416,11 @@ border-top-right-radius: 6px;
 		padding-left: 40px;
 	}
     .menu li.menu_choix1, .menu li.menu_choix2 {
-	padding-left: 4px;
-	padding-right: 0;
+        padding-left: 4px;
+        padding-right: 0;
     }
     .liste_articles {
-	margin-right: 0 !important;
+    	margin-right: 0 !important;
     }
 }
 
@@ -5746,12 +5743,12 @@ border-top-right-radius: 6px;
 	}
 
     div.tabBar {
-	padding-left: 8px;
-	padding-right: 8px;
-	-webkit-border-radius: 0;
-	border-radius: 0px;
-	border-right: none;
-	border-left: none;
+        padding-left: 8px;
+        padding-right: 8px;
+        -webkit-border-radius: 0;
+    	border-radius: 0px;
+        border-right: none;
+        border-left: none;
     }
 
 }
@@ -5774,23 +5771,23 @@ border-top-right-radius: 6px;
 {
 	div.tmenucenter {
 	    max-width: <?php echo round($fontsize * 4); ?>px;	/* size of viewport */
-	white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		color: #<?php echo $colortextbackhmenu; ?>;
+    	white-space: nowrap;
+  		overflow: hidden;
+  		text-overflow: ellipsis;
+  		color: #<?php echo $colortextbackhmenu; ?>;
 	}
 	.mainmenuaspan {
-		font-size: 12px;
+  		font-size: 12px;
     }
     .topmenuimage {
-	background-size: 26px auto;
-	margin-top: 0px;
+    	background-size: 26px auto;
+    	margin-top: 0px;
 	}
     li.tmenu, li.tmenusel {
-	min-width: 32px;
+    	min-width: 32px;
     }
     div.mainmenu {
-	min-width: auto;
+    	min-width: auto;
     }
 	div.tmenuleft {
 		display: none;
@@ -5801,16 +5798,16 @@ border-top-right-radius: 6px;
 {
 	div.tmenucenter {
 	    max-width: <?php echo round($fontsize * 2); ?>px;	/* size of viewport */
-		text-overflow: clip;
+  		text-overflow: clip;
 	}
 	.mainmenuaspan {
-		font-size: 10px;
-		padding-left: 0;
-		padding-right: 0;
+  		font-size: 10px;
+  		padding-left: 0;
+  		padding-right: 0;
     }
     .topmenuimage {
-	background-size: 20px auto;
-	margin-top: 2px;
+    	background-size: 20px auto;
+    	margin-top: 2px;
 	}
 }
 /* rule to reduce top menu - 3rd reduction */
@@ -5824,18 +5821,18 @@ border-top-right-radius: 6px;
 	<?php } ?>
 	}
     li.tmenu, li.tmenusel {
-	min-width: 30px;
+        min-width: 30px;
     }
 
 	div.tmenucenter {
-		text-overflow: clip;
+  		text-overflow: clip;
 	}
     .topmenuimage {
-	background-size: 20px auto;
-	margin-top: 2px !important;
+    	background-size: 20px auto;
+    	margin-top: 2px !important;
 	}
 	div.mainmenu {
-	min-width: 20px;
+    	min-width: 20px;
     }
 
 	#tooltip {
@@ -5850,13 +5847,13 @@ border-top-right-radius: 6px;
 		padding-right: 5px;
 	}
     img.photoref, div.photoref {
-	border: none;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	padding: 4px;
-	height: 20px;
-	width: 20px;
-	object-fit: contain;
+    	border: none;
+    	-webkit-box-shadow: none;
+        box-shadow: none;
+        padding: 4px;
+    	height: 20px;
+    	width: 20px;
+        object-fit: contain;
     }
 
 	.titlefield {
