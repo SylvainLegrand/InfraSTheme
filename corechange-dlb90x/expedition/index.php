@@ -41,7 +41,7 @@ $shipment=new Expedition($db);
 $helpurl='EN:Module_Shipments|FR:Module_Exp&eacute;ditions|ES:M&oacute;dulo_Expediciones';
 llxHeader('',$langs->trans("Shipment"),$helpurl);
 
-print load_fiche_titre($langs->trans("SendingsArea"), '', 'entrepot.png');
+print load_fiche_titre($langs->trans("SendingsArea"), '', 'entrepot.png');	// InfraS ajout ", '', 'entrepot.png'"
 
 
 print '<div class="fichecenter"><div class="fichethirdleft">';
@@ -208,9 +208,9 @@ if ( $resql )
 			$orderstatic->ref=$obj->ref;
 			$orderstatic->ref_customer=$obj->ref_customer;
 			$orderstatic->statut=$obj->status;
-            $orderstatic->billed=$obj->billed;
+	    $orderstatic->billed=$obj->billed;
 
-            $companystatic->name=$obj->name;
+	    $companystatic->name=$obj->name;
 			$companystatic->id=$obj->socid;
 
 			print '<tr class="oddeven"><td>';
@@ -219,10 +219,10 @@ if ( $resql )
 			print '<td>';
 			print $companystatic->getNomUrl(1,'customer');
 			print '</td>';
-            print '<td align="right">';
-            print $orderstatic->getLibStatut(3);
-            print '</td>';
-            print '</tr>';
+	    print '<td align="right">';
+	    print $orderstatic->getLibStatut(3);
+	    print '</td>';
+	    print '</tr>';
 			$i++;
 		}
 		print "</table><br>";

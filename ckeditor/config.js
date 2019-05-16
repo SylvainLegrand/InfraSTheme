@@ -31,6 +31,8 @@ CKEDITOR.editorConfig = function( config )
 	//config.autoParagraph = false;
 	//config.removeFormatTags = 'b,big,code,del,dfn,em,font,i,ins,kbd';		// See also rules on this.dataProcessor.writer.setRules
 	//config.forcePasteAsPlainText = true;
+	config.font_names = 'Century Gothic/Century Gothic, Futura PT, sans-serif;' + 'Arial/Arial, Helvetica, sans-serif;' + 'Cambria/Cambria, Times, serif;' + 'Times New Roman/Times New Roman, Times, serif;' + 'Verdana';
+	config.font_defaultLabel = 'Century Gothic';
 	config.scayt_autoStartup = true;
 	config.scayt_sLang = 'fr_FR';
 
@@ -88,7 +90,7 @@ CKEDITOR.editorConfig = function( config )
 	[
 	 	['Maximize'],
 	 	['SpellChecker', 'Scayt'],		// 'Cut','Copy','Paste','-', are useless, can be done with right click, even on smarpthone
-	    ['Format','FontSize'],
+	    ['Format','Font','FontSize'],
 	    ['Bold','Italic','Underline','Strike','-','TextColor','RemoveFormat'],	// ,'Subscript','Superscript' useless
 	 	['NumberedList','BulletedList','Outdent','Indent'],
 	 	['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],

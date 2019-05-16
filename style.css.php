@@ -1111,6 +1111,9 @@ div#iddivjstreecontrol img {
 	max-height: 16px;
 	vertical-align: middle;
 }
+.linecoldescription img {
+	max-height: 16px;
+}
 
 /* ============================================================================== */
 /* Styles for dragging lines                                                      */
