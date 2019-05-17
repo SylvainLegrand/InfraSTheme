@@ -136,7 +136,8 @@ if ($resql)
         $dolgraph->setShowLegend(1);
         $dolgraph->setShowPercent(1);
         $dolgraph->SetType(array('pie'));
-        //$dolgraph->setWidth('100%');	// InfraS
+		$dolgraph->setWidth('400');	// InfraS
+		$dolgraph->SetHeight('250');	// InfraS
         $dolgraph->draw('idgraphstatus');
         print $dolgraph->show($total?0:1);
         $data=array('series'=>$dataseries);

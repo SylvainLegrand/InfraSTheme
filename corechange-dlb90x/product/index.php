@@ -241,7 +241,8 @@ if (! empty($conf->categorie->enabled) && ! empty($conf->global->CATEGORY_GRAPHS
 			$dolgraph->setShowLegend(1);
 			$dolgraph->setShowPercent(1);
 			$dolgraph->SetType(array('pie'));
-			//$dolgraph->setWidth('100%');	// InfraS
+			$dolgraph->setWidth('400');	// InfraS
+			$dolgraph->SetHeight('300');	// InfraS
 			$dolgraph->draw('idstatscategproduct');
 			print $dolgraph->show($total?0:1);
 		}

@@ -144,7 +144,8 @@ if (! empty($conf->use_javascript_ajax) && ((round($third['prospect'])?1:0)+(rou
 	$dolgraph->setShowLegend(1);
 	$dolgraph->setShowPercent(1);
 	$dolgraph->SetType(array('pie'));
-	//$dolgraph->setWidth('100%');	// InfraS
+	$dolgraph->setWidth('400');	// InfraS
+	$dolgraph->SetHeight('250');	// InfraS
 	$dolgraph->draw('idgraphthirdparties');
 	print $dolgraph->show();
     print '</td></tr>'."\n";
@@ -232,7 +233,8 @@ if (! empty($conf->categorie->enabled) && ! empty($conf->global->CATEGORY_GRAPHS
 			$dolgraph->setShowLegend(1);
 			$dolgraph->setShowPercent(1);
 			$dolgraph->SetType(array('pie'));
-			//$dolgraph->setWidth('100%');	// InfraS
+			$dolgraph->setWidth('400');	// InfraS
+			$dolgraph->SetHeight('250');	// InfraS
 			$dolgraph->draw('idgraphcateg');
 			print $dolgraph->show();
 		}
