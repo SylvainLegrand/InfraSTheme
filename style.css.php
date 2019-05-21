@@ -1114,6 +1114,12 @@ div#iddivjstreecontrol img {
 .linecoldescription img {
 	max-height: 16px;
 }
+.litext img {
+	max-height: 16px;
+}
+.infras img {
+	max-height: 16px;
+}
 
 /* ============================================================================== */
 /* Styles for dragging lines                                                      */
@@ -3567,17 +3573,17 @@ img.boxhandle, img.boxclose {
 /*
  *   Ok, Warning, Error
  */
-.ok      { color: #114466; }
-.warning { color: #887711; }
+.ok      { color: #007f00; }
+.warning { color: #e47509; }
 .error   { color: #550000 !important; font-weight: bold; }
 
 div.ok {
-  color: #114466;
+  color: #007f00;
 }
 
 /* Info admin */
 div.info {
-	border-<?php print $left; ?>: solid 5px #87cfd2;
+	border-<?php print $left; ?>: solid 5px #007f00;
     padding-top: 8px;
     padding-left: 10px;
     padding-right: 4px;
@@ -3588,7 +3594,7 @@ div.info {
 
 /* Warning message */
 div.warning {
-    border-<?php print $left; ?>: solid 5px #f2cf87;
+    border-<?php print $left; ?>: solid 5px #6c2a6c;
 	padding-top: 8px;
 	padding-left: 10px;
 	padding-right: 4px;
@@ -3602,7 +3608,7 @@ div.warning a, div.info a, div.error a {
 
 /* Error message */
 div.error {
-    border-<?php print $left; ?>: solid 5px #f28787;
+    border-<?php print $left; ?>: solid 5px #550000;
 	padding-top: 8px;
 	padding-left: 10px;
 	padding-right: 4px;
