@@ -28,6 +28,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
 require_once DOL_DOCUMENT_ROOT .'/core/class/notify.class.php';
 require_once DOL_DOCUMENT_ROOT.'/societe/class/client.class.php';
 require_once DOL_DOCUMENT_ROOT .'/commande/class/commande.class.php';
+require_once DOL_DOCUMENT_ROOT.'/projet/class/project.class.php';
 
 if (!$user->rights->commande->lire) accessforbidden();
 
@@ -50,6 +51,7 @@ if ($user->societe_id > 0)
 
 $commandestatic=new Commande($db);
 $companystatic=new Societe($db);
+$projectstatic=new Project($db);
 $form = new Form($db);
 $formfile = new FormFile($db);
 $help_url="EN:Module_Customers_Orders|FR:Module_Commandes_Clients|ES:Módulo_Pedidos_de_clientes";
@@ -168,7 +170,7 @@ else
  */
 if (! empty($conf->commande->enabled))
 {
-	$sql = "SELECT c.rowid, c.ref, s.nom as name, s.rowid as socid";
+	$sql = "SELECT c.rowid, c.ref, c.fk_projet, s.nom as name, s.rowid as socid";
     $sql.= ", s.client";
     $sql.= ", s.code_client";
     $sql.= ", s.canvas";
@@ -186,7 +188,7 @@ if (! empty($conf->commande->enabled))
 	{
 		print '<table class="noborder" width="100%">';
 		print '<tr class="liste_titre">';
-		print '<th colspan="2">'.$langs->trans("DraftOrders").'</th></tr>';
+		print '<th colspan="3">'.$langs->trans("DraftOrders").'</th></tr>';
 		$langs->load("orders");
 		$num = $db->num_rows($resql);
 		if ($num)
@@ -206,6 +208,7 @@ if (! empty($conf->commande->enabled))
 				$companystatic->client=$obj->client;
 				$companystatic->code_client=$obj->code_client;
 				$companystatic->canvas=$obj->canvas;
+				$projectstatic->id=$obj->fk_projet;
 
 				print '<tr class="oddeven">';
 				print '<td class="nowrap">';
@@ -213,6 +216,9 @@ if (! empty($conf->commande->enabled))
                 print "</td>";
                 print '<td class="nowrap">';
 				print $companystatic->getNomUrl(1,'company',16);
+                print "</td>";
+                print '<td class="nowrap">';
+				print ($obj->fk_projet > 0 ? $projectstatic->getNomUrl(1) : '');
                 print '</td></tr>';
 				$i++;
 			}
@@ -236,7 +242,7 @@ $max=5;
  * Last modified orders
  */
 
-$sql = "SELECT c.rowid, c.ref, c.fk_statut, c.facture, c.date_cloture as datec, c.tms as datem,";
+$sql = "SELECT c.rowid, c.ref, c.fk_projet, c.fk_statut, c.facture, c.date_cloture as datec, c.tms as datem,";
 $sql.= " s.nom as name, s.rowid as socid";
 $sql.= ", s.client";
 $sql.= ", s.code_client";
@@ -257,7 +263,7 @@ if ($resql)
 {
 	print '<table class="noborder" width="100%">';
 	print '<tr class="liste_titre">';
-	print '<th colspan="4">'.$langs->trans("LastModifiedOrders",$max).'</th></tr>';
+	print '<th colspan="5">'.$langs->trans("LastModifiedOrders",$max).'</th></tr>';
 
 	$num = $db->num_rows($resql);
 	if ($num)
@@ -280,6 +286,7 @@ if ($resql)
 			$companystatic->client=$obj->client;
 			$companystatic->code_client=$obj->code_client;
 			$companystatic->canvas=$obj->canvas;
+			$projectstatic->id=$obj->fk_projet;
 
 			print '<table class="nobordernopadding"><tr class="nocellnopadd">';
 			print '<td width="96" class="nobordernopadding nowrap">';
@@ -301,6 +308,9 @@ if ($resql)
 
 			print '<td class="nowrap">';
             print $companystatic->getNomUrl(1,'company',16);
+			print "</td>";
+			print '<td class="nowrap">';
+			print ($obj->fk_projet > 0 ? $projectstatic->getNomUrl(1) : '');
             print '</td>';
 			print '<td>'.dol_print_date($db->jdate($obj->datem),'day').'</td>';
 			print '<td align="right">'.$commandestatic->LibStatut($obj->fk_statut,$obj->facture,5).'</td>';
@@ -318,7 +328,7 @@ else dol_print_error($db);
  */
 if (! empty($conf->commande->enabled))
 {
-	$sql = "SELECT c.rowid, c.ref, c.fk_statut, c.facture, s.nom as name, s.rowid as socid";
+	$sql = "SELECT c.rowid, c.ref, c.fk_projet, c.fk_statut, c.facture, s.nom as name, s.rowid as socid";
     $sql.= ", s.client";
     $sql.= ", s.code_client";
     $sql.= ", s.canvas";
@@ -339,7 +349,7 @@ if (! empty($conf->commande->enabled))
 
 		print '<table class="noborder" width="100%">';
 		print '<tr class="liste_titre">';
-		print '<th colspan="3">'.$langs->trans("OrdersToProcess").' <a href="'.DOL_URL_ROOT.'/commande/list.php?viewstatut=1"><span class="badge">'.$num.'</span></a></th></tr>';
+		print '<th colspan="4">'.$langs->trans("OrdersToProcess").' <a href="'.DOL_URL_ROOT.'/commande/list.php?viewstatut=1"><span class="badge">'.$num.'</span></a></th></tr>';
 
 		if ($num)
 		{
@@ -360,6 +370,7 @@ if (! empty($conf->commande->enabled))
 				$companystatic->client=$obj->client;
 				$companystatic->code_client=$obj->code_client;
 				$companystatic->canvas=$obj->canvas;
+				$projectstatic->id=$obj->fk_projet;
 
 				print '<table class="nobordernopadding"><tr class="nocellnopadd">';
 				print '<td width="96" class="nobordernopadding nowrap">';
@@ -381,6 +392,9 @@ if (! empty($conf->commande->enabled))
 
 				print '<td class="nowrap">';
                 print $companystatic->getNomUrl(1,'company',24);
+				print "</td>";
+				print '<td class="nowrap">';
+				print ($obj->fk_projet > 0 ? $projectstatic->getNomUrl(1) : '');
                 print '</td>';
 
 				print '<td align="right">'.$commandestatic->LibStatut($obj->fk_statut,$obj->facture,5).'</td>';
@@ -400,7 +414,7 @@ if (! empty($conf->commande->enabled))
  */
 if (! empty($conf->commande->enabled))
 {
-	$sql = "SELECT c.rowid, c.ref, c.fk_statut, c.facture, s.nom as name, s.rowid as socid";
+	$sql = "SELECT c.rowid, c.ref, c.fk_projet, c.fk_statut, c.facture, s.nom as name, s.rowid as socid";
     $sql.= ", s.client";
     $sql.= ", s.code_client";
     $sql.= ", s.canvas";
@@ -421,7 +435,7 @@ if (! empty($conf->commande->enabled))
 
 		print '<table class="noborder" width="100%">';
 		print '<tr class="liste_titre">';
-		print '<th colspan="3">'.$langs->trans("OnProcessOrders").' <a href="'.DOL_URL_ROOT.'/commande/list.php?viewstatut=2"><span class="badge">'.$num.'</span></a></th></tr>';
+		print '<th colspan="4">'.$langs->trans("OnProcessOrders").' <a href="'.DOL_URL_ROOT.'/commande/list.php?viewstatut=2"><span class="badge">'.$num.'</span></a></th></tr>';
 
 		if ($num)
 		{
@@ -442,6 +456,7 @@ if (! empty($conf->commande->enabled))
 				$companystatic->client=$obj->client;
 				$companystatic->code_client=$obj->code_client;
 				$companystatic->canvas=$obj->canvas;
+				$projectstatic->id=$obj->fk_projet;
 
 				print '<table class="nobordernopadding"><tr class="nocellnopadd">';
 				print '<td width="96" class="nobordernopadding nowrap">';
@@ -463,6 +478,9 @@ if (! empty($conf->commande->enabled))
 
 				print '<td>';
 				print $companystatic->getNomUrl(1,'company');
+				print "</td>";
+				print '<td class="nowrap">';
+				print ($obj->fk_projet > 0 ? $projectstatic->getNomUrl(1) : '');
 				print '</td>';
 
 				print '<td align="right">'.$commandestatic->LibStatut($obj->fk_statut,$obj->facture,5).'</td>';

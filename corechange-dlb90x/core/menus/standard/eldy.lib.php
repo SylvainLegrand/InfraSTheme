@@ -1767,7 +1767,7 @@ function print_left_eldy_menu($db,$menu_array_before,$menu_array_after,&$tabMenu
 					print ($menu_array[$i]['prefix']?$menu_array[$i]['prefix']:'').$menu_array[$i]['titre'];
 					if ($shorturlwithoutparam) print '</a>';
 					else print '</span>';
-					print '&nbsp;&nbsp;&nbsp;<span class="infrastoggle fa fa-caret-down"></span>';	// InfraS ajout
+					print '&nbsp;&nbsp;&nbsp;<span class="infrastoggle fa fa-caret-down" style="color: #888;"></span>';	// InfraS ajout
 					print '</div>'."\n";
 					$lastlevel0='enabled';
 				}

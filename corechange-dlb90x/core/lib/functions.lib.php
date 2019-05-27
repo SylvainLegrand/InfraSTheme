@@ -7251,7 +7251,7 @@ function printCommonFooter($zone='private')
 									if(link != "off" && $.urlParam("leftmenu", link) != 0) {
 										if ($.urlParam("leftmenu", url) == $.urlParam("leftmenu", link)) {
 											$(".menu_contenu:not(#menu_contenu_logo, .time_basket)").hide();
-											$(this).siblings(".infrastoggle").removeClass("fa-caret-down").addClass("fa-caret-left");
+											$(this).siblings(".infrastoggle").removeClass("fa-caret-down").addClass("fa-caret-up");
 											$(this).parent().show();
 											$(this).parent().siblings().show();
 											return(false);
@@ -7280,11 +7280,11 @@ function printCommonFooter($zone='private')
 								if($(this).hasClass("fa-caret-down")) {
 									$(".menu_contenu:not(#menu_contenu_logo, .time_basket)").hide();
 									$(this).parent().nextAll().toggle();
-									$(".infrastoggle").removeClass("fa-caret-left").addClass("fa-caret-down");
-									$(this).removeClass("fa-caret-down").addClass("fa-caret-left");
-								} else if($(this).hasClass("fa-caret-left")) {
+									$(".infrastoggle").removeClass("fa-caret-up").addClass("fa-caret-down");
+									$(this).removeClass("fa-caret-down").addClass("fa-caret-up");
+								} else if($(this).hasClass("fa-caret-up")) {
 									$(".menu_contenu:not(#menu_contenu_logo, .time_basket)").hide();
-									$(this).removeClass("fa-caret-left").addClass("fa-caret-down");
+									$(this).removeClass("fa-caret-up").addClass("fa-caret-down");
 								}
 							});';
 			}

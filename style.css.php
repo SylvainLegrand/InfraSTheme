@@ -293,9 +293,20 @@ body {
 th a { font-weight: <?php echo ($useboldtitle?'bold':'normal'); ?> !important; }
 a.tab { font-weight: bold !important; }
 
-a:link, a:visited, a:hover, a:active { font-family: <?php print $fontlist ?>; font-weight: normal; color: rgb(<?php print $colortextlink; ?>); text-decoration: none;  }
-a:hover { text-decoration: underline; color: rgb(<?php print $colortextlink; ?>); }
-a.commonlink { color: rgb(<?php print $colortextlink; ?>) !important; text-decoration: none; }
+a:link, a:visited, a:hover, a:active {
+	font-family: <?php print $fontlist ?>;
+	font-weight: normal;
+	color: rgb(<?php print $colortextlink; ?>);
+	text-decoration: none; 
+}
+a:hover {
+	text-decoration: underline;
+	color: rgb(<?php print $colortextlink; ?>);
+}
+a.commonlink {
+	color: rgb(<?php print $colortextlink; ?>) !important;
+	text-decoration: none;
+}
 
 input, input.flat, textarea, textarea.flat, form.flat select, select, select.flat, .dataTables_length label select {
     background-color: #FDFDFD;
@@ -512,11 +523,15 @@ input:-webkit-autofill {
 	background-image:none !important;
 	-webkit-box-shadow: 0 0 0 50px #FBFFEA inset;
 }
-::-webkit-input-placeholder { color:#ccc; }
-:-moz-placeholder { color:#bbb; } 			/* firefox 18- */
-::-moz-placeholder { color:#bbb; } 			/* firefox 19+ */
-:-ms-input-placeholder { color:#ccc; } 		/* ie */
-input:-moz-placeholder { color:#ccc; }
+::placeholder {
+  color: #888;
+  opacity: 1; /* Firefox */
+}
+::-webkit-input-placeholder { color:#888; }
+:-moz-placeholder { color:#888; } 			/* firefox 18- */
+::-moz-placeholder { color:#888; } 			/* firefox 19+ */
+:-ms-input-placeholder { color:#888; } 		/* ie */
+input:-moz-placeholder { color:#888; }
 input[name=weight], input[name=volume], input[name=surface], input[name=sizeheight], select[name=incoterm_id] { margin-right: 6px; }
 input[name=surface] { margin-right: 4px; }
 fieldset { border: 1px solid #AAAAAA !important; }
@@ -2191,16 +2206,21 @@ font.vsmenudisabled { font-size:<?php print $fontsize ?>px; font-family: <?php p
 a.vsmenu:link, a.vsmenu:visited { color: #<?php echo $colortextbackvmenu; ?>; white-space: nowrap; }
 font.vsmenudisabledmargin { margin: 1px 1px 1px 8px; }
 
-a.help:link, a.help:visited, a.help:hover, a.help:active, span.help { font-size:<?php print $fontsizesmaller ?>px; font-family: <?php print $fontlist ?>; text-align: <?php print $left; ?>; font-weight: normal; color: #999; text-decoration: none; }
+a.help:link, a.help:visited, a.help:hover, a.help:active, span.help {
+	font-size:<?php print $fontsizesmaller ?>px;
+	font-family: <?php print $fontlist ?>;
+	text-align: <?php print $left; ?>;
+	font-weight: normal;
+	color: rgb(<?php print $colorbacklinepairhover ?>);
+	text-decoration: none;
+}
 
-div.blockvmenulogo
-{
+div.blockvmenulogo {
 	border-bottom: 0 !important;
 }
-div.blockvmenupair, div.blockvmenuimpair
-{
+div.blockvmenupair, div.blockvmenuimpair {
 	font-family: <?php print $fontlist ?>;
-	color: #000000;
+	color: #<?php print $colortextbackvmenu ?>;
 	text-align: <?php print $left; ?>;
 	text-decoration: none;
     padding-left: 5px;
@@ -2210,8 +2230,7 @@ div.blockvmenupair, div.blockvmenuimpair
     margin: 1px 0px 8px 0px;
     padding-bottom: 10px;
 }
-div.blockvmenubookmarks
-{
+div.blockvmenubookmarks {
 	padding-bottom: 16px !important;
 }
 div.blockvmenuend {
@@ -2224,10 +2243,9 @@ a.vsmenu.addbookmarkpicto {
 div.blockvmenufirst {
 	padding-top: 10px;
 }
-div.blockvmenusearch, div.blockvmenubookmarks
-{
+div.blockvmenusearch, div.blockvmenubookmarks {
 	font-family: <?php print $fontlist ?>;
-	color: #000000;
+	color: #<?php print $colortextbackvmenu ?>;
 	text-align: <?php print $left; ?>;
 	text-decoration: none;
     padding-left: 5px;
@@ -2239,17 +2257,18 @@ div.blockvmenusearch, div.blockvmenubookmarks
     padding-bottom: 10px;
     /* border-bottom: 1px solid #f4f4f4; */
 }
-div.blockvmenusearchphone
-{
+div.blockvmenusearch input {
+	color: #<?php print $colortextbackvmenu ?>;
+}
+div.blockvmenusearchphone {
 	border-bottom: none;
 	margin-bottom: 0px;
 }
 
-div.blockvmenuhelp
-{
+div.blockvmenuhelp {
 <?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 	font-family: <?php print $fontlist ?>;
-	color: #000000;
+	color: rgb(<?php print $colorbacklinepairhover ?>);
 	text-align: center;
 	text-decoration: none;
     padding-left: 0px;
@@ -3193,11 +3212,11 @@ tr.liste_titre, tr.liste_titre_sel, form.liste_titre, form.liste_titre_sel, tabl
 div.liste_titre_bydiv, .liste_titre div.tagtr, tr.liste_titre, tr.liste_titre_sel, form.liste_titre, form.liste_titre_sel, table.dataTable thead tr
 {
 	<?php if ($usegradient) { ?>
-	background-image: -o-linear-gradient(top, rgba(<?php echo $colorbacktitle1; ?>,0.3) 0%, rgba(<?php echo $colorbacktitle1; ?>,1) 100%);
-	background-image: -moz-linear-gradient(top, rgba(<?php echo $colorbacktitle1; ?>,0.3) 0%, rgba(<?php echo $colorbacktitle1; ?>,1) 100%);
-	background-image: -webkit-linear-gradient(top, rgba(<?php echo $colorbacktitle1; ?>,0.3) 0%, rgba(<?php echo $colorbacktitle1; ?>,1) 100%);
-	background-image: -ms-linear-gradient(top, rgba(<?php echo $colorbacktitle1; ?>,0.3) 0%, rgba(<?php echo $colorbacktitle1; ?>,1) 100%);
-	background-image: linear-gradient(to top, rgba(<?php echo $colorbacktitle1; ?>,0.3) 0%, rgba(<?php echo $colorbacktitle1; ?>,1) 100%);
+	background-image: -o-linear-gradient(bottom, rgba(<?php echo $colorbacktitle1; ?>,0.3) 0%, rgba(<?php echo $colorbacktitle1; ?>,1) 100%);
+	background-image: -moz-linear-gradient(bottom, rgba(<?php echo $colorbacktitle1; ?>,0.3) 0%, rgba(<?php echo $colorbacktitle1; ?>,1) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgba(<?php echo $colorbacktitle1; ?>,0.3) 0%, rgba(<?php echo $colorbacktitle1; ?>,1) 100%);
+	background-image: -ms-linear-gradient(bottom, rgba(<?php echo $colorbacktitle1; ?>,0.3) 0%, rgba(<?php echo $colorbacktitle1; ?>,1) 100%);
+	background-image: linear-gradient(to bottom, rgba(<?php echo $colorbacktitle1; ?>,0.3) 0%, rgba(<?php echo $colorbacktitle1; ?>,1) 100%);
 	<?php } else { ?>
 	background: rgb(<?php echo $colorbacktitle1; ?>);
 	<?php } ?>
@@ -4724,7 +4743,7 @@ div.dataTables_length select {
     background-color: unset;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-
+	color: #888 !important;
 }
 .select2-container .select2-choice {
 	border-bottom: 1px solid #ccc;
@@ -4894,7 +4913,6 @@ a span.select2-chosen
 }
 span#select2-boxbookmark-container, span#select2-boxcombo-container {
     text-align: <?php echo $left; ?>;
-    opacity: 0.5;
 }
 .select2-container .select2-selection--single .select2-selection__rendered {
 	padding-left: 6px;
