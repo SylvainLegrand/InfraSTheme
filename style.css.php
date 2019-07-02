@@ -59,9 +59,10 @@ if (! defined('NOREQUIREHTML'))   define('NOREQUIREHTML',1);
 if (! defined('NOREQUIREAJAX'))   define('NOREQUIREAJAX','1');
 
 // Colors
-$colorbackhmenu1='56, 36, 83';      // topmenu '90, 50, 120'
+$colorbackhmenu1='90, 100, 130';      // topmenu
 $colorbackvmenu1='255, 255, 255';      // vmenu
 $colortopbordertitle1='';           // top border of tables-lists title. not defined = default to colorbackhmenu1
+$colorbacktitle1=$colorbackhmenu1;      // title of tables-lists
 $colorbacktabcard1='255, 255, 255';  // card
 $colorbacktabactive='234, 234, 234';
 $colorbacklineimpair1='255, 255, 255';    // line impair
@@ -171,7 +172,6 @@ $colortext				= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($con
 $colortextlink			= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TEXTLINK)			? $colortext:$conf->global->THEME_ELDY_TEXTLINK)					: (empty($user->conf->THEME_ELDY_TEXTLINK)?$colortextlink:$user->conf->THEME_ELDY_TEXTLINK);
 $fontsize				= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_FONT_SIZE1)			? $fontsize:$conf->global->THEME_ELDY_FONT_SIZE1)					: (empty($user->conf->THEME_ELDY_FONT_SIZE1)?$fontsize:$user->conf->THEME_ELDY_FONT_SIZE1);
 $fontsizesmaller		= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_FONT_SIZE2)			? $fontsize:$conf->global->THEME_ELDY_FONT_SIZE2)					: (empty($user->conf->THEME_ELDY_FONT_SIZE2)?$fontsize:$user->conf->THEME_ELDY_FONT_SIZE2);
-$colorbacktitle1=$colorbackhmenu1;      // title of tables-lists
 
 // Hover color
 $colorbacklinepairhover=((! isset($conf->global->THEME_ELDY_USE_HOVER) || (string) $conf->global->THEME_ELDY_USE_HOVER === '0')?'':($conf->global->THEME_ELDY_USE_HOVER === '1'?'edf4fb':$conf->global->THEME_ELDY_USE_HOVER));
@@ -297,7 +297,7 @@ a:link, a:visited, a:hover, a:active {
 	font-family: <?php print $fontlist ?>;
 	font-weight: normal;
 	color: rgb(<?php print $colortextlink; ?>);
-	text-decoration: none; 
+	text-decoration: none;
 }
 a:hover {
 	text-decoration: underline;
