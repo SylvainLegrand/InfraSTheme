@@ -712,7 +712,7 @@ if ($object->id > 0)
 				$objp = $db->fetch_object($resql);
 
 				print '<tr class="oddeven">';
-                print '<td class="nowrap">';
+                print '<td class="nowrap" width="200px">';	// InfraS Change
                 $propal_static->id = $objp->propalid;
                 $propal_static->ref = $objp->ref;
                 $propal_static->ref_client = $objp->ref_client;
@@ -724,8 +724,8 @@ if ($object->id > 0)
                     print " ".img_warning();
                 }
 				print '</td><td align="right" width="80px">'.dol_print_date($db->jdate($objp->dp),'day')."</td>\n";
-				print '<td align="right" style="min-width: 60px">'.price($objp->total_ht).'</td>';
-				print '<td align="right" style="min-width: 60px" class="nowrap">'.$propal_static->LibStatut($objp->fk_statut,5).'</td></tr>';
+				print '<td align="right" style="min-width: 80px">'.price($objp->total_ht).'</td>';	// InfraS Change
+				print '<td align="right" style="min-width: 260px" class="nowrap">'.$propal_static->LibStatut($objp->fk_statut,5).'</td></tr>';	// InfraS Change
 				$i++;
 			}
 			$db->free($resql);
@@ -807,11 +807,11 @@ if ($object->id > 0)
 				$commande_static->billed = $objp->billed;
 
 				print '<tr class="oddeven">';
-                print '<td class="nowrap">';
+                print '<td class="nowrap" width="200px">';	// InfraS Change
                 print $commande_static->getNomUrl(1);
 				print '</td><td align="right" width="80px">'.dol_print_date($db->jdate($objp->dc),'day')."</td>\n";
-				print '<td align="right" style="min-width: 60px">'.price($objp->total_ht).'</td>';
-				print '<td align="right" style="min-width: 60px" class="nowrap">'.$commande_static->LibStatut($objp->fk_statut,$objp->facture,5).'</td></tr>';
+				print '<td align="right" style="min-width: 80px">'.price($objp->total_ht).'</td>';	// InfraS Change
+				print '<td align="right" style="min-width: 260px" class="nowrap">'.$commande_static->LibStatut($objp->fk_statut,$objp->facture,5).'</td></tr>';	// InfraS Change
 				$i++;
 			}
 			$db->free($resql);
@@ -876,16 +876,16 @@ if ($object->id > 0)
                 $sendingstatic->ref = $objp->ref;
 
                 print '<tr class="oddeven">';
-                print '<td class="nowrap">';
+                print '<td class="nowrap" width="200px">';	// InfraS Change
                 print $sendingstatic->getNomUrl(1);
                 print '</td>';
                 if ($objp->date_creation > 0) {
                     print '<td align="right" width="80px">'.dol_print_date($db->jdate($objp->date_creation),'day').'</td>';
                 } else {
-                    print '<td align="right"><b>!!!</b></td>';
+                    print '<td align="right" width="80px"><b>!!!</b></td>';	// InfraS change
                 }
-
-                print '<td align="right" class="nowrap" width="100" >' . $sendingstatic->LibStatut($objp->statut, 5) . '</td>';
+				print '<td align="right" style="min-width: 80px">&nbsp;</td>';	// InfraS Add
+                print '<td align="right" style="min-width: 260px" class="nowrap">' . $sendingstatic->LibStatut($objp->statut, 5) . '</td>'; // InfraS change
                 print "</tr>\n";
                 $i++;
             }
@@ -925,7 +925,7 @@ if ($object->id > 0)
 				print '<table class="noborder" width="100%">';
 
 			    print '<tr class="liste_titre">';
-				print '<td colspan="6"><table width="100%" class="nobordernopadding"><tr><td>'.$langs->trans("LastContracts",($num<=$MAXLIST?"":$MAXLIST)).'</td>';
+				print '<td colspan="4"><table width="100%" class="nobordernopadding"><tr><td>'.$langs->trans("LastContracts",($num<=$MAXLIST?"":$MAXLIST)).'</td>';	// InfraS Change
 				print '<td align="right"><a class="notasortlink" href="'.DOL_URL_ROOT.'/contrat/list.php?socid='.$object->id.'">'.$langs->trans("AllContracts").' <span class="badge">'.$num.'</span></a></td>';
 				//print '<td width="20px" align="right"><a href="'.DOL_URL_ROOT.'/contract/stats/index.php?socid='.$object->id.'">'.img_picto($langs->trans("Statistics"),'stats').'</a></td>';
 				print '</tr></table></td>';
@@ -944,14 +944,14 @@ if ($object->id > 0)
 				$contrat->fetch_lines();
 
 				print '<tr class="oddeven">';
-				print '<td class="nowrap">';
+				print '<td class="nowrap" width="200px">';	// InfraS Change
 				print $contrat->getNomUrl(1,12);
 				print "</td>\n";
-				print '<td class="nowrap">'.dol_trunc($objp->refsup,12)."</td>\n";
+			//	print '<td class="nowrap">'.dol_trunc($objp->refsup,12)."</td>\n";	// InfraS Change
 				print '<td align="right" width="80px">'.dol_print_date($db->jdate($objp->dc),'day')."</td>\n";
-				print '<td align="right" width="80px">'.dol_print_date($db->jdate($objp->dcon),'day')."</td>\n";
-				print '<td width="20">&nbsp;</td>';
-				print '<td align="right" class="nowraponall">';
+				print '<td align="right" style="min-width: 80px">'.dol_print_date($db->jdate($objp->dcon),'day')."</td>\n";	// InfraS Change
+			//	print '<td width="20">&nbsp;</td>';	// InfraS Change
+				print '<td align="right" style="min-width: 260px" class="nowraponall">';	// InfraS Change
 				print $contrat->getLibStatut(4);
 				print "</td>\n";
 				print '</tr>';
@@ -995,7 +995,7 @@ if ($object->id > 0)
 				print '<table class="noborder" width="100%">';
 
 			    print '<tr class="liste_titre">';
-				print '<td colspan="3"><table width="100%" class="nobordernopadding"><tr><td>'.$langs->trans("LastInterventions",($num<=$MAXLIST?"":$MAXLIST)).'</td><td align="right"><a class="notasortlink" href="'.DOL_URL_ROOT.'/fichinter/list.php?socid='.$object->id.'">'.$langs->trans("AllInterventions").' <span class="badge">'.$num.'</span></td>';
+				print '<td colspan="4"><table width="100%" class="nobordernopadding"><tr><td>'.$langs->trans("LastInterventions",($num<=$MAXLIST?"":$MAXLIST)).'</td><td align="right"><a class="notasortlink" href="'.DOL_URL_ROOT.'/fichinter/list.php?socid='.$object->id.'">'.$langs->trans("AllInterventions").' <span class="badge">'.$num.'</span></td>';
 				print '<td width="20px" align="right"><a href="'.DOL_URL_ROOT.'/fichinter/stats/index.php?socid='.$object->id.'">'.img_picto($langs->trans("Statistics"),'stats').'</a></td>';
 				print '</tr></table></td>';
 				print '</tr>';
@@ -1010,10 +1010,11 @@ if ($object->id > 0)
                 $fichinter_static->statut=$objp->fk_statut;
 
 				print '<tr class="oddeven">';
-				print '<td class="nowrap"><a href="'.DOL_URL_ROOT.'/fichinter/card.php?id='.$objp->id.'">'.img_object($langs->trans("ShowPropal"),"propal").' '.$objp->ref.'</a></td>'."\n";
+				print '<td class="nowrap" width="200px"><a href="'.DOL_URL_ROOT.'/fichinter/card.php?id='.$objp->id.'">'.img_object($langs->trans("ShowPropal"),"propal").' '.$objp->ref.'</a></td>'."\n";	// InfraS Change
                 //print '<td align="right" width="80px">'.dol_print_date($db->jdate($objp->startdate)).'</td>'."\n";
-				print '<td align="right" style="min-width: 60px">'.convertSecondToTime($objp->duration).'</td>'."\n";
-				print '<td align="right" class="nowrap" style="min-width: 60px">'.$fichinter_static->getLibStatut(5).'</td>'."\n";
+				print '<td align="right" width="80px">&nbsp;</td>';	// InfraS add
+				print '<td align="right" style="min-width: 80px">'.convertSecondToTime($objp->duration).'</td>'."\n";	// InfraS Change
+				print '<td align="right" style="min-width: 260px" class="nowrap">'.$fichinter_static->getLibStatut(5).'</td>'."\n";	// InfraS Change
 				print '</tr>';
 
 				$i++;
@@ -1173,7 +1174,7 @@ if ($object->id > 0)
 				print '<table class="noborder" width="100%">';
 
 				print '<tr class="liste_titre">';
-				print '<td colspan="5"><table width="100%" class="nobordernopadding"><tr><td>'.$langs->trans("LastCustomersBills",($num<=$MAXLIST?"":$MAXLIST)).'</td><td align="right"><a class="notasortlink" href="'.DOL_URL_ROOT.'/compta/facture/list.php?socid='.$object->id.'">'.$langs->trans("AllBills").' <span class="badge">'.$num.'</span></a></td>';
+				print '<td colspan="4"><table width="100%" class="nobordernopadding"><tr><td>'.$langs->trans("LastCustomersBills",($num<=$MAXLIST?"":$MAXLIST)).'</td><td align="right"><a class="notasortlink" href="'.DOL_URL_ROOT.'/compta/facture/list.php?socid='.$object->id.'">'.$langs->trans("AllBills").' <span class="badge">'.$num.'</span></a></td>';
                 print '<td width="20px" align="right"><a href="'.DOL_URL_ROOT.'/compta/facture/stats/index.php?socid='.$object->id.'">'.img_picto($langs->trans("Statistics"),'stats').'</a></td>';
 				print '</tr></table></td>';
 				print '</tr>';
@@ -1192,7 +1193,7 @@ if ($object->id > 0)
 				$facturestatic->total_ttc = $objp->total_ttc;
 
 				print '<tr class="oddeven">';
-				print '<td class="nowrap">';
+                print '<td class="nowrap" width="200px">';	// InfraS Change
 				print $facturestatic->getNomUrl(1);
 				print '</td>';
 				if ($objp->df > 0)
@@ -1201,21 +1202,24 @@ if ($object->id > 0)
 				}
 				else
 				{
-					print '<td align="right"><b>!!!</b></td>';
+					print '<td align="right" width="80px"><b>!!!</b></td>';	// InfraS Change
 				}
-				print '<td align="right" style="min-width: 60px">';
-				print price($objp->total_ht);
-				print '</td>';
-
-				if (! empty($conf->global->MAIN_SHOW_PRICE_WITH_TAX_IN_SUMMARIES))
+				if (empty($conf->global->MAIN_SHOW_PRICE_WITH_TAX_IN_SUMMARIES))	// InfraS add
+				{	// InfraS add
+					print '<td align="right" style="min-width: 80px">';	// InfraS Change
+					print price($objp->total_ht);
+					print '</td>';
+				}	// InfraS add
+				else	// InfraS Change	if (! empty($conf->global->MAIN_SHOW_PRICE_WITH_TAX_IN_SUMMARIES))
 				{
-    				print '<td align="right" style="min-width: 60px">';
+    				print '<td align="right" style="min-width: 80px">';	// InfraS Change
     				print price($objp->total_ttc);
     				print '</td>';
 				}
 
-				print '<td align="right" class="nowrap" style="min-width: 60px">'.($facturestatic->LibStatut($objp->paye,$objp->statut,5,$objp->am)).'</td>';
+				print '<td align="right" style="min-width: 260px" class="nowrap">'.($facturestatic->LibStatut($objp->paye,$objp->statut,5,$objp->am)).'</td>';	// InfraS Change
 				print "</tr>\n";
+				
 				$i++;
 			}
 			$db->free($resql);

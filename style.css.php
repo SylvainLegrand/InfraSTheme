@@ -400,6 +400,7 @@ input.smallpadd {	/* Used for timesheet input */
 input.buttongen {
 	vertical-align: middle;
 }
+/*
 input.buttonpayment {
 	min-width: 320px;
 	margin-bottom: 15px;
@@ -449,7 +450,7 @@ input.buttonpaymentstripe {
 	background-image: url(<?php echo dol_buildpath($path.'/stripe/img/object_stripe.png',1) ?>);
 	background-repeat: no-repeat;
 	background-position: 8px 7px;
-}
+}*/
 /* Used for timesheets */
 span.timesheetalreadyrecorded input {
     border: none;

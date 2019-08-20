@@ -135,15 +135,16 @@ class box_graph_product_distribution extends ModeleBoxes
 		$socid=empty($user->societe_id)?0:$user->societe_id;
 		$userid=0;	// No filter on user creation
 
-		$WIDTH=($nbofgraph >= 2 || ! empty($conf->dol_optimize_smallscreen))?'360':'700';
-		$HEIGHT='350';
+		$boxWidth	= ($_SESSION['dol_screenwidth'] - 400) / 2;
+		$WIDTH		= ($nbofgraph >= 2 || ! empty($conf->dol_optimize_smallscreen)) ? $boxWidth / 2 : $boxWidth;
+		$HEIGHT		= $WIDTH - 120;
 
 		if (! empty($conf->facture->enabled) && ! empty($user->rights->facture->lire))
 		{
 			// Build graphic number of object. $data = array(array('Lib',val1,val2,val3),...)
 			if ($showinvoicenb)
 			{
-		$langs->load("bills");
+				$langs->load("bills");
 				include_once DOL_DOCUMENT_ROOT.'/compta/facture/class/facturestats.class.php';
 
 				$showpointvalue = 1; $nocolor = 0;
@@ -182,7 +183,7 @@ class box_graph_product_distribution extends ModeleBoxes
 					$px1->setShowPercent(1);
 					$px1->SetMaxValue($px1->GetCeilMaxValue());
 					$px1->SetWidth($WIDTH);
-//					$px1->SetHeight($HEIGHT);
+					$px1->SetHeight($HEIGHT);
 					//$px1->SetYLabel($langs->trans("NumberOfBills"));
 					$px1->SetShading(3);
 					$px1->SetHorizTickIncrement(1);
@@ -242,7 +243,7 @@ class box_graph_product_distribution extends ModeleBoxes
 					$px2->setShowPercent(1);
 					$px2->SetMaxValue($px2->GetCeilMaxValue());
 					$px2->SetWidth($WIDTH);
-		//			$px2->SetHeight($HEIGHT);
+					$px2->SetHeight($HEIGHT);
 					//$px2->SetYLabel($langs->trans("AmountOfBillsHT"));
 					$px2->SetShading(3);
 					$px2->SetHorizTickIncrement(1);
@@ -303,7 +304,7 @@ class box_graph_product_distribution extends ModeleBoxes
 					$px3->setShowPercent(1);
 					$px3->SetMaxValue($px3->GetCeilMaxValue());
 					$px3->SetWidth($WIDTH);
-		//			$px3->SetHeight($HEIGHT);
+					$px3->SetHeight($HEIGHT);
 					//$px3->SetYLabel($langs->trans("AmountOfBillsHT"));
 					$px3->SetShading(3);
 					$px3->SetHorizTickIncrement(1);
