@@ -13,7 +13,7 @@
 
 ## Licence
 
-***InfraSTheme v9*** est distribué sous les termes de la licence GNU General Public License v3+ ou supérieure. ![GPLv3](/custom/infraspackplus/img/gplv3.png)
+***InfraSTheme v10*** est distribué sous les termes de la licence GNU General Public License v3+ ou supérieure. ![GPLv3](/custom/infraspackplus/img/gplv3.png)
 
 Copyright (C) 2016-2019 Sylvain Legrand - InfraS
 
