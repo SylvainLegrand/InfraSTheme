@@ -1,4 +1,4 @@
-# ***InfraSTheme v9***
+# ***InfraSTheme v10***
 
 * Le thème ***InfraS*** améliore l'ergonomie de ***Dolibarr ERP/CRM*** et apporte un peu de fun :
 	 * Colonne des menus (gauche) masquable
