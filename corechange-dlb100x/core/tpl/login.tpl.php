@@ -201,11 +201,9 @@ if ($captcha) {
 
 	<table class="login_table_securitycode">
 	<tr class="valignmiddle">
-	<td><a href="<?php echo $php_self; ?>" tabindex="4" data-role="button"><?php echo $captcha_refresh; ?></a></td>
+	<td><a href="<?php echo $php_self; ?>" tabindex="4" data-role="button" class="fa"><?php echo $captcha_refresh; ?></a></td>
 	<td>
-	<span class="fa span-icon-security">
 	<input type="text" id="securitycode" placeholder="<?php echo $langs->trans("SecurityCode"); ?>" name="code" class="flat input-icon-security" maxlength="5" tabindex="3" />
-	</span>
 	<img src="<?php echo DOL_URL_ROOT ?>/core/antispamimage.php" border="0" id="img_securitycode" class="flat" />
 	</td>
 	</tr>
@@ -222,7 +220,7 @@ if ($captcha) {
 <?php if ($main_home)
 {
 ?>
-	<div class="center login_main_home <?php echo empty($conf->global->MAIN_LOGIN_BACKGROUND)?'':' backgroundsemitransparent'; ?>" style="max-width: 70%">
+	<div class="center login_main_home" style="max-width: 70%">
 	<?php echo $main_home; ?>
 	</div><br>
 <?php
