@@ -1008,12 +1008,14 @@ if ($object->id > 0)
 				$objp = $db->fetch_object($resql);
 
 				$fichinter_static->id=$objp->id;
+				$fichinter_static->ref = $objp->ref;
                 $fichinter_static->statut=$objp->fk_statut;
 
 				print '<tr class="oddeven">';
-				print '<td class="nowrap" width="200px"><a href="'.DOL_URL_ROOT.'/fichinter/card.php?id='.$objp->id.'">'.img_object($langs->trans("ShowPropal"),"propal").' '.$objp->ref.'</a></td>'."\n";	// InfraS Change
-                //print '<td class="right" width="80px">'.dol_print_date($db->jdate($objp->startdate)).'</td>'."\n";
-				print '<td align="right" width="80px">&nbsp;</td>';	// InfraS add
+				print '<td class="nowrap" width="200px">';	// InfraS add
+				print $fichinter_static->getNomUrl(1);	// InfraS Change
+				print "</td>\n";	// InfraS add
+                print '<td class="right" width="80px">'.dol_print_date($db->jdate($objp->startdate), 'day').'</td>'."\n";
 				print '<td align="right" style="min-width: 80px">'.convertSecondToTime($objp->duration).'</td>'."\n";	// InfraS Change
 				print '<td align="right" style="min-width: 260px" class="nowrap">'.$fichinter_static->getLibStatut(5).'</td>'."\n";	// InfraS Change
 				print '</tr>';

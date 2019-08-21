@@ -26,7 +26,7 @@ body {
 .img16 {
 	max-height: 16px;
 }
-.note img {
+.note img, .linecoldescription img {
 	max-height: 16px;
 }
 .thumbstat { font-weight: bold !important; }
@@ -1528,7 +1528,11 @@ a.tmenuimage:hover{
 /* Do not load menu img for other if hidden to save bandwidth */
 
 <?php if (empty($dol_hide_topmenu)) { ?>
-        div.mainmenu.home{
+        div.mainmenu {
+            background-position-x: center;
+			background-size: 30px;
+        }
+        div.mainmenu.home {
             background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/home.png', 1) ?>);
             background-position-x: center;
         }
@@ -1538,7 +1542,7 @@ a.tmenuimage:hover{
         }
 
         div.mainmenu.accountancy {
-            background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/money.png', 1) ?>);
+            background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/accounting.png', 1) ?>);
         }
 
         div.mainmenu.agenda {
@@ -1802,15 +1806,15 @@ table.login_table_securitycode tr td {
 }
 #securitycode {
 	min-width: 60px;
+	vertical-align: middle;
 }
 #img_securitycode {
-	border: 1px solid #DDDDDD;
+	vertical-align: middle;
 }
 #img_logo, .img_logo {
 	max-width: 170px;
 	max-height: 90px;
 }
-
 div.backgroundsemitransparent {
 	background:rgba(255,255,255,0.6);
 	padding-left: 10px;
@@ -1937,13 +1941,11 @@ img.userphotosmall {			/* size for user photo in lists */
 div.vmenu, td.vmenu {
     margin-<?php print $right; ?>: 2px;
     position: relative;
-    float: left;
     padding: 0px;
     padding-bottom: 0px;
     padding-top: 1px;
     width: 190px;
 }
-
 .vmenu {
     width: 190px;
 	margin-left: 6px;
@@ -1951,15 +1953,15 @@ div.vmenu, td.vmenu {
     display: none;
 	<?php } ?>
 }
-
 /* Force vmenusearchselectcombo with type=text differently than without because beautify with select2 affect vmenusearchselectcombo differently */
 input.vmenusearchselectcombo[type=text] {
 	width: 180px !important;
 }
 .vmenusearchselectcombo {
 	width: 188px;
+	color: #<?php echo $colortextbackvmenu; ?>;
+	border-bottom: 1px solid #<?php echo $colortextbackvmenu; ?> !important;
 }
-
 .menu_contenu {
 	padding-top: 3px;
 	padding-bottom: 3px;
@@ -1967,61 +1969,86 @@ input.vmenusearchselectcombo[type=text] {
     text-overflow: ellipsis;
     width: 188px;				/* required to have overflow working. must be same than .menu_titre */
 }
-#menu_contenu_logo { /* padding-top: 0; */ }
-.companylogo { }
-.searchform { padding-top: 10px; }
-.searchform input { font-size: 16px; }
-
-
-a.vmenu:link, a.vmenu:visited, a.vmenu:hover, a.vmenu:active, span.vmenu, span.vsmenu { white-space: nowrap; font-family: <?php print $fontlist ?>; text-align: <?php print $left; ?>; font-weight: bold; }	/* bold = 600, 500 is ko with Edge on 1200x960 */
-font.vmenudisabled  { font-family: <?php print $fontlist ?>; text-align: <?php print $left; ?>; font-weight: bold; color: #aaa; margin-left: 4px; }												/* bold = 600, 500 is ko with Edge on 1200x960 */
-a.vmenu:link, a.vmenu:visited { color: #<?php echo $colortextbackvmenu; ?>; }
-
-a.vsmenu:link, a.vsmenu:visited, a.vsmenu:hover, a.vsmenu:active, span.vsmenu { font-family: <?php print $fontlist ?>; text-align: <?php print $left; ?>; font-weight: normal; color: #202020; margin: 1px 1px 1px 6px; }
-font.vsmenudisabled { font-family: <?php print $fontlist ?>; text-align: <?php print $left; ?>; font-weight: normal; color: #aaa; }
-a.vsmenu:link, a.vsmenu:visited { color: #<?php echo $colortextbackvmenu; ?>; white-space: nowrap; }
-font.vsmenudisabledmargin { margin: 1px 1px 1px 6px; }
-li a.vsmenudisabled, li.vsmenudisabled { color: #aaa !important; }
-
-a.help:link, a.help:visited, a.help:hover, a.help:active, span.help { font-size:<?php print is_numeric($fontsizesmaller)?($fontsizesmaller.'px'):$fontsizesmaller; ?>; font-family: <?php print $fontlist ?>; text-align: <?php print $left; ?>; font-weight: normal; color: #aaa; text-decoration: none; }
-
-.vmenu div.blockvmenufirst, .vmenu div.blockvmenulogo, .vmenu div.blockvmenusearchphone, .vmenu div.blockvmenubookmarks
-{
+.searchform {
+	padding-top: 10px;
+}
+.searchform input {
+	font-size: 16px;
+}
+a.vmenu:link, a.vmenu:visited, a.vmenu:hover, a.vmenu:active, span.vmenu, span.vsmenu {
+	white-space: nowrap;
+	font-family: <?php print $fontlist ?>;
+	text-align: <?php print $left; ?>;
+	font-weight: bold;	/* bold = 600, 500 is ko with Edge on 1200x960 */
+}
+font.vmenudisabled  {
+	font-family: <?php print $fontlist ?>;
+	text-align: <?php print $left; ?>;
+	font-weight: bold;	/* bold = 600, 500 is ko with Edge on 1200x960 */
+	color: #aaa; margin-left: 4px;
+}
+a.vmenu:link, a.vmenu:visited {
+	color: #<?php echo $colortextbackvmenu; ?>;
+}
+a.vsmenu:link, a.vsmenu:visited, a.vsmenu:hover, a.vsmenu:active, span.vsmenu {
+	font-family: <?php print $fontlist ?>;
+	text-align: <?php print $left; ?>;
+	font-weight: normal;
+	color: #202020;
+	margin: 1px 1px 1px 6px;	/* t r b l */
+}
+font.vsmenudisabled {
+	font-family: <?php print $fontlist ?>;
+	text-align: <?php print $left; ?>;
+	font-weight: normal; color: #aaa;
+}
+a.vsmenu:link, a.vsmenu:visited {
+	color: #<?php echo $colortextbackvmenu; ?>;
+	white-space: nowrap;
+}
+font.vsmenudisabledmargin {
+	margin: 1px 1px 1px 6px;	/* t r b l */
+}
+li a.vsmenudisabled, li.vsmenudisabled {
+	color: #aaa !important;
+}
+a.help:link, a.help:visited, a.help:hover, a.help:active, span.help {
+	font-size:<?php print is_numeric($fontsizesmaller)?($fontsizesmaller.'px'):$fontsizesmaller; ?>;
+	font-family: <?php print $fontlist ?>;
+	text-align: <?php print $left; ?>;
+	font-weight: normal;
+	color: #aaa;
+	text-decoration: none;
+}
+.vmenu div.blockvmenufirst, .vmenu div.blockvmenulogo, .vmenu div.blockvmenusearchphone, .vmenu div.blockvmenubookmarks {
     border-top: 1px solid #BBB;
 }
 a.vsmenu.addbookmarkpicto {
     padding-right: 10px;
 }
-div.blockvmenusearchphone
-{
+div.blockvmenusearchphone {
 	border-bottom: none !important;
 }
-.vmenu div.blockvmenuend, .vmenu div.blockvmenulogo
-{
+.vmenu div.blockvmenuend, .vmenu div.blockvmenulogo {
 	margin: 0 0 8px 2px;
 }
-.vmenu div.blockvmenusearch
-{
+.vmenu div.blockvmenusearch {
 	padding-bottom: 4px;
 }
-.vmenu div.blockvmenuend
-{
+.vmenu div.blockvmenuend {
 	padding-bottom: 5px;
 }
-.vmenu div.blockvmenulogo
-{
+.vmenu div.blockvmenulogo {
 	padding-bottom: 10px;
 	padding-top: 0;
 }
-div.blockvmenubookmarks
-{
+div.blockvmenubookmarks {
 	padding-top: 10px !important;
 	padding-bottom: 16px !important;
 }
-div.blockvmenupair, div.blockvmenuimpair, div.blockvmenubookmarks, div.blockvmenuend
-{
+div.blockvmenupair, div.blockvmenuimpair, div.blockvmenubookmarks, div.blockvmenuend {
 	font-family: <?php print $fontlist ?>;
-	color: #000000;
+	color: #<?php echo $colortextbackvmenu; ?>;;
 	text-align: <?php print $left; ?>;
 	text-decoration: none;
     padding-left: 5px;
@@ -2029,35 +2056,28 @@ div.blockvmenupair, div.blockvmenuimpair, div.blockvmenubookmarks, div.blockvmen
     padding-top: 3px;
     padding-bottom: 3px;
     margin: 0 0 0 2px;
-
 	background: transparent;
-
     border-left: 1px solid #AAA;
     border-right: 1px solid #BBB;
 }
-
-div.blockvmenusearch
-{
+div.blockvmenusearch {
 	font-family: <?php print $fontlist ?>;
-	color: #000000;
+	color: #<?php echo $colortextbackvmenu; ?>;;
 	text-align: <?php print $left; ?>;
 	text-decoration: none;
     margin: 1px 0px 0px 2px;
 	background: transparent;
 }
-
 div.blockvmenusearch > form > div {
 	padding-top: 3px;
 }
 div.blockvmenusearch > form > div > label {
 	padding-right: 2px;
 }
-
-div.blockvmenuhelp
-{
+div.blockvmenuhelp {
 <?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 	font-family: <?php print $fontlist ?>;
-	color: #000000;
+	color: #<?php echo $colortextbackvmenu; ?>;;
 	text-align: center;
 	text-decoration: none;
     padding-left: 0px;
@@ -2069,8 +2089,6 @@ div.blockvmenuhelp
     display: none;
 <?php } ?>
 }
-
-
 td.barre {
 	border-right: 1px solid #000000;
 	border-bottom: 1px solid #000000;
@@ -2080,12 +2098,10 @@ td.barre {
 	text-align: <?php print $left; ?>;
 	text-decoration: none;
 }
-
 td.barre_select {
 	background: #b3c5cc;
 	color: #000000;
 }
-
 td.photo {
 	background: #F4F4F4;
 	color: #000000;
@@ -2502,7 +2518,7 @@ table.liste th, table.noborder th, table.noborder tr.liste_titre td, table.nobor
 	padding: 7px 8px 7px 8px;			/* t r b l */
 }
 table.liste td, table.noborder td, div.noborder form div, table.tableforservicepart1 td, table.tableforservicepart2 td {
-	padding: 0 8px;			/* t+b r+l */
+	padding: 4px 8px 0px 8px;			/* t r b l */
 	line-height: <?php echo $dropdownLineHeight; ?>;
 }
 div.liste_titre_bydiv .divsearchfield {
@@ -3170,9 +3186,6 @@ span.dashboardlineko {
 }
 .boxtable img {
 	max-height: 16px;
-}
-table.noborder.boxtable tr td {
-    height: unset;
 }
 .boxtablenotop {
     border-top-width: 0 !important;
