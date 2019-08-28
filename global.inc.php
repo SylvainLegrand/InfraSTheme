@@ -22,11 +22,7 @@ body {
     margin-left: 0;
     <?php print 'direction: '.$langs->trans("DIRECTION").";\n"; ?>
 }
-
-.img16 {
-	max-height: 16px;
-}
-.note img, .linecoldescription img {
+table.tableforfield img, .img16, .note img, .linecoldescription img, form[action="/stripe/admin/stripe.php"] img {
 	max-height: 16px;
 }
 .thumbstat { font-weight: bold !important; }
@@ -43,7 +39,6 @@ input, input.flat, textarea, textarea.flat, form.flat select, select, select.fla
 select.vmenusearchselectcombo {
 	background-color: unset;
 }
-
 input.select2-input {
 	border-bottom: none ! important;
 }
@@ -51,7 +46,6 @@ input.select2-input {
 	border: none;
 	border-bottom:  solid 1px rgba(0,0,0,.2) !important;	/* required to avoid to lose bottom line when focus is lost on select2. */
 }
-
 .liste_titre input[name=month_date_when], .liste_titre input[name=monthvalid], .liste_titre input[name=search_ordermonth], .liste_titre input[name=search_deliverymonth],
 .liste_titre input[name=search_smonth], .liste_titre input[name=search_month], .liste_titre input[name=search_emonth], .liste_titre input[name=smonth], .liste_titre input[name=month], .liste_titre select[name=month],
 .liste_titre input[name=month_lim], .liste_titre input[name=month_start], .liste_titre input[name=month_end], .liste_titre input[name=month_create],
@@ -64,8 +58,7 @@ input.select2-input {
 .liste_titre input[name=search_day_create], .liste_titre input[name=search_day_start], .liste_titre input[name=search_day_end],
 .liste_titre input[name=search_day_date_when], .liste_titre input[name=search_month_date_when], .liste_titre input[name=search_year_date_when],
 .liste_titre input[name=search_dtstartday], .liste_titre input[name=search_dtendday], .liste_titre input[name=search_dtstartmonth], .liste_titre input[name=search_dtendmonth],
-select#date_startday, select#date_startmonth, select#date_endday, select#date_endmonth, select#reday, select#remonth
-{
+select#date_startday, select#date_startmonth, select#date_endday, select#date_endmonth, select#reday, select#remonth {
 	margin-right: 4px;
 }
 input[type=submit] {
@@ -80,7 +73,6 @@ input, input.flat, textarea, textarea.flat, form.flat select, select, select.fla
     margin: 0px 0px 0px 0px;
     border<?php echo empty($conf->global->THEME_HIDE_BORDER_ON_INPUT)?'-bottom':''; ?>: solid 1px rgba(0,0,0,.2);
 }
-
 input {
     line-height: 1.3em;
 	padding: 5px;
@@ -100,7 +92,6 @@ input, select {
 input.button.massactionconfirmed {
     margin: 4px;
 }
-
 /* Focus definitions must be after standard definition */
 textarea:focus {
     /* v6 box-shadow: 0 0 4px #8091BF; */
@@ -109,18 +100,15 @@ textarea:focus {
 input:focus, select:focus {
 	border-bottom: 1px solid #666;
 }
-textarea.cke_source:focus
-{
+textarea.cke_source:focus {
 	box-shadow: none;
 }
-
 textarea {
 	border-radius: 0;
 	border-top:solid 1px rgba(0,0,0,.2);
 	border-left:solid 1px rgba(0,0,0,.2);
 	border-right:solid 1px rgba(0,0,0,.2);
 	border-bottom:solid 1px rgba(0,0,0,.2);
-
 	padding:4px;
 	margin-left:0px;
 	margin-bottom:1px;
@@ -197,7 +185,6 @@ a.buttonticket {
 	padding-left: 5px;
 	padding-right: 5px;
 }
-
 /* Used by timesheets */
 span.timesheetalreadyrecorded input {
     border: none;
@@ -222,7 +209,6 @@ td.leftborder, td.hide6 {
 td.rightborder {
 	border-right: 1px solid #ccc;
 }
-
 td.actionbuttons a {
     padding-left: 6px;
 }
@@ -251,7 +237,6 @@ select:invalid {
 input:disabled {
 	background:#ddd;
 }
-
 input.liste_titre {
 	box-shadow: none !important;
 }
@@ -281,14 +266,17 @@ fieldset { border: 1px solid #AAAAAA !important; }
 input#onlinepaymenturl, input#directdownloadlink {
 	opacity: 0.7;
 }
-
 div#moretabsListaction {
     z-index: 5;
 }
-
-hr { border: 0; border-top: 1px solid #ccc; }
-.tabBar hr { margin-top: 20px; margin-bottom: 17px; }
-
+hr {
+	border: 0;
+	border-top: 1px solid #ccc;
+}
+.tabBar hr {
+	margin-top: 20px;
+	margin-bottom: 17px;
+}
 form {
     padding:0px;
     margin:0px;
@@ -296,19 +284,15 @@ form {
 form#addproduct {
     padding-top: 10px;
 }
-div.float
-{
+div.float {
     float:<?php print $left; ?>;
 }
-div.floatright
-{
+div.floatright {
     float:<?php print $right; ?>;
 }
-.inline-block
-{
+.inline-block {
 	display:inline-block;
 }
-
 th .button {
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
@@ -615,11 +599,9 @@ select.flat.selectlimit {
 .fa-file-text-o, .fa-file-code-o, .fa-file-powerpoint-o, .fa-file-excel-o, .fa-file-word-o, .fa-file-o, .fa-file-image-o, .fa-file-video-o, .fa-file-audio-o, .fa-file-archive-o, .fa-file-pdf-o {
 	color: #055;
 }
-
 .fa-15 {
 	font-size: 1.5em;
 }
-
 /* DOL_XXX for future usage (when left menu has been removed). If we do not use datatable */
 /*.table-responsive {
     width: calc(100% - 330px);
@@ -642,6 +624,9 @@ div.fiche>form>div.div-table-responsive, div.fiche>form>div.div-table-responsive
 div.fiche>form>div.div-table-responsive-no-min {
     overflow-x: auto;
 }
+div.ficheaddleft>div.div-table-responsive-no-min img {
+    max-height: 16px;
+}
 div.fiche>form>div.div-table-responsive-no-min img {
     max-height: 16px;
 }
@@ -654,7 +639,6 @@ div.fiche>div.tabBar>form>div.div-table-responsive {
 div.fiche {
 	/* text-align: justify; */
 }
-
 .flexcontainer {
     <?php if (in_array($conf->browser->name, array('chrome','firefox'))) echo 'display: inline-flex;'."\n"; ?>
     flex-flow: row wrap;
@@ -678,14 +662,12 @@ div.fiche {
 	flex-shrink: 0;
 <?php } ?>
 }
-
 select.selectarrowonleft {
 	direction: rtl;
 }
 select.selectarrowonleft option {
 	direction: ltr;
 }
-
 
 /* ============================================================================== */
 /* Styles to hide objects                                                         */
@@ -902,14 +884,16 @@ select.selectarrowonleft option {
 		min-width: 300px;
    	}
 }
-.linkobject { cursor: pointer; }
-
+.linkobject {
+	cursor: pointer;
+}
 table.tableforfield tr>td:first-of-type, div.tableforfield div.tagtr>div.tagtd:first-of-type {
 	color: #666;
 }
-
 <?php if (GETPOST('optioncss', 'aZ09') == 'print') { ?>
-.hideonprint { display: none; }
+.hideonprint {
+	display: none;
+}
 <?php } ?>
 
 
@@ -934,6 +918,7 @@ td.showDragHandle {
 /* ============================================================================== */
 
 #id-container {
+	display: table;
 	table-layout: fixed;
 	width: 100%;
 }
