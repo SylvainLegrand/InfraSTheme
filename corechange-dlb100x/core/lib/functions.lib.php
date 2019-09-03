@@ -6062,16 +6062,23 @@ $substitutionarray=array_merge($substitutionarray, array(
 		if ($onlykey != 2 || $mysoc->useLocalTax(1)) $substitutionarray['__AMOUNT_TAX2__']     = is_object($object)?$object->total_localtax1:'';
 		if ($onlykey != 2 || $mysoc->useLocalTax(2)) $substitutionarray['__AMOUNT_TAX3__']     = is_object($object)?$object->total_localtax2:'';
 
-		// Add by philazerty
+		// Add by philazerty and modified by InfraS
+		if (is_object($object))
+		{
+			$totalpaye			= $object->getSommePaiement();
+			$totalcreditnotes	= $object->getSumCreditNotesUsed();
+			$totaldeposits		= $object->getSumDepositsUsed();
+			$resteapayer		= price2num($object->total_ttc - $totalpaye - $totalcreditnotes - $totaldeposits, 'MT');
+		}	// if (is_object($object))
 		$substitutionarray['__FACDATE__']			= is_object($object)?(isset($object->date) ? dol_print_date($object->date, 'daytext', 0, $outputlangs) : '') : '';
 		$substitutionarray['__FACDATELIMREG__']		= is_object($object)?(isset($object->date_lim_reglement) ? dol_print_date($object->date_lim_reglement, 'daytext', 0, $outputlangs) : '') : '';
-		$substitutionarray['__FACTOTALTTC_2D__']	= is_object($object)?number_format($object->total_ttc,2,',',' '):'';
-		$substitutionarray['__FACTOTALHT_2D__']		= is_object($object)?number_format($object->total_ht,2,',',' '):'';
-		$substitutionarray['__FACTOTALHT_2DC__']	= is_object($object)?price($object->total_ht,0,$outputlangs,1,2,2,'auto'):'';
-		$substitutionarray['__FACTOTALTTC_2DC__']	= is_object($object)?price($object->total_ttc,0,$outputlangs,1,2,2,'auto'):'';
-		$substitutionarray['__FACREST_2D__']		= is_object($object)?price($object->total_ttc - $object->totalpaye,2,',',' '):'';
-		$substitutionarray['__FACREST_2DC__']		= is_object($object)?price($object->total_ttc - $object->totalpaye,0,$outputlangs,1,2,2,'auto'):'';
-		// End of addition by Philazerty
+		$substitutionarray['__FACTOTALTTC_2D__']	= is_object($object)?number_format($object->total_ttc, 2, ',', ' ') : '';
+		$substitutionarray['__FACTOTALHT_2D__']		= is_object($object)?number_format($object->total_ht, 2, ',', ' ') : '';
+		$substitutionarray['__FACTOTALHT_2DC__']	= is_object($object)?price($object->total_ht, 0, $outputlangs, 1, 2, 2, 'auto') : '';
+		$substitutionarray['__FACTOTALTTC_2DC__']	= is_object($object)?price($object->total_ttc, 0, $outputlangs, 1, 2, 2, 'auto') : '';
+		$substitutionarray['__FACREST_2D__']		= is_object($object)?price($resteapayer, 2, ',', ' ') : '';
+		$substitutionarray['__FACREST_2DC__']		= is_object($object)?price($resteapayer, 0, $outputlangs, 1, 2, 2, 'auto') : '';
+		// End of addition by Philazerty and modified by InfraS
 
 		$substitutionarray['__AMOUNT_FORMATED__']          = is_object($object)?($object->total_ttc ? price($object->total_ttc, 0, $outputlangs, 0, 0, -1, $conf->currency) : null):'';
 		$substitutionarray['__AMOUNT_EXCL_TAX_FORMATED__'] = is_object($object)?($object->total_ht ? price($object->total_ht, 0, $outputlangs, 0, 0, -1, $conf->currency) : null):'';
