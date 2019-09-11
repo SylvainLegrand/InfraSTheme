@@ -2101,19 +2101,17 @@ class Societe extends CommonObject
 			}
 		}
 
-	// removed by InfraS for customToolTip compatibility
-	//	if (!empty($this->name_alias)) $name .= ' ('.$this->name_alias.')';
+		if (!empty($this->name_alias)) $name .= ' ('.$this->name_alias.')';
 
 		$result=''; $label='';
 		$linkstart=''; $linkend='';
 
-	// removed by InfraS for customToolTip compatibility
-	//	if (! empty($this->logo) && class_exists('Form'))
-	//	{
-	//		$label.= '<div class="photointooltip">';
-	//		$label.= Form::showphoto('societe', $this, 0, 40, 0, 'photowithmargin', 'mini', 0);	// Important, we must force height so image will have height tags and if image is inside a tooltip, the tooltip manager can calculate height and position correctly the tooltip.
-	//		$label.= '</div><div style="clear: both;"></div>';
-	//	}
+		if (! empty($this->logo) && class_exists('Form'))
+		{
+			$label.= '<div class="photointooltip">';
+			$label.= Form::showphoto('societe', $this, 0, 40, 0, 'photowithmargin', 'mini', 0);	// Important, we must force height so image will have height tags and if image is inside a tooltip, the tooltip manager can calculate height and position correctly the tooltip.
+			$label.= '</div><div style="clear: both;"></div>';
+		}
 
 		$label.= '<div class="centpercent">';
 

@@ -131,16 +131,15 @@ class box_graph_product_distribution extends ModeleBoxes
 		$socid=empty($user->societe_id)?0:$user->societe_id;
 		$userid=0;	// No filter on user creation
 
-		$boxWidth	= ($_SESSION['dol_screenwidth'] - 400) / 2;
-		$WIDTH		= ($nbofgraph >= 2 || ! empty($conf->dol_optimize_smallscreen)) ? $boxWidth / 2 : $boxWidth;
-		$HEIGHT		= $WIDTH - 120;
+		$WIDTH=($nbofgraph >= 2 || ! empty($conf->dol_optimize_smallscreen))?'160':'320';
+		$HEIGHT='192';
 
 		if (! empty($conf->facture->enabled) && ! empty($user->rights->facture->lire))
 		{
 			// Build graphic number of object. $data = array(array('Lib',val1,val2,val3),...)
 			if ($showinvoicenb)
 			{
-				$langs->load("bills");
+                $langs->load("bills");
 				include_once DOL_DOCUMENT_ROOT.'/compta/facture/class/facturestats.class.php';
 
 				$showpointvalue = 1; $nocolor = 0;
@@ -163,7 +162,7 @@ class box_graph_product_distribution extends ModeleBoxes
 					$i=0;$tot=count($data1);$legend=array();
 					while ($i <= $tot)
 					{
-						$data1[$i][0]=dol_trunc($data1[$i][0], 15);	// modification InfraS 5 => 4 // Required to avoid error "Could not draw pie with labels contained inside canvas"
+						$data1[$i][0]=dol_trunc($data1[$i][0], 5);	// Required to avoid error "Could not draw pie with labels contained inside canvas"
 						$legend[]=$data1[$i][0];
 						$i++;
 					}
@@ -174,9 +173,9 @@ class box_graph_product_distribution extends ModeleBoxes
 					if ($nocolor) $px1->SetDataColor(array(array(220,220,220)));
 					$px1->SetPrecisionY(0);
 					$px1->SetLegend($legend);
-					$px1->setShowLegend(1);
+					$px1->setShowLegend(0);
 					$px1->setShowPointValue($showpointvalue);
-					$px1->setShowPercent(1);
+					$px1->setShowPercent(0);
 					$px1->SetMaxValue($px1->GetCeilMaxValue());
 					$px1->SetWidth($WIDTH);
 					$px1->SetHeight($HEIGHT);
@@ -200,7 +199,7 @@ class box_graph_product_distribution extends ModeleBoxes
 			// Build graphic number of object. $data = array(array('Lib',val1,val2,val3),...)
 			if ($showpropalnb)
 			{
-		$langs->load("propal");
+                $langs->load("propal");
 				include_once DOL_DOCUMENT_ROOT.'/comm/propal/class/propalestats.class.php';
 
 				$showpointvalue = 1; $nocolor = 0;
@@ -223,7 +222,7 @@ class box_graph_product_distribution extends ModeleBoxes
 					$i=0;$tot=count($data2);$legend=array();
 					while ($i <= $tot)
 					{
-						$data2[$i][0]=dol_trunc($data2[$i][0], 15);	// modification InfraS 5 => 4 	// Required to avoid error "Could not draw pie with labels contained inside canvas"
+						$data2[$i][0]=dol_trunc($data2[$i][0], 5);	// Required to avoid error "Could not draw pie with labels contained inside canvas"
 						$legend[]=$data2[$i][0];
 						$i++;
 					}
@@ -234,9 +233,9 @@ class box_graph_product_distribution extends ModeleBoxes
 					if ($nocolor) $px2->SetDataColor(array(array(220,220,220)));
 					$px2->SetPrecisionY(0);
 					$px2->SetLegend($legend);
-					$px2->setShowLegend(1);
+					$px2->setShowLegend(0);
 					$px2->setShowPointValue($showpointvalue);
-					$px2->setShowPercent(1);
+					$px2->setShowPercent(0);
 					$px2->SetMaxValue($px2->GetCeilMaxValue());
 					$px2->SetWidth($WIDTH);
 					$px2->SetHeight($HEIGHT);
@@ -284,7 +283,7 @@ class box_graph_product_distribution extends ModeleBoxes
 					$i=0;$tot=count($data3);$legend=array();
 					while ($i <= $tot)
 					{
-						$data3[$i][0]=dol_trunc($data3[$i][0], 15);	// modification InfraS 5 => 4 	// Required to avoid error "Could not draw pie with labels contained inside canvas"
+						$data3[$i][0]=dol_trunc($data3[$i][0], 5);	// Required to avoid error "Could not draw pie with labels contained inside canvas"
 						$legend[]=$data3[$i][0];
 						$i++;
 					}
@@ -295,9 +294,9 @@ class box_graph_product_distribution extends ModeleBoxes
 					if ($nocolor) $px3->SetDataColor(array(array(220,220,220)));
 					$px3->SetPrecisionY(0);
 					$px3->SetLegend($legend);
-					$px3->setShowLegend(1);
+					$px3->setShowLegend(0);
 					$px3->setShowPointValue($showpointvalue);
-					$px3->setShowPercent(1);
+					$px3->setShowPercent(0);
 					$px3->SetMaxValue($px3->GetCeilMaxValue());
 					$px3->SetWidth($WIDTH);
 					$px3->SetHeight($HEIGHT);

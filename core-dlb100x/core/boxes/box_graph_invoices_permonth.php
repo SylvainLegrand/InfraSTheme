@@ -121,8 +121,8 @@ class box_graph_invoices_permonth extends ModeleBoxes
 			if (empty($endyear)) $endyear=$nowarray['year'];
 			$startyear=$endyear-1;
 			$mode='customer';
-			$WIDTH=(($shownb && $showtot) || ! empty($conf->dol_optimize_smallscreen))?'350':'600';
-			$HEIGHT='220';
+			$WIDTH=(($shownb && $showtot) || ! empty($conf->dol_optimize_smallscreen))?'256':'320';
+			$HEIGHT='192';
 
 			$stats = new FactureStats($this->db, $socid, $mode, 0);
 

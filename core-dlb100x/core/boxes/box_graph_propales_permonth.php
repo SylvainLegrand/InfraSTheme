@@ -120,8 +120,8 @@ class box_graph_propales_permonth extends ModeleBoxes
 			$nowarray=dol_getdate(dol_now(), true);
 			if (empty($endyear)) $endyear=$nowarray['year'];
 			$startyear=$endyear-1;
-			$WIDTH=(($shownb && $showtot) || ! empty($conf->dol_optimize_smallscreen))?'350':'600';
-			$HEIGHT='220';
+			$WIDTH=(($shownb && $showtot) || ! empty($conf->dol_optimize_smallscreen))?'256':'320';
+			$HEIGHT='192';
 
 			$stats = new PropaleStats($this->db, $socid, 0);
 

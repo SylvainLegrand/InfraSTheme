@@ -1460,7 +1460,7 @@ function dol_banner_tab($object, $paramid, $morehtml = '', $shownav = 1, $fieldi
 	{
 		if (! empty($conf->use_javascript_ajax) && $user->rights->societe->creer && ! empty($conf->global->MAIN_DIRECT_STATUS_UPDATE))
 		{
-		   	$morehtmlstatus.=ajax_object_onoff($object, 'status', 'status', 'InActivity', 'ActivityCeased');
+			$morehtmlstatus.=ajax_object_onoff($object, 'status', 'status', 'InActivity', 'ActivityCeased');
 		}
 		else {
 			$morehtmlstatus.=$object->getLibStatut(6);
@@ -2935,7 +2935,7 @@ function dol_trunc($string, $size = 40, $trunc = 'right', $stringencoding = 'UTF
 /**
  *	Show picto whatever it's its name (generic function)
  *
- *	@param      string		$titlealt         		Text on title tag for tooltip. Not used if param notitle is set to 1.
+ *	@param      string		$titlealt       	  	Text on title tag for tooltip. Not used if param notitle is set to 1.
  *	@param      string		$picto       			Name of image file to show ('filenew', ...)
  *													If no extension provided, we use '.png'. Image must be stored into theme/xxx/img directory.
  *                                  				Example: picto.png                  if picto.png is stored into htdocs/theme/mytheme/img
@@ -2948,7 +2948,7 @@ function dol_trunc($string, $size = 40, $trunc = 'right', $stringencoding = 'UTF
  *  @param		string		$alt					Force alt for bind people
  *  @param		string		$morecss				Add more class css on img tag (For example 'myclascss'). Work only if $moreatt is empty.
  *  @param		string		$marginleftonlyshort	1 = Add a short left margin on picto, 2 = Add a larger left maring on picto, 0 = No margin left. Works for fontawesome picto only.
- *  @return     string       				    	Return img tag
+ *  @return     string								Return img tag
  *  @see        img_object(), img_picto_common()
  */
 function img_picto($titlealt, $picto, $moreatt = '', $pictoisfullpath = false, $srconly = 0, $notitle = 0, $alt = '', $morecss = '', $marginleftonlyshort = 2)
@@ -2987,7 +2987,6 @@ function img_picto($titlealt, $picto, $moreatt = '', $pictoisfullpath = false, $
 		    if (empty($conf->global->MAIN_DISABLE_FONT_AWESOME_5)) $fa='fas';
 		    $fakey = $pictowithoutext;
 			$facolor = ''; $fasize = '';
-
 			if ($pictowithoutext == 'setup') {
 			    $fakey = 'fa-cog';
 			    $fasize = '1.4em';
@@ -3110,7 +3109,7 @@ function img_picto($titlealt, $picto, $moreatt = '', $pictoisfullpath = false, $
 			}
 			//this snippet only needed since function img_edit accepts only one additional parameter: no separate one for css only.
             //class/style need to be extracted to avoid duplicate class/style validation errors when $moreatt is added to the end of the attributes
-            $reg=array();
+	    $reg=array();
 			if (preg_match('/class="([^"]+)"/', $moreatt, $reg)) {
                 $morecss .= ($morecss ? ' ' : '') . $reg[1];
                 $moreatt = str_replace('class="'.$reg[1].'"', '', $moreatt);
@@ -4056,7 +4055,7 @@ function load_fiche_titre($titre, $morehtmlright = '', $picto = 'title_generic.p
 
 	$return.= "\n";
 	$return.= '<table '.($id?'id="'.$id.'" ':'').'class="centpercent notopnoleftnoright'.($morecssontable?' '.$morecssontable:'').'" style="margin-bottom: 6px;"><tr>';	// maring bottom must be same than into print_barre_list
-	if ($picto) $return.= '<td class="nobordernopadding widthpictotitle" valign="middle">'.img_picto('',$picto, 'class="valignmiddle widthpictotitle pictotitle"', $pictoisfullpath).'</td>';	// InfraS delete class "opacityhigh"
+	if ($picto) $return.= '<td class="nobordernopadding widthpictotitle opacityhigh valignmiddle">'.img_picto('', $picto, 'class="valignmiddle widthpictotitle pictotitle"', $pictoisfullpath).'</td>';
 	$return.= '<td class="nobordernopadding valignmiddle">';
 	$return.= '<div class="titre inline-block">'.$titre.'</div>';
 	$return.= '</td>';
@@ -4122,7 +4121,7 @@ function print_barre_liste($titre, $page, $file, $options = '', $sortfield = '',
 	// Left
 	//if ($picto && $titre) print '<td class="nobordernopadding hideonsmartphone left valignmiddle" style="width: 40px">'.img_picto('', $picto, 'id="pictotitle"', $pictoisfullpath).'</td>';
 	print '<td class="nobordernopadding valignmiddle">';
-	if ($picto && $titre) print img_picto('', $picto, 'class="hideonsmartphone valignmiddle pictotitle widthpictotitle"', $pictoisfullpath);	// InfraS delete class "opacityhigh"
+	if ($picto && $titre) print img_picto('', $picto, 'class="hideonsmartphone valignmiddle opacityhigh pictotitle widthpictotitle"', $pictoisfullpath);
 	print '<div class="titre inline-block">'.$titre;
 	if (!empty($titre) && $savtotalnboflines >= 0 && (string) $savtotalnboflines != '') print ' ('.$totalnboflines.')';
 	print '</div></td>';
@@ -4249,14 +4248,14 @@ function print_fleche_navigation($page, $file, $options = '', $nextpage = 0, $be
 		{
 			print '<!-- JS CODE TO ENABLE select limit to launch submit of page -->
             		<script>
-                	jQuery(document).ready(function () {
-            	  		jQuery(".selectlimit").change(function() {
-                            console.log("Change limit. Send submit");
-                            $(this).parents(\'form:first\').submit();
-            	  		});
-                	});
-            		</script>
-                ';
+			jQuery(document).ready(function () {
+				jQuery(".selectlimit").change(function() {
+			    console.log("Change limit. Send submit");
+			    $(this).parents(\'form:first\').submit();
+				});
+			});
+			</script>
+		';
 		}
 		print '</li>';
 	}
@@ -4681,19 +4680,19 @@ function get_localtax($vatrate, $local, $thirdparty_buyer = "", $thirdparty_sell
 
 	// By default, search value of local tax on line of common tax
 	$sql  = "SELECT t.localtax1, t.localtax2, t.localtax1_type, t.localtax2_type";
-   	$sql .= " FROM ".MAIN_DB_PREFIX."c_tva as t, ".MAIN_DB_PREFIX."c_country as c";
-   	$sql .= " WHERE t.fk_pays = c.rowid AND c.code = '".$thirdparty_seller->country_code."'";
-   	$sql .= " AND t.taux = ".((float) $vatratecleaned)." AND t.active = 1";
-   	if ($vatratecode) $sql.= " AND t.code ='".$vatratecode."'";		// If we have the code, we use it in priority
-   	else $sql.= " AND t.recuperableonly ='".$vatnpr."'";
-   	dol_syslog("get_localtax", LOG_DEBUG);
-   	$resql=$db->query($sql);
+	$sql .= " FROM ".MAIN_DB_PREFIX."c_tva as t, ".MAIN_DB_PREFIX."c_country as c";
+	$sql .= " WHERE t.fk_pays = c.rowid AND c.code = '".$thirdparty_seller->country_code."'";
+	$sql .= " AND t.taux = ".((float) $vatratecleaned)." AND t.active = 1";
+	if ($vatratecode) $sql.= " AND t.code ='".$vatratecode."'";		// If we have the code, we use it in priority
+	else $sql.= " AND t.recuperableonly ='".$vatnpr."'";
+	dol_syslog("get_localtax", LOG_DEBUG);
+	$resql=$db->query($sql);
 
-   	if ($resql)
-   	{
-   		$obj = $db->fetch_object($resql);
-   		if ($local==1) return $obj->localtax1;
-   		elseif ($local==2) return $obj->localtax2;
+	if ($resql)
+	{
+		$obj = $db->fetch_object($resql);
+		if ($local==1) return $obj->localtax1;
+		elseif ($local==2) return $obj->localtax2;
 	}
 
 	return 0;
@@ -6058,16 +6057,26 @@ $substitutionarray=array_merge($substitutionarray, array(
 		if ($onlykey != 2 || $mysoc->useLocalTax(1)) $substitutionarray['__AMOUNT_TAX2__']     = is_object($object)?$object->total_localtax1:'';
 		if ($onlykey != 2 || $mysoc->useLocalTax(2)) $substitutionarray['__AMOUNT_TAX3__']     = is_object($object)?$object->total_localtax2:'';
 
-		// Add by philazerty
-		$substitutionarray['__FACDATE__']			= is_object($object)?(isset($object->date) ? dol_print_date($object->date, 'daytext', 0, $outputlangs) : '') : '';
-		$substitutionarray['__FACDATELIMREG__']		= is_object($object)?(isset($object->date_lim_reglement) ? dol_print_date($object->date_lim_reglement, 'daytext', 0, $outputlangs) : '') : '';
-		$substitutionarray['__FACTOTALTTC_2D__']	= is_object($object)?number_format($object->total_ttc,2,',',' '):'';
-		$substitutionarray['__FACTOTALHT_2D__']		= is_object($object)?number_format($object->total_ht,2,',',' '):'';
-		$substitutionarray['__FACTOTALHT_2DC__']	= is_object($object)?price($object->total_ht,0,$outputlangs,1,2,2,'auto'):'';
-		$substitutionarray['__FACTOTALTTC_2DC__']	= is_object($object)?price($object->total_ttc,0,$outputlangs,1,2,2,'auto'):'';
-		$substitutionarray['__FACREST_2D__']		= is_object($object)?price($object->total_ttc - $object->totalpaye,2,',',' '):'';
-		$substitutionarray['__FACREST_2DC__']		= is_object($object)?price($object->total_ttc - $object->totalpaye,0,$outputlangs,1,2,2,'auto'):'';
-		// End of addition by Philazerty
+		// Add by philazerty and modified by InfraS
+		if ($object->element =='facture')
+        {
+			if (is_object($object))
+			{
+				$totalpaye			= $object->getSommePaiement();
+				$totalcreditnotes	= $object->getSumCreditNotesUsed();
+				$totaldeposits		= $object->getSumDepositsUsed();
+				$resteapayer		= price2num($object->total_ttc - $totalpaye - $totalcreditnotes - $totaldeposits, 'MT');
+			}	// if (is_object($object))
+			$substitutionarray['__FACDATE__']			= is_object($object)?(isset($object->date) ? dol_print_date($object->date, 'daytext', 0, $outputlangs) : '') : '';
+			$substitutionarray['__FACDATELIMREG__']		= is_object($object)?(isset($object->date_lim_reglement) ? dol_print_date($object->date_lim_reglement, 'daytext', 0, $outputlangs) : '') : '';
+			$substitutionarray['__FACTOTALTTC_2D__']	= is_object($object)?number_format($object->total_ttc, 2, ',', ' ') : '';
+			$substitutionarray['__FACTOTALHT_2D__']		= is_object($object)?number_format($object->total_ht, 2, ',', ' ') : '';
+			$substitutionarray['__FACTOTALHT_2DC__']	= is_object($object)?price($object->total_ht, 0, $outputlangs, 1, 2, 2, 'auto') : '';
+			$substitutionarray['__FACTOTALTTC_2DC__']	= is_object($object)?price($object->total_ttc, 0, $outputlangs, 1, 2, 2, 'auto') : '';
+			$substitutionarray['__FACREST_2D__']		= is_object($object)?price($resteapayer, 2, ',', ' ') : '';
+			$substitutionarray['__FACREST_2DC__']		= is_object($object)?price($resteapayer, 0, $outputlangs, 1, 2, 2, 'auto') : '';
+        }	// if ($object->element =='facture')
+        // End of addition by Philazerty and modified by InfraS
 
 		$substitutionarray['__AMOUNT_FORMATED__']          = is_object($object)?($object->total_ttc ? price($object->total_ttc, 0, $outputlangs, 0, 0, -1, $conf->currency) : null):'';
 		$substitutionarray['__AMOUNT_EXCL_TAX_FORMATED__'] = is_object($object)?($object->total_ht ? price($object->total_ht, 0, $outputlangs, 0, 0, -1, $conf->currency) : null):'';
@@ -7059,19 +7068,19 @@ function getLanguageCodeFromCountryCode($countrycode)
 	if (function_exists('locale_get_primary_language') && function_exists('locale_get_region'))    // Need extension php-intl
 	{
 	    foreach ($locales as $locale)
-    	{
-    		$locale_language = locale_get_primary_language($locale);
-    		$locale_region = locale_get_region($locale);
-    		if (strtoupper($countrycode) == $locale_region)
-    		{
-    			//var_dump($locale.'-'.$locale_language.'-'.$locale_region);
-    			return strtolower($locale_language).'_'.strtoupper($locale_region);
-    		}
-    	}
+	{
+		$locale_language = locale_get_primary_language($locale);
+		$locale_region = locale_get_region($locale);
+		if (strtoupper($countrycode) == $locale_region)
+		{
+			//var_dump($locale.'-'.$locale_language.'-'.$locale_region);
+			return strtolower($locale_language).'_'.strtoupper($locale_region);
+		}
+	}
 	}
 	else
 	{
-        dol_syslog("Warning Exention php-intl is not available", LOG_WARNING);
+	dol_syslog("Warning Exention php-intl is not available", LOG_WARNING);
 	}
 
 	return null;
@@ -7185,7 +7194,7 @@ function complete_head_from_modules($conf, $langs, $object, &$head, &$h, $type, 
 		if ($reshook > 0)
 		{
 			$head = $hookmanager->resArray;
-            $h = count($head);
+	    $h = count($head);
 		}
 	}
 }
@@ -7223,81 +7232,24 @@ function printCommonFooter($zone = 'private')
 		print "\n";
 		if (! empty($conf->use_javascript_ajax))
 		{
-			print '	<script src="'.dol_buildpath('/theme/eldy/js/jquery.cookie.js', 1).'"></script>
-					<script>
-						jQuery(document).ready(function() {';
+			print '<script>'."\n";
+			print 'jQuery(document).ready(function() {'."\n";
 
 			if ($zone == 'private' && empty($conf->dol_use_jmobile))
 			{
-				print '
-							/* JS CODE TO ENABLE to manage handler to switch left menu page (menuhider) */
-							$.isSet = function(testVar){ return typeof(testVar) !== "undefined" && testVar !== null && testVar !== ""; };
-							var menu = "on";
-							if($.cookie && $.isSet($.cookie("hidemenu"))) { menu = $.cookie("hidemenu"); }
-							if(menu == "on") { $("body").removeClass("sidebar-collapse"); }
-							else { $("body").addClass("sidebar-collapse"); }
-
-							jQuery(".menuhider").click(function(event) {
-								if (!$( "body" ).hasClass( "sidebar-collapse" )){ event.preventDefault(); }
-								$("body").toggleClass("sidebar-collapse");
-								if ($( "body" ).hasClass( "sidebar-collapse" )){ $.cookie("hidemenu", "off", { expires: 1, path: "/" }); }
-								else { $.cookie("hidemenu", "on", { expires: 1, path: "/" }); }
-							});
-							
-							/* JS CODE TO ACTIVATE to manage vertical menu expansion / collapse */
-							$.urlParam = function(param, url){
-								var results = new RegExp("[\?&]" + param + "=([^&#]*)").exec(url);
-								return results[1] || 0;
-							};
-							var url = "off";
-							if(window.location.href.indexOf("leftmenu=") > 0) {
-								url = window.location.href;
-							} else if(document.referrer.indexOf("leftmenu=") > 0) {
-								url = document.referrer;
-							}
-							$(".menu_contenu:not(#menu_contenu_logo, .time_basket)").hide();
-							if(url != "off" && $.urlParam("leftmenu", url) != 0) {
-								$(".blockvmenu").find("a").each(function() {
-									var link = "off";
-									if($(this).attr("href").indexOf("leftmenu=") > 0) {
-										link = $(this).attr("href");
-									}
-									if(link != "off" && $.urlParam("leftmenu", link) != 0) {
-										if ($.urlParam("leftmenu", url) == $.urlParam("leftmenu", link)) {
-											$(".menu_contenu:not(#menu_contenu_logo, .time_basket)").hide();
-											$(this).siblings(".infrastoggle").removeClass("fa-caret-down").addClass("fa-caret-up");
-											$(this).parent().show();
-											$(this).parent().siblings().show();
-											return(false);
-										}
-									}
-								});
-							}
-							$(".blockvmenu").each(function() {
-								if($(this).children(".menu_contenu").length == 0) {
-									$(this).find(".infrastoggle").hide();
-								} else {
-									$(this).find(".infrastoggle").show();
-								}
-							});
-							$(".infrastoggle").click(function() {
-								if($(this).hasClass("fa-caret-down")) {
-									$(".menu_contenu:not(#menu_contenu_logo, .time_basket)").hide();
-									$(this).parent().nextAll().toggle();
-									$(".infrastoggle").removeClass("fa-caret-up").addClass("fa-caret-down");
-									$(this).removeClass("fa-caret-down").addClass("fa-caret-up");
-								} else if($(this).hasClass("fa-caret-up")) {
-									$(".menu_contenu:not(#menu_contenu_logo, .time_basket)").hide();
-									$(this).removeClass("fa-caret-up").addClass("fa-caret-down");
-								}
-							});';
+				print "\n";
+				print '/* JS CODE TO ENABLE to manage handler to switch left menu page (menuhider) */'."\n";
+				print 'jQuery(".menuhider").click(function(event) {';
+				print '  if (!$( "body" ).hasClass( "sidebar-collapse" )){ event.preventDefault(); }'."\n";
+				print '  console.log("We click on .menuhider");'."\n";
+				print '  $("body").toggleClass("sidebar-collapse")'."\n";
+				print '});'."\n";
 			}
 
 			// Management of focus and mandatory for fields
 			if ($action == 'create' || $action == 'edit' || (empty($action) && (preg_match('/new\.php/', $_SERVER["PHP_SELF"]))))
 			{
-				print '
-						/* JS CODE TO ENABLE to manage focus and mandatory form fields */'."\n";
+				print '/* JS CODE TO ENABLE to manage focus and mandatory form fields */'."\n";
 				$relativepathstring = $_SERVER["PHP_SELF"];
 				// Clean $relativepathstring
 				if (constant('DOL_URL_ROOT')) $relativepathstring = preg_replace('/^'.preg_quote(constant('DOL_URL_ROOT'), '/').'/', '', $relativepathstring);
@@ -7606,19 +7558,19 @@ function natural_search($fields, $value, $mode = 0, $nofirstand = 0)
 			    $tmparray=explode(',', trim($crit));
 			    if (count($tmparray))
 			    {
-			        $listofcodes='';
-			        foreach($tmparray as $val)
-			        {
-			            if ($val)
-			            {
-			                $newres .= ($i2 > 0 ? ' OR (' : '(') . $field . ' LIKE \'' . $db->escape(trim($val)) . ',%\'';
-			                $newres .= ' OR '. $field . ' = \'' . $db->escape(trim($val)) . '\'';
-			                $newres .= ' OR '. $field . ' LIKE \'%,' . $db->escape(trim($val)) . '\'';
-			                $newres .= ' OR '. $field . ' LIKE \'%,' . $db->escape(trim($val)) . ',%\'';
-			                $newres .= ')';
-			                $i2++;
-			            }
-			        }
+				$listofcodes='';
+				foreach($tmparray as $val)
+				{
+				    if ($val)
+				    {
+					$newres .= ($i2 > 0 ? ' OR (' : '(') . $field . ' LIKE \'' . $db->escape(trim($val)) . ',%\'';
+					$newres .= ' OR '. $field . ' = \'' . $db->escape(trim($val)) . '\'';
+					$newres .= ' OR '. $field . ' LIKE \'%,' . $db->escape(trim($val)) . '\'';
+					$newres .= ' OR '. $field . ' LIKE \'%,' . $db->escape(trim($val)) . ',%\'';
+					$newres .= ')';
+					$i2++;
+				    }
+				}
 			    }
 			}
 			else    // $mode=0
@@ -7773,7 +7725,7 @@ function ajax_autoselect($htmlname, $addlink = '')
 {
 	global $langs;
 	$out = '<script>
-               jQuery(document).ready(function () {
+	       jQuery(document).ready(function () {
 				    jQuery("#'.$htmlname.'").click(function() { jQuery(this).select(); } );
 				});
 		    </script>';

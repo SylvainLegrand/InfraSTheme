@@ -1174,6 +1174,102 @@ function show_contacts($conf, $langs, $db, $object, $backtopage = '')
 
 
 /**
+ * 		Show html area for list of addresses
+ *
+ *		@param	Conf		$conf		Object conf
+ * 		@param	Translate	$langs		Object langs
+ * 		@param	DoliDB		$db			Database handler
+ * 		@param	Societe		$object		Third party object
+ *      @param  string		$backtopage	Url to go once address is created
+ *      @return	void
+ */
+function show_addresses($conf,$langs,$db,$object,$backtopage='')
+{
+	global $user;
+
+	require_once DOL_DOCUMENT_ROOT.'/societe/class/address.class.php';
+
+	$addressstatic = new Address($db);
+	$num = $addressstatic->fetch_lines($object->id);
+
+	$newcardbutton='';
+	if ($user->rights->societe->creer)
+	{
+		$newcardbutton='<a class="butActionNew" href="'.DOL_URL_ROOT.'/comm/address.php?socid='.$object->id.'&amp;action=create&amp;backtopage='.urlencode($backtopage).'"><span class="valignmiddle">'.$langs->trans("AddAddress").'</span>';
+		$newcardbutton.= '<span class="fa fa-plus-circle valignmiddle"></span>';
+		$newcardbutton.= '</a>';
+	}
+
+	print "\n";
+	print load_fiche_titre($langs->trans("AddressesForCompany"),$newcardbutton,'');
+
+	print "\n".'<table class="noborder" width="100%">'."\n";
+
+	print '<tr class="liste_titre"><td>'.$langs->trans("AddressLabel").'</td>';
+	print '<td>'.$langs->trans("CompanyName").'</td>';
+	print '<td>'.$langs->trans("Town").'</td>';
+	print '<td>'.$langs->trans("Country").'</td>';
+	print '<td>'.$langs->trans("Phone").'</td>';
+	print '<td>'.$langs->trans("Fax").'</td>';
+	print '<td>'.$langs->trans("Email").'</td>'; // InfraS ajout
+	print '<td>'.$langs->trans("url").'</td>'; // InfraS ajout
+	print "<td>&nbsp;</td>";
+	print "</tr>";
+
+	if ($num > 0)
+	{
+		foreach ($addressstatic->lines as $address)
+		{
+			print '<tr class="oddeven">';
+
+			print '<td>';
+			$addressstatic->id = $address->id;
+			$addressstatic->label = $address->label;
+			print $addressstatic->getNomUrl(1);
+			print '</td>';
+
+			print '<td>'.$address->name.'</td>';
+
+			print '<td>'.$address->town.'</td>';
+
+			$img=picto_from_langcode($address->country_code);
+			print '<td>'.($img?$img.' ':'').$address->country.'</td>';
+
+			// Lien click to dial
+			print '<td>';
+			print dol_print_phone($address->phone,$address->country_code,$address->id,$object->id,'AC_TEL');
+			print '</td>';
+			print '<td>';
+			print dol_print_phone($address->fax,$address->country_code,$address->id,$object->id,'AC_FAX');
+			print '</td>';
+			print '<td>'.$address->email.'</td>'; // InfraS ajout
+			print '<td>'.$address->url.'</td>'; // InfraS ajout
+
+			if ($user->rights->societe->creer)
+			{
+				print '<td align="right">';
+				print '<a href="'.DOL_URL_ROOT.'/comm/address.php?action=edit&amp;id='.$address->id.'&amp;socid='.$object->id.'&amp;backtopage='.urlencode($backtopage).'">';
+				print img_edit();
+				print '</a></td>';
+			}
+
+			print "</tr>\n";
+		}
+	}
+	//else
+	//{
+		//print '<tr class="oddeven">';
+		//print '<td>'.$langs->trans("NoAddressYetDefined").'</td>';
+		//print "</tr>\n";
+	//}
+	print "\n</table>\n";
+
+	print "<br>\n";
+
+	return $num;
+}
+
+/**
  *    	Show html area with actions to do
  *
  * 		@param	Conf		$conf		        Object conf

@@ -7237,7 +7237,7 @@ function printCommonFooter($zone = 'private')
 		print "\n";
 		if (! empty($conf->use_javascript_ajax))
 		{
-			print '	<script src="'.dol_buildpath('/theme/eldy/js/jquery.cookie.js', 1).'"></script>
+			print '	<script src="'.dol_buildpath('/theme/infras/js/jquery.cookie.js', 1).'"></script>
 					<script>
 						jQuery(document).ready(function() {';
 
