@@ -207,7 +207,7 @@ class modTicket extends DolibarrModules
             'titre' => 'Ticket',
             'mainmenu' => 'ticket',
             'leftmenu' => 'ticket',
-            'url' => '/ticket/index.php?leftmenu=ticket',	// InfraS change
+            'url' => '/ticket/index.php',
             'langs' => 'ticket',
             'position' => 101,
             'enabled' => '$conf->ticket->enabled',
@@ -220,7 +220,7 @@ class modTicket extends DolibarrModules
             'type' => 'left',
             'titre' => 'NewTicket',
             'mainmenu' => 'ticket',
-            'url' => '/ticket/card.php?leftmenu=ticket&action=create',	// InfraS change
+            'url' => '/ticket/card.php?action=create',
             'langs' => 'ticket',
             'position' => 102,
             'enabled' => '$conf->ticket->enabled',
@@ -234,7 +234,7 @@ class modTicket extends DolibarrModules
             'titre' => 'List',
             'mainmenu' => 'ticket',
             'leftmenu' => 'ticketlist',
-            'url' => '/ticket/list.php?leftmenu=ticket&search_fk_status=non_closed',	// InfraS change
+            'url' => '/ticket/list.php?search_fk_status=non_closed',
             'langs' => 'ticket',
             'position' => 103,
             'enabled' => '$conf->ticket->enabled',
@@ -248,7 +248,7 @@ class modTicket extends DolibarrModules
             'titre' => 'MenuTicketMyAssign',
             'mainmenu' => 'ticket',
             'leftmenu' => 'ticketmy',
-            'url' => '/ticket/list.php?leftmenu=ticket&mode=mine&search_fk_status=non_closed',	// InfraS change
+            'url' => '/ticket/list.php?mode=mine&search_fk_status=non_closed',
             'langs' => 'ticket',
             'position' => 105,
             'enabled' => '$conf->ticket->enabled',
@@ -261,7 +261,7 @@ class modTicket extends DolibarrModules
             'type' => 'left',
             'titre' => 'Statistics',
             'mainmenu' => 'ticket',
-            'url' => '/ticket/stats/index.php?leftmenu=ticket',	// InfraS change
+            'url' => '/ticket/stats/index.php',
             'langs' => 'ticket',
             'position' => 107,
             'enabled' => '$conf->ticket->enabled',

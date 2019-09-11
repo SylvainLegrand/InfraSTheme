@@ -190,7 +190,7 @@ class modResource extends DolibarrModules
 			'titre'=> 'MenuResourceIndex',
 			'mainmenu'=>'tools',
 			'leftmenu'=> 'resource',
-			'url'=> '/resource/list.php?leftmenu=resource',	// InfraS change
+			'url'=> '/resource/list.php',
 			'langs'=> 'resource',
 			'position'=> 100,
 			'enabled'=> '1',
@@ -205,7 +205,7 @@ class modResource extends DolibarrModules
 			'titre'=> 'MenuResourceAdd',
 			'mainmenu'=> 'tools',
 			'leftmenu'=> 'resource_add',
-			'url'=> '/resource/card.php??leftmenu=resource&action=create',	// InfraS change
+			'url'=> '/resource/card.php?action=create',
 			'langs'=> 'resource',
 			'position'=> 101,
 			'enabled'=> '1',
@@ -220,7 +220,7 @@ class modResource extends DolibarrModules
 			'titre'=> 'List',
 			'mainmenu'=> 'tools',
 			'leftmenu'=> 'resource_list',
-			'url'=> '/resource/list.php?leftmenu=resource',	// InfraS change
+			'url'=> '/resource/list.php',
 			'langs'=> 'resource',
 			'position'=> 102,
 			'enabled'=> '1',
