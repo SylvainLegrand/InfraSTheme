@@ -189,6 +189,7 @@ if ($colorBorderError != '') $colorBorderError=join(',', colorStringToArray($col
 if ($colorBackError != '') $colorBackError=join(',', colorStringToArray($colorBackError));
 
 $nbtopmenuentries=$menumanager->showmenu('topnb');
+if ($conf->browser->layout == 'phone') $nbtopmenuentries = max($nbtopmenuentries, 10);
 
 
 $minwidthtmenu=66;		/* minimum width for one top menu entry */

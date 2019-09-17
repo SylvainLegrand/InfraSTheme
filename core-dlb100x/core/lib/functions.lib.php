@@ -796,7 +796,10 @@ function dol_size($size, $type = '')
  */
 function dol_sanitizeFileName($str, $newstr = '_', $unaccent = 1)
 {
-	$filesystem_forbidden_chars = array('<','>','/','\\','?','*','|','"','°');
+	// List of special chars for filenames in windows are defined on page https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file
+	// Char '>' '<' '|' '$' and ';' are special chars for shells.
+	// Char '/' and '\' are file delimiters.
+	$filesystem_forbidden_chars = array('<', '>', '/', '\\', '?', '*', '|', '"', ':', '°', '$', ';');
 	return dol_string_nospecial($unaccent?dol_string_unaccent($str):$str, $newstr, $filesystem_forbidden_chars);
 }
 
@@ -921,11 +924,15 @@ function dol_escape_js($stringtoescape, $mode = 0, $noescapebackslashn = 0)
  *  @param      string		$stringtoescape		String to escape
  *  @param		int			$keepb				1=Preserve b tags (otherwise, remove them)
  *  @param      int         $keepn              1=Preserve \r\n strings (otherwise, replace them with escaped value). Set to 1 when escaping for a <textarea>.
+ *  @param		string		$keepmoretags		'' or 'common' or list of tags
  *  @return     string     				 		Escaped string
  *  @see		dol_string_nohtmltag(), dol_string_nospecial(), dol_string_unaccent()
  */
-function dol_escape_htmltag($stringtoescape, $keepb = 0, $keepn = 0)
+function dol_escape_htmltag($stringtoescape, $keepb = 0, $keepn = 0, $keepmoretags = '')
 {
+	if ($keepmoretags == 'common') $keepmoretags = 'html,body,a,em,i,u,ul,li,br,div,img,font,p,span,strong,table,tr,td,th,tbody';
+	// TODO Implement $keepmoretags
+
 	// escape quotes and backslashes, newlines, etc.
 	$tmp=html_entity_decode($stringtoescape, ENT_COMPAT, 'UTF-8');		// TODO Use htmlspecialchars_decode instead, that make only required change for html tags
 	if (! $keepb) $tmp=strtr($tmp, array("<b>"=>'','</b>'=>''));
@@ -1208,7 +1215,7 @@ function dol_get_fiche_head($links = array(), $active = '', $title = '', $notab 
 	}
 	if ($popuptab) $outmore.='</div>';
 
-	if ($displaytab > $limittoshow)
+	if ($popuptab)	// If there is some tabs not shown
 	{
 		$left=($langs->trans("DIRECTION") == 'rtl'?'right':'left');
 		$right=($langs->trans("DIRECTION") == 'rtl'?'left':'right');
@@ -1460,7 +1467,7 @@ function dol_banner_tab($object, $paramid, $morehtml = '', $shownav = 1, $fieldi
 	{
 		if (! empty($conf->use_javascript_ajax) && $user->rights->societe->creer && ! empty($conf->global->MAIN_DIRECT_STATUS_UPDATE))
 		{
-			$morehtmlstatus.=ajax_object_onoff($object, 'status', 'status', 'InActivity', 'ActivityCeased');
+		   	$morehtmlstatus.=ajax_object_onoff($object, 'status', 'status', 'InActivity', 'ActivityCeased');
 		}
 		else {
 			$morehtmlstatus.=$object->getLibStatut(6);
@@ -2935,7 +2942,7 @@ function dol_trunc($string, $size = 40, $trunc = 'right', $stringencoding = 'UTF
 /**
  *	Show picto whatever it's its name (generic function)
  *
- *	@param      string		$titlealt       	  	Text on title tag for tooltip. Not used if param notitle is set to 1.
+ *	@param      string		$titlealt         		Text on title tag for tooltip. Not used if param notitle is set to 1.
  *	@param      string		$picto       			Name of image file to show ('filenew', ...)
  *													If no extension provided, we use '.png'. Image must be stored into theme/xxx/img directory.
  *                                  				Example: picto.png                  if picto.png is stored into htdocs/theme/mytheme/img
@@ -2948,7 +2955,7 @@ function dol_trunc($string, $size = 40, $trunc = 'right', $stringencoding = 'UTF
  *  @param		string		$alt					Force alt for bind people
  *  @param		string		$morecss				Add more class css on img tag (For example 'myclascss'). Work only if $moreatt is empty.
  *  @param		string		$marginleftonlyshort	1 = Add a short left margin on picto, 2 = Add a larger left maring on picto, 0 = No margin left. Works for fontawesome picto only.
- *  @return     string								Return img tag
+ *  @return     string       				    	Return img tag
  *  @see        img_object(), img_picto_common()
  */
 function img_picto($titlealt, $picto, $moreatt = '', $pictoisfullpath = false, $srconly = 0, $notitle = 0, $alt = '', $morecss = '', $marginleftonlyshort = 2)
@@ -2987,6 +2994,7 @@ function img_picto($titlealt, $picto, $moreatt = '', $pictoisfullpath = false, $
 		    if (empty($conf->global->MAIN_DISABLE_FONT_AWESOME_5)) $fa='fas';
 		    $fakey = $pictowithoutext;
 			$facolor = ''; $fasize = '';
+
 			if ($pictowithoutext == 'setup') {
 			    $fakey = 'fa-cog';
 			    $fasize = '1.4em';
@@ -3109,7 +3117,7 @@ function img_picto($titlealt, $picto, $moreatt = '', $pictoisfullpath = false, $
 			}
 			//this snippet only needed since function img_edit accepts only one additional parameter: no separate one for css only.
             //class/style need to be extracted to avoid duplicate class/style validation errors when $moreatt is added to the end of the attributes
-	    $reg=array();
+            $reg=array();
 			if (preg_match('/class="([^"]+)"/', $moreatt, $reg)) {
                 $morecss .= ($morecss ? ' ' : '') . $reg[1];
                 $moreatt = str_replace('class="'.$reg[1].'"', '', $moreatt);
@@ -4248,14 +4256,14 @@ function print_fleche_navigation($page, $file, $options = '', $nextpage = 0, $be
 		{
 			print '<!-- JS CODE TO ENABLE select limit to launch submit of page -->
             		<script>
-			jQuery(document).ready(function () {
-				jQuery(".selectlimit").change(function() {
-			    console.log("Change limit. Send submit");
-			    $(this).parents(\'form:first\').submit();
-				});
-			});
-			</script>
-		';
+                	jQuery(document).ready(function () {
+            	  		jQuery(".selectlimit").change(function() {
+                            console.log("Change limit. Send submit");
+                            $(this).parents(\'form:first\').submit();
+            	  		});
+                	});
+            		</script>
+                ';
 		}
 		print '</li>';
 	}
@@ -4680,19 +4688,19 @@ function get_localtax($vatrate, $local, $thirdparty_buyer = "", $thirdparty_sell
 
 	// By default, search value of local tax on line of common tax
 	$sql  = "SELECT t.localtax1, t.localtax2, t.localtax1_type, t.localtax2_type";
-	$sql .= " FROM ".MAIN_DB_PREFIX."c_tva as t, ".MAIN_DB_PREFIX."c_country as c";
-	$sql .= " WHERE t.fk_pays = c.rowid AND c.code = '".$thirdparty_seller->country_code."'";
-	$sql .= " AND t.taux = ".((float) $vatratecleaned)." AND t.active = 1";
-	if ($vatratecode) $sql.= " AND t.code ='".$vatratecode."'";		// If we have the code, we use it in priority
-	else $sql.= " AND t.recuperableonly ='".$vatnpr."'";
-	dol_syslog("get_localtax", LOG_DEBUG);
-	$resql=$db->query($sql);
+   	$sql .= " FROM ".MAIN_DB_PREFIX."c_tva as t, ".MAIN_DB_PREFIX."c_country as c";
+   	$sql .= " WHERE t.fk_pays = c.rowid AND c.code = '".$thirdparty_seller->country_code."'";
+   	$sql .= " AND t.taux = ".((float) $vatratecleaned)." AND t.active = 1";
+   	if ($vatratecode) $sql.= " AND t.code ='".$vatratecode."'";		// If we have the code, we use it in priority
+   	else $sql.= " AND t.recuperableonly ='".$vatnpr."'";
+   	dol_syslog("get_localtax", LOG_DEBUG);
+   	$resql=$db->query($sql);
 
-	if ($resql)
-	{
-		$obj = $db->fetch_object($resql);
-		if ($local==1) return $obj->localtax1;
-		elseif ($local==2) return $obj->localtax2;
+   	if ($resql)
+   	{
+   		$obj = $db->fetch_object($resql);
+   		if ($local==1) return $obj->localtax1;
+   		elseif ($local==2) return $obj->localtax2;
 	}
 
 	return 0;
@@ -5526,7 +5534,7 @@ function dol_nl2br($stringtoencode, $nl2brmode = 0, $forxml = false)
 
 /**
  *	This function is called to encode a string into a HTML string but differs from htmlentities because
- * 	a detection is done before to see if text is already HTML or not. Also, all entities but &,<,> are converted.
+ * 	a detection is done before to see if text is already HTML or not. Also, all entities but &,<,>," are converted.
  *  This permits to encode special chars to entities with no double encoding for already encoded HTML strings.
  * 	This function also remove last EOL or BR if $removelasteolbr=1 (default).
  *  For PDF usage, you can show text by 2 ways:
@@ -5633,7 +5641,7 @@ function dol_string_is_good_iso($s)
 	$ok=1;
 	for($scursor=0;$scursor<$len;$scursor++)
 	{
-		$ordchar=ord($s{$scursor});
+		$ordchar=ord($s[$scursor]);
 		//print $scursor.'-'.$ordchar.'<br>';
 		if ($ordchar < 32 && $ordchar != 13 && $ordchar != 10) { $ok=0; break; }
 		if ($ordchar > 126 && $ordchar < 160) { $ok=0; break; }
@@ -6056,27 +6064,6 @@ $substitutionarray=array_merge($substitutionarray, array(
 		$substitutionarray['__AMOUNT_VAT__']      = is_object($object)?($object->total_vat?$object->total_vat:$object->total_tva):'';
 		if ($onlykey != 2 || $mysoc->useLocalTax(1)) $substitutionarray['__AMOUNT_TAX2__']     = is_object($object)?$object->total_localtax1:'';
 		if ($onlykey != 2 || $mysoc->useLocalTax(2)) $substitutionarray['__AMOUNT_TAX3__']     = is_object($object)?$object->total_localtax2:'';
-
-		// Add by philazerty and modified by InfraS
-		if ($object->element =='facture')
-        {
-			if (is_object($object))
-			{
-				$totalpaye			= $object->getSommePaiement();
-				$totalcreditnotes	= $object->getSumCreditNotesUsed();
-				$totaldeposits		= $object->getSumDepositsUsed();
-				$resteapayer		= price2num($object->total_ttc - $totalpaye - $totalcreditnotes - $totaldeposits, 'MT');
-			}	// if (is_object($object))
-			$substitutionarray['__FACDATE__']			= is_object($object)?(isset($object->date) ? dol_print_date($object->date, 'daytext', 0, $outputlangs) : '') : '';
-			$substitutionarray['__FACDATELIMREG__']		= is_object($object)?(isset($object->date_lim_reglement) ? dol_print_date($object->date_lim_reglement, 'daytext', 0, $outputlangs) : '') : '';
-			$substitutionarray['__FACTOTALTTC_2D__']	= is_object($object)?number_format($object->total_ttc, 2, ',', ' ') : '';
-			$substitutionarray['__FACTOTALHT_2D__']		= is_object($object)?number_format($object->total_ht, 2, ',', ' ') : '';
-			$substitutionarray['__FACTOTALHT_2DC__']	= is_object($object)?price($object->total_ht, 0, $outputlangs, 1, 2, 2, 'auto') : '';
-			$substitutionarray['__FACTOTALTTC_2DC__']	= is_object($object)?price($object->total_ttc, 0, $outputlangs, 1, 2, 2, 'auto') : '';
-			$substitutionarray['__FACREST_2D__']		= is_object($object)?price($resteapayer, 2, ',', ' ') : '';
-			$substitutionarray['__FACREST_2DC__']		= is_object($object)?price($resteapayer, 0, $outputlangs, 1, 2, 2, 'auto') : '';
-        }	// if ($object->element =='facture')
-        // End of addition by Philazerty and modified by InfraS
 
 		$substitutionarray['__AMOUNT_FORMATED__']          = is_object($object)?($object->total_ttc ? price($object->total_ttc, 0, $outputlangs, 0, 0, -1, $conf->currency) : null):'';
 		$substitutionarray['__AMOUNT_EXCL_TAX_FORMATED__'] = is_object($object)?($object->total_ht ? price($object->total_ht, 0, $outputlangs, 0, 0, -1, $conf->currency) : null):'';
@@ -7068,19 +7055,19 @@ function getLanguageCodeFromCountryCode($countrycode)
 	if (function_exists('locale_get_primary_language') && function_exists('locale_get_region'))    // Need extension php-intl
 	{
 	    foreach ($locales as $locale)
-	{
-		$locale_language = locale_get_primary_language($locale);
-		$locale_region = locale_get_region($locale);
-		if (strtoupper($countrycode) == $locale_region)
-		{
-			//var_dump($locale.'-'.$locale_language.'-'.$locale_region);
-			return strtolower($locale_language).'_'.strtoupper($locale_region);
-		}
-	}
+    	{
+    		$locale_language = locale_get_primary_language($locale);
+    		$locale_region = locale_get_region($locale);
+    		if (strtoupper($countrycode) == $locale_region)
+    		{
+    			//var_dump($locale.'-'.$locale_language.'-'.$locale_region);
+    			return strtolower($locale_language).'_'.strtoupper($locale_region);
+    		}
+    	}
 	}
 	else
 	{
-	dol_syslog("Warning Exention php-intl is not available", LOG_WARNING);
+        dol_syslog("Warning Exention php-intl is not available", LOG_WARNING);
 	}
 
 	return null;
@@ -7194,7 +7181,7 @@ function complete_head_from_modules($conf, $langs, $object, &$head, &$h, $type, 
 		if ($reshook > 0)
 		{
 			$head = $hookmanager->resArray;
-	    $h = count($head);
+            $h = count($head);
 		}
 	}
 }
@@ -7558,19 +7545,19 @@ function natural_search($fields, $value, $mode = 0, $nofirstand = 0)
 			    $tmparray=explode(',', trim($crit));
 			    if (count($tmparray))
 			    {
-				$listofcodes='';
-				foreach($tmparray as $val)
-				{
-				    if ($val)
-				    {
-					$newres .= ($i2 > 0 ? ' OR (' : '(') . $field . ' LIKE \'' . $db->escape(trim($val)) . ',%\'';
-					$newres .= ' OR '. $field . ' = \'' . $db->escape(trim($val)) . '\'';
-					$newres .= ' OR '. $field . ' LIKE \'%,' . $db->escape(trim($val)) . '\'';
-					$newres .= ' OR '. $field . ' LIKE \'%,' . $db->escape(trim($val)) . ',%\'';
-					$newres .= ')';
-					$i2++;
-				    }
-				}
+			        $listofcodes='';
+			        foreach($tmparray as $val)
+			        {
+			            if ($val)
+			            {
+			                $newres .= ($i2 > 0 ? ' OR (' : '(') . $field . ' LIKE \'' . $db->escape(trim($val)) . ',%\'';
+			                $newres .= ' OR '. $field . ' = \'' . $db->escape(trim($val)) . '\'';
+			                $newres .= ' OR '. $field . ' LIKE \'%,' . $db->escape(trim($val)) . '\'';
+			                $newres .= ' OR '. $field . ' LIKE \'%,' . $db->escape(trim($val)) . ',%\'';
+			                $newres .= ')';
+			                $i2++;
+			            }
+			        }
 			    }
 			}
 			else    // $mode=0
@@ -7725,7 +7712,7 @@ function ajax_autoselect($htmlname, $addlink = '')
 {
 	global $langs;
 	$out = '<script>
-	       jQuery(document).ready(function () {
+               jQuery(document).ready(function () {
 				    jQuery("#'.$htmlname.'").click(function() { jQuery(this).select(); } );
 				});
 		    </script>';

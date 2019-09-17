@@ -584,7 +584,7 @@ foreach ($fieldsforcontent as $tmpfieldlist)
 
 $colspan=count($fieldlist)+1;
 //print '<tr><td colspan="'.$colspan.'">&nbsp;</td></tr>';	// Keep &nbsp; to have a line with enough height
-print '<tr class="impair nodrag nodrop nohover"><td colspan = "7" style = "line-height: 1px;">&nbsp;</td></tr>';
+print '<tr class="impair nodrag nodrop nohover"><td colspan = "7" style = "line-height: 1px;">&nbsp;</td></tr>';	// InfraS add
 print '</table>';
 print '</div>';
 print '</form>';
@@ -628,7 +628,7 @@ if ($resql)
 
 
     // Title line with search boxes
-    print '<tr class="liste_titre_filter">';
+    print '<tr class="liste_titre_filter">';	// InfraS change
     $filterfound=0;
     foreach ($fieldlist as $field => $value)
     {
