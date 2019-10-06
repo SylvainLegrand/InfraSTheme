@@ -2,9 +2,9 @@
 Copyright (c) 2003-2010, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
-
 CKEDITOR.editorConfig = function( config )
 {
+	if($.cookie && $.isSet($.cookie("colortopckeditor"))) { var colortopckeditor = $.cookie("colortopckeditor"); }
 	// Define changes to default configuration here.
 	// http://docs.cksource.com/CKEditor_3.x/Developers_Guide
 	// http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html
@@ -21,11 +21,12 @@ CKEDITOR.editorConfig = function( config )
 	config.removeDialogTabs = 'flash:advanced';	// config.removeDialogTabs = 'flash:advanced;image:Link';
 	config.protectedSource.push( /<\?[\s\S]*?\?>/g );   // Prevent PHP Code to be formatted
 	//config.menu_groups = 'clipboard,table,anchor,link,image';	// for context menu 'clipboard,form,tablecell,tablecellproperties,tablerow,tablecolumn,table,anchor,link,image,flash,checkbox,radio,textfield,hiddenfield,imagebutton,button,select,textarea'
-	//config.language = 'de';
-	//config.defaultLanguage = 'en';
-	//config.contentsLanguage = 'fr';
+	config.language = 'fr';
+	config.defaultLanguage = 'fr';
+	config.contentsLanguage = 'fr';
 	config.fullPage = false;	// Not a full html page string, just part of it
-	config.dialog_backgroundCoverColor = 'rgb(255, 254, 253)';
+	config.dialog_backgroundCoverColor = '#d4d4d4';
+	config.uiColor = '#'+colortopckeditor;
 	//config.contentsCss = '/css/mysitestyles.css';
 	config.image_previewText=' ';	// Must no be empty
 	//config.autoParagraph = false;

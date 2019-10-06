@@ -2060,13 +2060,16 @@ div.blockvmenusearch {
 div.blockvmenusearch > form > div {
 	padding-top: 3px;
 }
+div.blockvmenusearch > form > input {
+	color: #<?php echo $colortextbackvmenu; ?>;
+}
 div.blockvmenusearch > form > div > label {
 	padding-right: 2px;
 }
 div.blockvmenuhelp {
 <?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 	font-family: <?php print $fontlist ?>;
-	color: #<?php echo $colortextbackvmenu; ?>;;
+	color: #<?php echo $colortextbackvmenu; ?>;
 	text-align: center;
 	text-decoration: none;
     padding-left: 0px;
@@ -4034,27 +4037,24 @@ A.none, A.none:active, A.none:visited, A.none:hover {
 body.cke_show_borders {
     margin: 5px !important;
 }
-
+.cke_chrome {
+    border-style: solid;
+	border-color: rgb(<?php echo $colortopbordertitle1 ?>);
+	border-top-width: 4px;
+	border-left-width: 4px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+}
 .cke_dialog {
     border: 1px #bbb solid ! important;
 }
-/*.cke_editor table, .cke_editor tr, .cke_editor td
-{
-    border: 0px solid #FF0000 !important;
+a.cke_dialog_tab: hover {
+	color: #<?php echo $colortopckeditor ?>;
 }
-span.cke_skin_kama { padding: 0 !important; }*/
+a.cke_dialog_tab_selected {
+	color: #<?php echo $colortopckeditor ?>;
+}
 .cke_wrapper { padding: 4px !important; }
-a.cke_dialog_ui_button
-{
-    font-family: <?php print $fontlist ?> !important;
-	background-image: url(<?php echo $img_button ?>) !important;
-	background-position: bottom !important;
-    border: 1px solid #C0C0C0 !important;
-	-webkit-border-radius:0px 5px 0px 5px !important;
-	border-radius:0px 5px 0px 5px !important;
-    -webkit-box-shadow: 3px 3px 4px #DDD !important;
-    box-shadow: 3px 3px 4px #DDD !important;
-}
 .cke_dialog_ui_hbox_last
 {
 	vertical-align: bottom ! important;
@@ -4068,7 +4068,6 @@ a.cke_dialog_ui_button
 */
 a.cke_dialog_ui_button_ok span {
     text-shadow: none !important;
-    color: #333 !important;
 }
 
 

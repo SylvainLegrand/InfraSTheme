@@ -18,7 +18,7 @@ div.tabsActionNoBottom > a.butAction, div.tabsActionNoBottom > a.butActionRefuse
 span.butAction, span.butActionDelete, .button_search, .button_removefilter {
 	cursor: pointer;
 }
-.butAction, .button, input[name="sbmtConnexion"], .butActionDelete, .buttonDelete, .butActionRefused, .butActionNew, .butActionNewRefused, .button-top-menu-dropdown {
+.butAction, .button, input[name="sbmtConnexion"], .butActionDelete, .buttonDelete, .butActionRefused, .butActionNew, .butActionNewRefused, .button-top-menu-dropdown, a.cke_dialog_ui_button {
 	cursor: pointer;
 	font-family: <?php print $fontlist ?>;
 	text-decoration: none;
@@ -27,13 +27,13 @@ span.butAction, span.butActionDelete, .button_search, .button_removefilter {
 	display: inline-block;
 	padding: 0.6em 0.3125em; /* top+bottom right+left */
 	margin: 0em 0.6em !important;
-	-webkit-border-radius: 5x;
+	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
 .butAction img, .button img, .butActionDelete img, .buttonDelete img, .butActionRefused img, .butActionNew img, .butActionNewRefused img, .button-top-menu-dropdown img {
 	max-height: 12px;
 }
-.butAction, .button, input[name="sbmtConnexion"], .button-top-menu-dropdown {
+.butAction, .button, input[name="sbmtConnexion"], .button-top-menu-dropdown, a.cke_dialog_ui_button {
     color: #<?php echo $colortextbackhmenu; ?> !important;
 	background-image: -o-linear-gradient(bottom, rgba(<?php echo $colorbackhmenu1; ?>, 0.3) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
 	background-image: -moz-linear-gradient(bottom, rgba(<?php echo $colorbackhmenu1; ?>, 0.3) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
@@ -42,7 +42,7 @@ span.butAction, span.butActionDelete, .button_search, .button_removefilter {
 	background-image: linear-gradient(to bottom, rgba(<?php echo $colorbackhmenu1; ?>, 0.3) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
 	background-repeat: repeat-x;
 }
-.butActionDelete, .buttonDelete, .butActionDelete:link, .butActionDelete:visited, .butActionDelete:hover, .butActionDelete:active {
+.butActionDelete, .buttonDelete, .butActionDelete:link, .butActionDelete:visited, .butActionDelete:hover, .butActionDelete:active, a.cke_dialog_ui_button_cancel {
 	color: #4c4c4c !important;
 	background-image: -o-linear-gradient(bottom, rgba(<?php echo $colorbacklinepairhover; ?>, 0.3) 0%, rgba(<?php echo $colorbacklinepairhover; ?>, 1) 100%);
 	background-image: -moz-linear-gradient(bottom, rgba(<?php echo $colorbacklinepairhover; ?>, 0.3) 0%, rgba(<?php echo $colorbacklinepairhover; ?>, 1) 100%);
@@ -51,7 +51,7 @@ span.butAction, span.butActionDelete, .button_search, .button_removefilter {
 	background-image: linear-gradient(to bottom, rgba(<?php echo $colorbacklinepairhover; ?>, 0.3) 0%, rgba(<?php echo $colorbacklinepairhover; ?>, 1) 100%);
 	background-repeat: repeat-x;
 }
-.button:hover, .buttonDelete:hover, .butAction:hover, .butActionNew:hover, .butActionDelete:hover, .button-top-menu-dropdown:hover, .button:focus, .buttonDelete:focus, .butAction:focus, .butActionNew:focus, .butActionDelete:focus, .button-top-menu-dropdown:focus {
+.button:hover, .buttonDelete:hover, .butAction:hover, .butActionNew:hover, .butActionDelete:hover, .button-top-menu-dropdown:hover, a.cke_dialog_ui_button:hover, .button:focus, .buttonDelete:focus, .butAction:focus, .butActionNew:focus, .butActionDelete:focus, .button-top-menu-dropdown:focus, a.cke_dialog_ui_button:focus {
 	/* warning: having a larger shadow has side effect when button is completely on left of a table */
 	-webkit-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 0px 0px rgba(60,60,60,0.1);
 	box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 0px 0px rgba(60,60,60,0.1);
