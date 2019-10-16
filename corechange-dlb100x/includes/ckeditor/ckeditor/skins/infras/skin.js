@@ -3,8 +3,8 @@
  For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.skin.name="infras";
-CKEDITOR.skin.ua_editor="ie,iequirks,ie7,ie8,gecko";
-CKEDITOR.skin.ua_dialog="ie,iequirks,ie7,ie8";
+CKEDITOR.skin.ua_editor="ie, iequirks, ie7, ie8, gecko";
+CKEDITOR.skin.ua_dialog="ie, iequirks, ie7, ie8";
 CKEDITOR.skin.chameleon=function(){
 	var b=function(){
 		return function(b,e){
