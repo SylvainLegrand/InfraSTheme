@@ -949,6 +949,8 @@ td.showDragHandle {
 	position: fixed;
 	top: 50px;
 	bottom: 0;
+	overflow-y: auto !important;
+	overflow-x: hidden;
 	border-<?php echo $right; ?>: 1px solid #d0d0d0;
 	box-shadow: 3px 0 6px -2px #eee;
 	background: rgb(<?php print $colorbackhmenu1; ?>);
@@ -2476,6 +2478,12 @@ table.paddingtopbottomonly tr td {
 	background-image: -ms-linear-gradient(top,		rgba(<?php echo $colorbackhmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%) !important;
 	background-image: linear-gradient(to top,		rgba(<?php echo $colorbackhmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%) !important;
 	background-repeat: repeat-x;
+
+	font-weight: <?php echo $useboldtitle?'bold':'normal'; ?>;
+
+    color: rgb(<?php echo $colortexttitle; ?>);
+    font-family: <?php print $fontlist ?>;
+    text-align: <?php echo $left; ?>;
 }
 table:not(.listwithfilterbefore) tr.liste_titre_filter:first-of-type td.liste_titre {
     padding-top: 5px;
