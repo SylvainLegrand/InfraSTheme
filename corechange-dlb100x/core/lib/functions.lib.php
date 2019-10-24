@@ -7277,7 +7277,7 @@ function printCommonFooter($zone = 'private')
 							if(menu == "on") { $("body").removeClass("sidebar-collapse"); }
 							else { $("body").addClass("sidebar-collapse"); }
 
-				print 'jQuery("li.menuhider").click(function(event) {';
+							jQuery("li.menuhider").click(function(event) {
 								if (!$( "body" ).hasClass( "sidebar-collapse" )){ event.preventDefault(); }
 								$("body").toggleClass("sidebar-collapse");
 								if ($( "body" ).hasClass( "sidebar-collapse" )){ $.cookie("hidemenu", "off", { expires: 1, path: "/" }); }
