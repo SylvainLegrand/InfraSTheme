@@ -37,5 +37,6 @@ Après la mise à jour
 * par copie (écrasement) des fichiers du répertoire ***./htdocs/theme/infras/*** :
 	* Il est IMPERATIF :
 		 * D'effectuer le Core change (voir point précédent)
+Pour certaines options : MAIN_ONLY_LAST_NAME_ON_MAIL
 
 

@@ -6348,7 +6348,7 @@ function get_date_range($date_start, $date_end, $format = '', $outputlangs = '',
  *
  * @param	string	$firstname		Firstname
  * @param	string	$lastname		Lastname
- * @param	int		$nameorder		-1=Auto, 0=Lastname+Firstname, 1=Firstname+Lastname, 2=Firstname, 3=Firstname if defined else lastname
+ * @param	int		$nameorder		-1=Auto, 0=Lastname+Firstname, 1=Firstname+Lastname, 2=Firstname, 3=Firstname if defined else lastname, 4=Lastname // InfraS change
  * @return	string					Firstname + lastname or Lastname + firstname
  */
 function dolGetFirstLastname($firstname, $lastname, $nameorder = -1)
@@ -6358,7 +6358,7 @@ function dolGetFirstLastname($firstname, $lastname, $nameorder = -1)
 	$ret='';
 	// If order not defined, we use the setup
 	if ($nameorder < 0) $nameorder=(empty($conf->global->MAIN_FIRSTNAME_NAME_POSITION)?1:0);
-	if ($nameorder && $nameorder != 2 && $nameorder != 3)
+	if ($nameorder && $nameorder != 2 && $nameorder != 3 && $nameorder != 4)	// InfraS change
 	{
 		$ret.=$firstname;
 		if ($firstname && $lastname) $ret.=' ';
@@ -6371,6 +6371,10 @@ function dolGetFirstLastname($firstname, $lastname, $nameorder = -1)
 	   {
 	   		$ret.=$lastname;
 	   }
+	}
+	elseif ($nameorder == 4)	// InfraS add
+	{
+		$ret.=$lastname;	// InfraS add
 	}
 	else
 	{
