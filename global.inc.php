@@ -954,7 +954,7 @@ td.showDragHandle {
 	overflow-x: hidden;
 	border-<?php echo $right; ?>: 1px solid #d0d0d0;
 	box-shadow: 3px 0 6px -2px #eee;
-	background: rgb(<?php print $colorbackhmenu1; ?>);
+	background: rgb(<?php print $colorbackvmenu1; ?>);
 }
 /* ============================================================================== */
 /* Slide animation																  */
@@ -2892,11 +2892,11 @@ div.colorback	/* for the form "assign user" on time spent view */
 }
 div.liste_titre_bydiv, .liste_titre div.tagtr, tr.liste_titre, tr.liste_titre_sel, .tagtr.liste_titre, .tagtr.liste_titre_sel, form.liste_titre, form.liste_titre_sel, table.dataTable thead tr
 {
-	background-image: -o-linear-gradient(bottom,		rgba(<?php echo $colorbackhmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
-	background-image: -moz-linear-gradient(bottom,		rgba(<?php echo $colorbackhmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
-	background-image: -webkit-linear-gradient(bottom,	rgba(<?php echo $colorbackhmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
-	background-image: -ms-linear-gradient(bottom,		rgba(<?php echo $colorbackhmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
-	background-image: linear-gradient(to bottom,		rgba(<?php echo $colorbackhmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
+	background-image: -o-linear-gradient(bottom,		rgba(<?php echo $colorbacktitle1; ?>, 0.1) 0%, rgba(<?php echo $colorbacktitle1; ?>, 1) 100%);
+	background-image: -moz-linear-gradient(bottom,		rgba(<?php echo $colorbacktitle1; ?>, 0.1) 0%, rgba(<?php echo $colorbacktitle1; ?>, 1) 100%);
+	background-image: -webkit-linear-gradient(bottom,	rgba(<?php echo $colorbacktitle1; ?>, 0.1) 0%, rgba(<?php echo $colorbacktitle1; ?>, 1) 100%);
+	background-image: -ms-linear-gradient(bottom,		rgba(<?php echo $colorbacktitle1; ?>, 0.1) 0%, rgba(<?php echo $colorbacktitle1; ?>, 1) 100%);
+	background-image: linear-gradient(to bottom,		rgba(<?php echo $colorbacktitle1; ?>, 0.1) 0%, rgba(<?php echo $colorbacktitle1; ?>, 1) 100%);
 	background-repeat: repeat-x;
 
 	font-weight: <?php echo $useboldtitle?'bold':'normal'; ?>;
@@ -5670,11 +5670,11 @@ div.tabsElem a.tab {
 	.side-nav {
 		z-index: 200;
 		padding-top: 70px;
-		background-image: -o-linear-gradient(bottom,		rgba(<?php echo $colorbackhmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
-		background-image: -moz-linear-gradient(bottom,		rgba(<?php echo $colorbackhmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
-		background-image: -webkit-linear-gradient(bottom,	rgba(<?php echo $colorbackhmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
-		background-image: -ms-linear-gradient(bottom,		rgba(<?php echo $colorbackhmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
-		background-image: linear-gradient(to bottom,		rgba(<?php echo $colorbackhmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackhmenu1; ?>, 1) 100%);
+		background-image: -o-linear-gradient(bottom,		rgba(<?php echo $colorbackvmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackvmenu1; ?>, 1) 100%);
+		background-image: -moz-linear-gradient(bottom,		rgba(<?php echo $colorbackvmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackvmenu1; ?>, 1) 100%);
+		background-image: -webkit-linear-gradient(bottom,	rgba(<?php echo $colorbackvmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackvmenu1; ?>, 1) 100%);
+		background-image: -ms-linear-gradient(bottom,		rgba(<?php echo $colorbackvmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackvmenu1; ?>, 1) 100%);
+		background-image: linear-gradient(to bottom,		rgba(<?php echo $colorbackvmenu1; ?>, 0.1) 0%, rgba(<?php echo $colorbackvmenu1; ?>, 1) 100%);
 		background-repeat: repeat-x;
     }
 	#id-left {
