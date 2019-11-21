@@ -6029,7 +6029,8 @@ $substitutionarray=array_merge($substitutionarray, array(
 					if (is_array($extrafields->attributes[$object->table_element]['label']) && count($extrafields->attributes[$object->table_element]['label']) > 0)
 					{
 						foreach ($extrafields->attributes[$object->table_element]['label'] as $key => $label) {
-							$substitutionarray['__EXTRAFIELD_' . strtoupper($key) . '__'] = $object->array_options['options_' . $key];
+							$value															= $object->array_options['options_' . $key];	// InfraS Add
+							$substitutionarray['__EXTRAFIELD_' . strtoupper($key) . '__']	= $extrafields->showOutputField($key, $value);	// InfraS change
 						}
 					}
 				}
