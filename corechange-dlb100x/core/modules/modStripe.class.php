@@ -114,10 +114,10 @@ class modStripe extends DolibarrModules
 			'titre'=>'StripeAccount',
 			'mainmenu'=>'bank',
 			'leftmenu'=>'stripe',
-			'url' => '/stripe/index.php?mainmenu=bank&leftmenu=stripe',	// InfraS change
+			'url' => '/compta/bank/list.php?mainmenu=bank&leftmenu=stripe',	// InfraS change
 			'langs' => 'stripe',
 			'position' => 100,
-			'enabled' => '$conf->stripe->enabled && $conf->banque->enabled && $conf->global->MAIN_FEATURES_LEVEL >= 1',
+			'enabled' => '$conf->stripe->enabled && $conf->banque->enabled',
 			'perms' => '$user->rights->banque->lire',
 			'target' => '',
 			'user' => 0
@@ -130,8 +130,8 @@ class modStripe extends DolibarrModules
 			'titre' => 'StripeChargeList',
 			'url' => '/stripe/charge.php?mainmenu=bank&leftmenu=stripe',	// InfraS change
 			'langs' => 'stripe',
-			'position' => 102,
-			'enabled' => '$conf->stripe->enabled && $conf->banque->enabled && $conf->global->MAIN_FEATURES_LEVEL >= 1',
+			'position' => 101,
+			'enabled' => '$conf->stripe->enabled && $conf->banque->enabled',
 			'perms' => '$user->rights->banque->lire',
 			'target' => '',
 			'user' => 0
@@ -145,11 +145,12 @@ class modStripe extends DolibarrModules
 			'url' => '/stripe/transaction.php?mainmenu=bank&leftmenu=stripe',	// InfraS change
 			'langs' => 'stripe',
 			'position' => 102,
-			'enabled' => '$conf->stripe->enabled && $conf->banque->enabled && $conf->global->MAIN_FEATURES_LEVEL >= 1',
+			'enabled' => '$conf->stripe->enabled && $conf->banque->enabled',
 			'perms' => '$user->rights->banque->lire',
 			'target' => '',
 			'user' => 0
 		);
+    	$r++;
 	    $this->menu[$r] = array(
 			'fk_menu' => 'fk_mainmenu=bank,fk_leftmenu=stripe',
 			'type' => 'left',
@@ -157,7 +158,7 @@ class modStripe extends DolibarrModules
 			'url' => '/stripe/payout.php?mainmenu=bank&leftmenu=stripe',	// InfraS change
 			'langs' => 'stripe',
 			'position' => 103,
-			'enabled' => '$conf->stripe->enabled && $conf->banque->enabled && $conf->global->MAIN_FEATURES_LEVEL >= 1',
+			'enabled' => '$conf->stripe->enabled && $conf->banque->enabled',
 			'perms' => '$user->rights->banque->lire',
 			'target' => '',
 			'user' => 0
