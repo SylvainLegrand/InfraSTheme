@@ -150,7 +150,8 @@ class modStripe extends DolibarrModules
 			'target' => '',
 			'user' => 0
 		);
-    	$r++;
+
+        $r++;
 	    $this->menu[$r] = array(
 			'fk_menu' => 'fk_mainmenu=bank,fk_leftmenu=stripe',
 			'type' => 'left',
