@@ -356,27 +356,27 @@ if ((!empty($conf->product->enabled) || !empty($conf->service->enabled)) && ($us
 				// Sell price
 				if (empty($conf->global->PRODUIT_MULTIPRICES))
 				{
-					if (!empty($conf->dynamicprices->enabled) && !empty($objp->fk_price_expression))
-					{
-						$product = new Product($db);
-						$product->fetch($objp->rowid);
-						$priceparser = new PriceParser($db);
-						$price_result = $priceparser->parseProduct($product);
-						if ($price_result >= 0) {
-							$objp->price = $price_result;
-						}
-					}
+	                if (!empty($conf->dynamicprices->enabled) && !empty($objp->fk_price_expression))
+	                {
+	                	$product = new Product($db);
+	                	$product->fetch($objp->rowid);
+	                    $priceparser = new PriceParser($db);
+	                    $price_result = $priceparser->parseProduct($product);
+	                    if ($price_result >= 0) {
+	                        $objp->price = $price_result;
+	                    }
+	                }
 					print '<td class="nowrap right">';
-					if (isset($objp->price_base_type) && $objp->price_base_type == 'TTC') print price($objp->price_ttc).' '.$langs->trans("TTC");
-					else print price($objp->price).' '.$langs->trans("HT");
-					print '</td>';
+	    			if (isset($objp->price_base_type) && $objp->price_base_type == 'TTC') print price($objp->price_ttc).' '.$langs->trans("TTC");
+	    			else print price($objp->price).' '.$langs->trans("HT");
+	    			print '</td>';
 				}
 				print '<td class="right nowrap width25"><span class="statusrefsell">';
 				print $product_static->LibStatut($objp->tosell, 3, 0);
 				print "</span></td>";
-				print '<td class="right nowrap width25"><span class="statusrefbuy">';
-				print $product_static->LibStatut($objp->tobuy, 3, 1);
-				print "</span></td>";
+	            print '<td class="right nowrap width25"><span class="statusrefbuy">';
+	            print $product_static->LibStatut($objp->tobuy, 3, 1);
+	            print "</span></td>";
 				print "</tr>\n";
 				$i++;
 			}

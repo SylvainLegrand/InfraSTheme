@@ -53,7 +53,7 @@ llxHeader('', $langs->trans("SuppliersOrdersArea"));
 
 $commandestatic = new CommandeFournisseur($db);
 $companystatic=new Societe($db);	// InfraS add
-$userstatic=new User($db);
+$userstatic = new User($db);
 $formfile = new FormFile($db);
 
 print load_fiche_titre($langs->trans("SuppliersOrdersArea"), '', 'supplierorder');	// InfraS change commercial by supplierorder
@@ -83,7 +83,7 @@ $sql .= " FROM ".MAIN_DB_PREFIX."societe as s";
 $sql .= ", ".MAIN_DB_PREFIX."commande_fournisseur as cf";
 if (!$user->rights->societe->client->voir && !$socid) $sql .= ", ".MAIN_DB_PREFIX."societe_commerciaux as sc";
 $sql .= " WHERE cf.fk_soc = s.rowid";
-$sql .= " AND cf.entity = ".$conf->entity;
+$sql .= " AND cf.entity IN (".getEntity('supplier_order').")";
 if ($user->socid) $sql .= ' AND cf.fk_soc = '.$user->socid;
 if (!$user->rights->societe->client->voir && !$socid) $sql .= " AND s.rowid = sc.fk_soc AND sc.fk_user = ".$user->id;
 $sql .= " GROUP BY cf.fk_statut";
@@ -270,7 +270,7 @@ if (! empty($conf->multicompany->enabled) && ! empty($conf->global->MULTICOMPANY
 }
 else
 {
-	$sql.= " WHERE u.entity IN (".getEntity('user').")";
+	$sql.= " WHERE (u.entity IN (".getEntity('user')."))";
 }
 $sql.= " AND u.fk_soc IS NULL"; // An external user can not approved
 
@@ -416,7 +416,7 @@ $num = $db->num_rows($resql);
 print '<div class="div-table-responsive-no-min">';
 print '<table class="noborder centpercent">';
 print '<tr class="liste_titre">';
-print '<th colspan="3">'.$langs->trans("OrdersToProcess").' <a href="'.DOL_URL_ROOT.'/commande/list.php?viewstatut=1">('.$num.')</a></th></tr>';
+print '<th colspan="3">'.$langs->trans("OrdersToProcess").' <a href="'.DOL_URL_ROOT.'/commande/list.php?search_status=1">('.$num.')</a></th></tr>';
 
 if ($num)
 {

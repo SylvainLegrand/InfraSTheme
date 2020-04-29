@@ -185,13 +185,6 @@
 	if ($colorBackWarning != '')			$colorBackWarning			= join(',', colorStringToArray($colorBackWarning));
 	if ($colorBorderError != '')			$colorBorderError			= join(',', colorStringToArray($colorBorderError));
 	if ($colorBackError != '')				$colorBackError				= join(',', colorStringToArray($colorBackError));
-	$nbtopmenuentries						= $menumanager->showmenu('topnb');
-	$sql									= 'SELECT *';
-	$sql									.= ' FROM '.MAIN_DB_PREFIX.'menu';
-	$sql									.= ' WHERE menu_handler = "'.$db->escape('all').'" AND entity = '.$conf->entity.' AND type = "top"';
-	$res									= $db->query($sql);
-	$nbRows									= $res ? $db->num_rows($res) : 0;
-	$topSideNav								= $nbtopmenuentries + $nbRows > 16 ? 100 : 50;
 	if ($conf->browser->layout == 'phone')	$nbtopmenuentries			= max($nbtopmenuentries, 10);
 	$minwidthtmenu							= 66;	/* minimum width for one top menu entry */
 	$heightmenu								= 48;	/* height of top menu, part with image */

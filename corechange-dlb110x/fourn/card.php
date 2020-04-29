@@ -218,11 +218,11 @@ if ($object->id > 0)
 
     // TVA Intra
     print '<tr><td class="nowrap">'.$langs->trans('VATIntra').'</td><td>';
-	$tvaIntra	= $object->tva_intra;	// ajout InfraS
-	if (strtoupper($object->country_code) == 'FR')	// ajout InfraS
+	$tvaIntra	= $object->tva_intra;	// InfraS add
+	if (strtoupper($object->country_code) == 'FR')	// InfraS add
 		if (dol_strlen($tvaIntra) == 13)	$tvaIntra	= substr($tvaIntra, 0, 4).'&nbsp;'.substr($tvaIntra, 4, 3).'&nbsp;'.substr($tvaIntra, 7, 3).'&nbsp;'.substr($tvaIntra, 10, 3);	// ajout InfraS
-	print $tvaIntra;	// ajout InfraS
-//	print $object->tva_intra;	// modification InfraS
+	print $tvaIntra;	// InfraS add
+//	print $object->tva_intra;	// InfraS change
     print '</td></tr>';
 
 	// Default terms of the settlement
@@ -809,16 +809,6 @@ if ($object->id > 0)
 	            print '<a class="butAction" href="'.DOL_URL_ROOT.'/fourn/commande/card.php?action=create&socid='.$object->id.'">'.$langs->trans("AddOrder").'</a>';
 	        } else {
 	            print '<a class="butActionRefused classfortooltip" title="'.dol_escape_js($langs->trans("ThirdPartyIsClosed")).'" href="#">'.$langs->trans("AddOrder").'</a>';
-	        }
-		}
-
-		if ($user->rights->fournisseur->facture->creer)
-		{
-			$langs->load("bills");
-	        if ($object->status == 1) {
-	            print '<a class="butAction" href="'.DOL_URL_ROOT.'/fourn/facture/card.php?action=create&socid='.$object->id.'">'.$langs->trans("AddBill").'</a>';
-	        } else {
-	            print '<a class="butActionRefused classfortooltip" title="'.dol_escape_js($langs->trans("ThirdPartyIsClosed")).'" href="#">'.$langs->trans("AddBill").'</a>';
 	        }
 		}
 

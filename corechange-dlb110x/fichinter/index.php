@@ -162,7 +162,7 @@ if ($resql)
         {
             print '<tr class="oddeven">';
             print '<td>'.$fichinterstatic->LibStatut($status, $bool, 0).'</td>';
-            print '<td class="right"><a href="list.php?viewstatut='.$status.'">'.(isset($vals[$status.$bool]) ? $vals[$status.$bool] : 0).' ';
+            print '<td class="right"><a href="list.php?search_status='.$status.'">'.(isset($vals[$status.$bool]) ? $vals[$status.$bool] : 0).' ';
             print $fichinterstatic->LibStatut($status, $bool, 3);
             print '</a>';
             print '</td>';
@@ -207,7 +207,7 @@ if (!empty($conf->ficheinter->enabled))
 		$num = $db->num_rows($resql);	// Infras moved from line 212
 		print '<table class="noborder centpercent">';
 		print '<tr class="liste_titre">';
-		print '<th colspan="3">'.$langs->trans("DraftFichinter").'</th></tr>';
+		print '<th colspan="3">'.$langs->trans("DraftFichinter").'</th></tr>';	// InfraS change 2 to 3
 		$langs->load("fichinter");
 		$num = $db->num_rows($resql);
 		if ($num)
@@ -362,7 +362,7 @@ if (!empty($conf->ficheinter->enabled))
         print '<div class="div-table-responsive-no-min">';
 		print '<table class="noborder centpercent">';
 		print '<tr class="liste_titre">';
-		print '<th colspan="4">'.$langs->trans("FichinterToProcess").' <a href="'.DOL_URL_ROOT.'/fichinter/list.php?viewstatut=1">'.($num?' <span class="badge">'.$num.'</span>':'').'</a></th></tr>';	// InfraS change
+		print '<th colspan="4">'.$langs->trans("FichinterToProcess").' <a href="'.DOL_URL_ROOT.'/fichinter/list.php?search_status=1">'.($num?' <span class="badge">'.$num.'</span>':'').'</a></th></tr>';	// InfraS change
 
 		if ($num)
 		{

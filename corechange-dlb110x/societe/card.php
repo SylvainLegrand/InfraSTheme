@@ -1557,14 +1557,9 @@ else
 			print '</td></tr>';
 		}
 
-        // Other attributes
-        $parameters = array('colspan' => ' colspan="3"', 'cols' => '3');
-        $reshook = $hookmanager->executeHooks('formObjectOptions', $parameters, $object, $action); // Note that $action and $object may have been modified by hook
-        print $hookmanager->resPrint;
-        if (empty($reshook))
-        {
-        	print $object->showOptionals($extrafields, 'edit', $parameters);
-        }
+		// Other attributes
+		$parameters = array('socid'=>$socid, 'colspan' => ' colspan="3"', 'colspanvalue' => '3');
+		include DOL_DOCUMENT_ROOT.'/core/tpl/extrafields_add.tpl.php';
 
 		// Assign a sale representative
 		print '<tr>';
@@ -2218,14 +2213,9 @@ else
 				print '</td></tr>';
 			}
 
-            // Other attributes
-            $parameters = array('colspan' => ' colspan="3"', 'cols' => '3');
-            $reshook = $hookmanager->executeHooks('formObjectOptions', $parameters, $object, $action); // Note that $action and $object may have been modified by hook
-            print $hookmanager->resPrint;
-            if (empty($reshook))
-            {
-            	print $object->showOptionals($extrafields, 'edit', $parameters);
-            }
+			// Other attributes
+			$parameters = array('socid'=>$socid, 'colspan' => ' colspan="3"', 'colspanvalue' => '3');
+			include DOL_DOCUMENT_ROOT.'/core/tpl/extrafields_edit.tpl.php';
 
             // Webservices url/key
             if (!empty($conf->syncsupplierwebservices->enabled)) {
@@ -2386,7 +2376,7 @@ else
                 print '<tr>';
             	print '<td>'.$idprof.'</td><td>';
                 $key = 'idprof'.$i;
-				// début modification InfraS
+				// InfraS change begin
 				$profID	= $object->$key;
 				if (strtoupper($object->country_code) == "FR")
 				{
@@ -2395,7 +2385,7 @@ else
 				}	// if (strtoupper($object->country_code) == "FR")
 				print $profID;
 			//	print $object->$key;
-				// fin modification InfraS
+				// InfraS change end
                 if ($object->$key)
                 {
                     if ($object->id_prof_check($i, $object) > 0) print ' &nbsp; '.$object->id_prof_url($i, $object);
@@ -2520,12 +2510,12 @@ else
 		print '<td class="nowrap">'.$langs->trans('VATIntra').'</td><td>';
         if ($object->tva_intra)
         {
-			$tvaIntra	= $object->tva_intra;	// ajout InfraS
-			if (strtoupper($object->country_code) == "FR")	// ajout InfraS
+			$tvaIntra	= $object->tva_intra;	// InfraS add
+			if (strtoupper($object->country_code) == "FR")	// InfraS add
 				if (dol_strlen($tvaIntra) == 13)	$tvaIntra	= substr($tvaIntra, 0, 4).'&nbsp;'.substr($tvaIntra, 4, 3).'&nbsp;'.substr($tvaIntra, 7, 3).'&nbsp;'.substr($tvaIntra, 10, 3);	// ajout InfraS
             $s = '';
-	//		$s. = $object->tva_intra;	// modification InfraS
-			$s .= $tvaIntra;	// ajout InfraS
+	//		$s. = $object->tva_intra;	// InfraS change
+			$s .= $tvaIntra;	// InfraS add
             $s .= '<input type="hidden" id="tva_intra" name="tva_intra" maxlength="20" value="'.$object->tva_intra.'">';
 
             if (empty($conf->global->MAIN_DISABLEVATCHECK) && isInEEC($object))
@@ -2737,16 +2727,18 @@ else
 					}
 				}
 
-		        if (!empty($object->email) || $at_least_one_email_contact)
-		        {
-		        	$langs->load("mails");
-		        	print '<a class="butAction" href="'.$_SERVER['PHP_SELF'].'?socid='.$object->id.'&amp;action=presend&amp;mode=init#formmailbeforetitle">'.$langs->trans('SendMail').'</a>';
-		        }
-		        else
-				{
-		        	$langs->load("mails");
-		       		print '<a class="butActionRefused classfortooltip" href="#" title="'.dol_escape_htmltag($langs->trans("NoEMail")).'">'.$langs->trans('SendMail').'</a>';
-		        }
+				if (empty($user->socid)) {
+					if (!empty($object->email) || $at_least_one_email_contact)
+			        {
+			        	$langs->load("mails");
+			        	print '<a class="butAction" href="'.$_SERVER['PHP_SELF'].'?socid='.$object->id.'&action=presend&mode=init#formmailbeforetitle">'.$langs->trans('SendMail').'</a>';
+			        }
+			        else
+					{
+			        	$langs->load("mails");
+			       		print '<a class="butActionRefused classfortooltip" href="#" title="'.dol_escape_htmltag($langs->trans("NoEMail")).'">'.$langs->trans('SendMail').'</a>';
+			        }
+				}
 
 		        if ($user->rights->societe->creer)
 		        {

@@ -1091,7 +1091,7 @@ td.showDragHandle {
 
 .side-nav {
 	position: fixed;
-	top: <?php print $topSideNav ?>px;
+	top: 50px;
 	bottom: 0;
 	overflow-y: auto !important;
 	overflow-x: hidden;

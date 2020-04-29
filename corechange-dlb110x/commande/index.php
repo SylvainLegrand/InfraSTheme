@@ -158,7 +158,7 @@ if ($resql)
 	    {
         	print '<tr class="oddeven">';
             print '<td>'.$commandestatic->LibStatut($status, $bool, 0).'</td>';
-            print '<td class="right"><a href="list.php?viewstatut='.$status.'">'.(isset($vals[$status.$bool]) ? $vals[$status.$bool] : 0).' ';
+            print '<td class="right"><a href="list.php?search_status='.$status.'">'.(isset($vals[$status.$bool]) ? $vals[$status.$bool] : 0).' ';
             print $commandestatic->LibStatut($status, $bool, 3);
             print '</a>';
             print '</td>';
@@ -358,7 +358,7 @@ if (!empty($conf->commande->enabled))
         print '<div class="div-table-responsive-no-min">';
 		print '<table class="noborder centpercent">';
 		print '<tr class="liste_titre">';
-		print '<th colspan="4">'.$langs->trans("OrdersToProcess").' <a href="'.DOL_URL_ROOT.'/commande/list.php?viewstatut=1">'.($num?' <span class="badge">'.$num.'</span>':'').'</a></th></tr>';	// InfraS change
+		print '<th colspan="4">'.$langs->trans("OrdersToProcess").' <a href="'.DOL_URL_ROOT.'/commande/list.php?search_status=1">'.($num?' <span class="badge">'.$num.'</span>':'').'</a></th></tr>';	// InfraS change
 
 		if ($num)
 		{
@@ -444,7 +444,7 @@ if (!empty($conf->commande->enabled))
         print '<div class="div-table-responsive-no-min">';
 		print '<table class="noborder centpercent">';
 		print '<tr class="liste_titre">';
-		print '<th colspan="4">'.$langs->trans("OnProcessOrders").' <a href="'.DOL_URL_ROOT.'/commande/list.php?viewstatut=2">'.($num?' <span class="badge">'.$num.'</span>':'').'</a></th></tr>';	// InfraS change
+		print '<th colspan="4">'.$langs->trans("OnProcessOrders").' <a href="'.DOL_URL_ROOT.'/commande/list.php?search_status=2">'.($num?' <span class="badge">'.$num.'</span>':'').'</a></th></tr>';	// InfraS change
 
 		if ($num)
 		{

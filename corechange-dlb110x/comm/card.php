@@ -670,7 +670,7 @@ if ($object->id > 0)
 	$now = dol_now();
 
 	/*
-	 * Last proposals
+	 * Latest proposals
 	 */
 	if (!empty($conf->propal->enabled) && $user->rights->propal->lire)
 	{
@@ -742,7 +742,7 @@ if ($object->id > 0)
 	}
 
 	/*
-	 * Last orders
+	 * Latest orders
 	 */
 	if (!empty($conf->commande->enabled) && $user->rights->commande->lire)
 	{
@@ -755,7 +755,7 @@ if ($object->id > 0)
 		$sql .= " FROM ".MAIN_DB_PREFIX."societe as s, ".MAIN_DB_PREFIX."commande as c";
 		$sql .= " WHERE c.fk_soc = s.rowid ";
 		$sql .= " AND s.rowid = ".$object->id;
-		$sql .= " AND c.entity = ".$conf->entity;
+		$sql .= " AND c.entity IN (".getEntity('commande').')';
 		$sql .= " ORDER BY c.date_commande DESC";
 
 		$resql = $db->query($sql);
@@ -828,7 +828,7 @@ if ($object->id > 0)
 	}
 
     /*
-     *   Last shipments
+     *   Latest shipments
      */
     if (!empty($conf->expedition->enabled) && $user->rights->expedition->lire)
     {
@@ -901,7 +901,7 @@ if ($object->id > 0)
     }
 
 	/*
-	 * Last linked contracts
+	 * Latest linked contracts
 	 */
 	if (!empty($conf->contrat->enabled) && $user->rights->contrat->lire)
 	{
@@ -909,7 +909,7 @@ if ($object->id > 0)
 		$sql .= " FROM ".MAIN_DB_PREFIX."societe as s, ".MAIN_DB_PREFIX."contrat as c";
 		$sql .= " WHERE c.fk_soc = s.rowid ";
 		$sql .= " AND s.rowid = ".$object->id;
-		$sql .= " AND c.entity = ".$conf->entity;
+		$sql .= " AND c.entity IN (".getEntity('contract').")";
 		$sql .= " ORDER BY c.datec DESC";
 
 		$resql = $db->query($sql);
@@ -971,7 +971,7 @@ if ($object->id > 0)
 	}
 
 	/*
-	 * Last interventions
+	 * Latest interventions
 	 */
 	if (!empty($conf->ficheinter->enabled) && $user->rights->ficheinter->lire)
 	{
@@ -979,7 +979,7 @@ if ($object->id > 0)
 		$sql .= " FROM ".MAIN_DB_PREFIX."societe as s, ".MAIN_DB_PREFIX."fichinter as f";
 		$sql .= " WHERE f.fk_soc = s.rowid";
 		$sql .= " AND s.rowid = ".$object->id;
-		$sql .= " AND f.entity = ".$conf->entity;
+		$sql .= " AND f.entity IN (".getEntity('intervention').")";
 		$sql .= " ORDER BY f.tms DESC";
 
 		$resql = $db->query($sql);
@@ -1034,7 +1034,7 @@ if ($object->id > 0)
 	}
 
 	/*
-	 *   Last invoices templates
+	 *   Latest invoices templates
 	 */
 	if (!empty($conf->facture->enabled) && $user->rights->facture->lire)
 	{
@@ -1050,7 +1050,7 @@ if ($object->id > 0)
 		$sql .= ', s.nom, s.rowid as socid';
 		$sql .= " FROM ".MAIN_DB_PREFIX."societe as s,".MAIN_DB_PREFIX."facture_rec as f";
 		$sql .= " WHERE f.fk_soc = s.rowid AND s.rowid = ".$object->id;
-		$sql .= " AND f.entity = ".$conf->entity;
+		$sql .= " AND f.entity IN (".getEntity('invoice').")";
 		$sql .= ' GROUP BY f.rowid, f.titre, f.amount, f.total, f.tva, f.total_ttc,';
 		$sql .= ' f.date_last_gen, f.datec, f.frequency, f.unit_frequency,';
 		$sql .= ' f.suspended, f.date_when,';

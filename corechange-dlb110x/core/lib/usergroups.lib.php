@@ -1025,12 +1025,12 @@ function showSkins($fuser, $edit = 0, $foruserprofile = false)
 	}
 	print '</table>';
 }
-	// InfraS ajout function
+	// InfraS add function
 	function txt_color(&$bgcolor)
 	{
 		require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 		global $conf;
-		
+
 		$tmppart			= colorStringToArray($bgcolor);
 		$tmpvalr			= (! empty($tmppart[0]) ? $tmppart[0] : 0) * 0.3;
 		$tmpvalg			= (! empty($tmppart[1]) ? $tmppart[1] : 0) * 0.59;

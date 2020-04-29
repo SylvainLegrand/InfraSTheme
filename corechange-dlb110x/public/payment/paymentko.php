@@ -227,7 +227,7 @@ if (! empty($logosmall) && is_readable($conf->mycompany->dir_output.'/logos/'.$l
 	$urllogo=DOL_URL_ROOT.'/viewimage.php?modulepart=mycompany&amp;entity='.$conf->entity.'&amp;file='.urlencode('logos/'.$logosmall);	// InfraS add "entity='.$conf->entity.'&amp;"
 	$width=1080;	// InfraS change 150 to 1080
 }
-elseif (! empty($logo) && is_readable($conf->mycompany->dir_output.'/logos/'.$logo))
+elseif (!empty($logo) && is_readable($conf->mycompany->dir_output.'/logos/'.$logo))
 {
 	$urllogo=DOL_URL_ROOT.'/viewimage.php?modulepart=mycompany&amp;entity='.$conf->entity.'&amp;file='.urlencode('logos/'.$logo);	// InfraS add "entity='.$conf->entity.'&amp;"
 	$width=1080;	// InfraS change 150 to 1080

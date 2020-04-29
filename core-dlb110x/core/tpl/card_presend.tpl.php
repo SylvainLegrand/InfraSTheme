@@ -189,7 +189,7 @@ if ($action == 'presend')
 	}
 
 	$formmail->withto = $liste;
-	$formmail->withtofree = (GETPOSTISSET('sendto') ? (GETPOST('sendto') ? GETPOST('sendto') : '1') : '');
+	$formmail->withtofree = (GETPOSTISSET('sendto') ? (GETPOST('sendto') ? GETPOST('sendto') : '1') : '1');
 	$formmail->withtocc = $liste;
 	$formmail->withtoccc = $conf->global->MAIN_EMAIL_USECCC;
 	$formmail->withtopic = $topicmail;
@@ -219,6 +219,7 @@ if ($action == 'presend')
 
         if (!empty($origin) && !empty($origin_id)) {
             $element = $subelement = $origin;
+            $regs = array();
             if (preg_match('/^([^_]+)_([^_]+)/i', $origin, $regs)) {
                 $element = $regs[1];
                 $subelement = $regs[2];
