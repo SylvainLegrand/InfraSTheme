@@ -1427,6 +1427,10 @@ div.arearef {
 	padding-top: 2px;
 	margin-bottom: 10px;
 	padding-bottom: 10px;
+	background: inherit;
+    position: sticky;
+    width: 100%;
+    z-index: 3;
 }
 div.arearefnobottom {
 	padding-top: 2px;
@@ -2434,6 +2438,13 @@ div.tabsAction {
     margin: 20px 0em 30px 0em;
     padding: 0em 0em;
     text-align: right;
+    position: sticky;
+    bottom: 0;
+<?php if (GETPOST('optioncss', 'aZ09') == 'print') {  ?>
+	background-color: #FFFFFF;
+<?php } else { ?>
+	background: rgb(<?php print $colorbackbody; ?>);
+<?php } ?>
 }
 div.tabsActionNoBottom {
     margin-bottom: 0px;

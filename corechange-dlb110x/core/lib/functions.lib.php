@@ -7492,7 +7492,7 @@ function printCommonFooter($zone = 'private')
 					<script>
 						jQuery(document).ready(function() {
 							$.isSet = function(testVar){ return typeof(testVar) !== "undefined" && testVar !== null && testVar !== ""; };';
-
+			
 			if ($zone == 'private' && empty($conf->dol_use_jmobile))
 			{
 				print '
@@ -7557,7 +7557,25 @@ function printCommonFooter($zone = 'private')
 									$(".menu_contenu:not(#menu_contenu_logo, .time_basket)").hide();
 									$(this).removeClass("fa-caret-up").addClass("fa-caret-down");
 								}
-							});';
+							});
+							if ($("div.fiche table#tablelines").length > 0) {
+								var w = $("div.fiche table#tablelines").outerWidth(true) + $("div.fiche table#tablelines").offset().left;
+								if (w > $("div.side-nav-vert").css("width").replace("px", "")) $("div.side-nav-vert").css("width", w);
+							}
+							else if ($("div.fiche > table.liste").length > 0) {
+								var w = $("div.fiche > table.liste").outerWidth() + $("div.fiche > table.liste").offset().left + $("div.side-nav-vert").offset().left;
+								if (w > $("div.side-nav-vert").css("width").replace("px", "")) $("div.side-nav-vert").css("width", w);
+							}
+							else if ($("div.fiche > form > table.liste").length > 0) {
+								var w = $("div.fiche> form > table.liste").outerWidth(true) + $("div.fiche> form > table.liste").offset().left - $("div.side-nav-vert").offset().left;
+								if (w > $("div.side-nav-vert").css("width").replace("px", "")) $("div.side-nav-vert").css("width", w);
+							}
+							else if ($("div.fiche > form > div.div-table-responsive > table.liste").length > 0) {
+								var w = $("div.fiche > form > div.div-table-responsive > table.liste").outerWidth(true) + $("div.fiche > form > div.div-table-responsive > table.liste").offset().left  - $("div.side-nav-vert").offset().left;
+								if (w > $("div.side-nav-vert").css("width").replace("px", "")) $("div.side-nav-vert").css("width", w);
+							}
+							$("div.arearef").css("top", $("div.side-nav-vert").height());
+							';
 			}
 
 			// Management of focus and mandatory for fields

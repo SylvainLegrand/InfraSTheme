@@ -202,6 +202,7 @@ if (!empty($conf->commande->enabled))
 		print '<tr class="liste_titre">';
 		print '<th colspan="3">'.$langs->trans("DraftOrders").($num?' <span class="badge">'.$num.'</span>':'').'</th></tr>';	// InfraS change colspan 2 to 3 and add .($num?' <span class="badge">'.$num.'</span>':'')
 		$langs->load("orders");
+//		$num = $db->num_rows($resql);	InfraS moved to line 200
 		if ($num)
 		{
 			$i = 0;

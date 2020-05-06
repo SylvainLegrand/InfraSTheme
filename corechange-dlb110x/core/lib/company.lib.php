@@ -1284,8 +1284,8 @@ function show_addresses($conf,$langs,$db,$object,$backtopage='')
 	print '<td>'.$langs->trans("Country").'</td>';
 	print '<td>'.$langs->trans("Phone").'</td>';
 	print '<td>'.$langs->trans("Fax").'</td>';
-	print '<td>'.$langs->trans("Email").'</td>'; // InfraS ajout
-	print '<td>'.$langs->trans("url").'</td>'; // InfraS ajout
+	print '<td>'.$langs->trans("Email").'</td>';
+	print '<td>'.$langs->trans("url").'</td>';
 	print "<td>&nbsp;</td>";
 	print "</tr>";
 	if ($num > 0)
@@ -1309,8 +1309,8 @@ function show_addresses($conf,$langs,$db,$object,$backtopage='')
 			print '<td>';
 			print dol_print_phone($address->fax,$address->country_code,$address->id,$object->id,'AC_FAX');
 			print '</td>';
-			print '<td>'.$address->email.'</td>'; // InfraS ajout
-			print '<td>'.$address->url.'</td>'; // InfraS ajout
+			print '<td>'.$address->email.'</td>';
+			print '<td>'.$address->url.'</td>';
 			if ($user->rights->societe->creer)
 			{
 				print '<td align="right">';
