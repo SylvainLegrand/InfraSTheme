@@ -806,6 +806,7 @@ if ($resql)
 		$generic_commande->total_ttc = $obj->total_ttc;
 		$generic_commande->note_public = $obj->note_public;
 		$generic_commande->note_private = $obj->note_private;
+		$generic_commande->loadExpeditions();	// InfraS add
 
 		$projectstatic->id = $obj->project_id;
 		$projectstatic->ref = $obj->project_ref;
@@ -831,7 +832,8 @@ if ($resql)
 					$numlines = count($generic_commande->lines); // Loop on each line of order
 					for ($lig = 0; $lig < $numlines; $lig++)
 					{
-						if ($generic_commande->lines[$lig]->product_type == 0 && $generic_commande->lines[$lig]->fk_product > 0)  // If line is a product and not a service
+						$reliquat	= $generic_commande->lines[$lig]->qty - $generic_commande->expeditions[$generic_commande->lines[$lig]->rowid];	// InfraS add
+						if ($generic_commande->lines[$lig]->product_type == 0 && $generic_commande->lines[$lig]->fk_product > 0 && $reliquat != 0)  // If line is a product and not a service	// InfraS change, add " && $reliquat != 0"
 						{
 							$nbprod++; // order contains real products
 							$generic_product->id = $generic_commande->lines[$lig]->fk_product;
@@ -849,12 +851,12 @@ if ($resql)
 
 							if (empty($conf->global->SHIPPABLE_ORDER_ICON_IN_LIST))  // Default code. Default is when this option is not set, setting it create strange result
 							{
-								$text_info .= $generic_commande->lines[$lig]->qty.' X '.$generic_commande->lines[$lig]->ref.'&nbsp;'.dol_trunc($generic_commande->lines[$lig]->product_label, 25);
+								$text_info .= $reliquat.' X '.$generic_commande->lines[$lig]->ref.'&nbsp;'.dol_trunc($generic_commande->lines[$lig]->product_label, 25);	// InfraS change "$generic_commande->lines[$lig]->qty" by "$reliquat"
 								$text_info .= ' - '.$langs->trans("Stock").': '.$generic_product->stock_reel;
 								$text_info .= ' - '.$langs->trans("VirtualStock").': '.$generic_product->stock_theorique;
 								$text_info .= '<br>';
 
-								if ($generic_commande->lines[$lig]->qty > $generic_product->stock_reel)
+								if ($reliquat > $generic_product->stock_reel)	// InfraS change "$generic_commande->lines[$lig]->qty" by "$reliquat"
 								{
 									$notshippable++;
 								}
@@ -886,13 +888,13 @@ if ($resql)
 										$stock_order_supplier = $generic_product->stats_commande_fournisseur['qty'];
 									}
 								}
-								$text_info .= $generic_commande->lines[$lig]->qty.' X '.$generic_commande->lines[$lig]->ref.'&nbsp;'.dol_trunc($generic_commande->lines[$lig]->product_label, 25);
+								$text_info .= $reliquat.' X '.$generic_commande->lines[$lig]->ref.'&nbsp;'.dol_trunc($generic_commande->lines[$lig]->product_label, 25);	// InfraS change "$generic_commande->lines[$lig]->qty" by "$reliquat"
 								$text_stock_reel = $generic_product->stock_reel.'/'.$stock_order;
-								if ($stock_order > $generic_product->stock_reel && !($generic_product->stock_reel < $generic_commande->lines[$lig]->qty)) {
+								if ($stock_order > $generic_product->stock_reel && !($generic_product->stock_reel < $reliquat)) {	// InfraS change "$generic_commande->lines[$lig]->qty" by "$reliquat"
 									$warning++;
 									$text_warning .= '<span class="warning">'.$langs->trans('Available').'&nbsp;:&nbsp;'.$text_stock_reel.'</span>';
 								}
-								if ($generic_product->stock_reel < $generic_commande->lines[$lig]->qty) {
+								if ($generic_product->stock_reel < $reliquat) {	// InfraS change "$generic_commande->lines[$lig]->qty" by "$reliquat"
 									$notshippable++;
 									$text_info .= '<span class="warning">'.$langs->trans('Available').'&nbsp;:&nbsp;'.$text_stock_reel.'</span>';
 								} else {
