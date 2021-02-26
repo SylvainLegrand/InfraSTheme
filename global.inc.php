@@ -305,6 +305,13 @@ hr {
 	margin-top: 20px;
 	margin-bottom: 17px;
 }
+.button_search, .button_removefilter {
+    border: unset;
+    background-color: unset;
+}
+.button_search:hover, .button_removefilter:hover {
+    cursor: pointer;
+}
 form {
     padding:0px;
     margin:0px;
